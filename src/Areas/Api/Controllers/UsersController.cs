@@ -148,5 +148,22 @@ namespace Weavy.Areas.Api.Controllers {
             var result = UserService.Search(query);
             return Ok(new ScrollableList<User>(result, Request.RequestUri));
         }
+        /// <summary>
+        /// Sync user by email
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns>Synced user by email</returns>
+        [HttpGet]
+        [ResponseType(typeof(User))]
+        [Route("users/byemail")]
+        public IHttpActionResult Retrieve(string email)
+        {   
+            var user = UserService.GetByEmail(email);
+            if (user == null)
+            {
+                ThrowResponseException(HttpStatusCode.NotFound, "User with email " + email + " not found");
+            }
+            return Ok(user);
+        }
     }
 }
