@@ -35,7 +35,6 @@
                 <a class="dropdown-item@(ActionName == nameof(HomeController.Index) && ControllerName == typeof(HomeController).ControllerName() && AreaName.IsNullOrEmpty() ? " active" : "")" href="@(Url.Action<HomeController>(c => c.Index()))">
                     @Html.IconImg(24)<span>@T["Start"]</span>
                 </a>
-
                 @if (visited.Any()) {
                     <div class="dropdown-divider"></div>
                     foreach (var space in visited) {
@@ -46,7 +45,10 @@
                     <div class="dropdown-divider"></div>
                 }
                 @(Html.ActionLink<SpaceController>(c => c.Index(null, null), icon: "view-grid", color: "primary", text: T["Spaces"].ToString(), htmlAttributes: new { @class = "dropdown-item spaces" }, active: LinkActive.Action))
-                @(Html.ActionLink<PeopleController>(c => c.Index(null, null), icon: "account-multiple", color: "primary", text: T["People"].ToString(), htmlAttributes: new { @class = "dropdown-item" }, active: LinkActive.Controller))
+                @{ /*
+                  @(Html.ActionLink<PeopleController>(c => c.Index(null, null), icon: "account-multiple", color: "primary", text: T["People"].ToString(), htmlAttributes: new { @class = "dropdown-item" }, active: LinkActive.Controller))
+                     */
+                }
 
                 @if (WeavyContext.Browser.Desktop) {
                     <a class="dropdown-item" href="@(Url.Action<Weavy.Areas.Apps.Controllers.MessengerController>(c => c.Index(null)))" target="_blank" title="@T["Open Messenger"]">
