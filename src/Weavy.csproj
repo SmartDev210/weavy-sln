@@ -4377,11 +4377,7 @@
       <Output TaskParameter="Major" PropertyName="Major" />
       <Output TaskParameter="Minor" PropertyName="Minor" />
       <Output TaskParameter="Patch" PropertyName="Patch" />
-    </GetVersion>
-    <GitInfo>
-      <Output TaskParameter="GitBranch" PropertyName="GitBranch" />
-      <Output TaskParameter="GitCommit" PropertyName="GitCommit" />
-    </GitInfo>
+    </GetVersion>   
     <PropertyGroup>
       <SemVer>$(Major).$(Minor).$(Patch)</SemVer>
       <SemVer Condition="'$(GitBranch)' != '' AND '$(GitBranch)' != 'HEAD' AND '$(GitBranch)' != 'master'">$(SemVer)-$(GitBranch)</SemVer>
