@@ -4305,12 +4305,14 @@
     <Compile Include="Areas\Apps\Controllers\FilesController.cs" />
     <Compile Include="Areas\Apps\Controllers\FolderController.cs" />
     <Compile Include="Areas\Apps\Controllers\MessengerController.cs" />
+    <Compile Include="Areas\Apps\Controllers\MyHomeController.cs" />
     <Compile Include="Areas\Apps\Controllers\NotificationsController.cs" />
     <Compile Include="Areas\Apps\Controllers\PostsController.cs" />
     <Compile Include="Areas\Apps\Controllers\SearchController.cs" />
     <Compile Include="Areas\Apps\Controllers\TaskItemController.cs" />
     <Compile Include="Areas\Apps\Controllers\TasksController.cs" />
     <Compile Include="Areas\Apps\Models\Messenger.cs" />
+    <Compile Include="Areas\Apps\Models\MyHomeViewModel.cs" />
     <Compile Include="Areas\Apps\Models\Notifications.cs" />
     <Compile Include="Areas\Apps\Models\TaskItem.cs" />
     <Compile Include="Areas\Apps\Models\Tasks.cs" />
@@ -4323,6 +4325,8 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="Areas\Apps\Styles\customize.scss" />
+    <Content Include="Areas\Apps\Views\MyHome\Index.cshtml" />
     <None Include="Resources\Resources.txt" />
     <None Include="Resources\Resources.en.txt" />
     <None Include="packages.config" />
@@ -4377,7 +4381,7 @@
       <Output TaskParameter="Major" PropertyName="Major" />
       <Output TaskParameter="Minor" PropertyName="Minor" />
       <Output TaskParameter="Patch" PropertyName="Patch" />
-    </GetVersion>   
+    </GetVersion>
     <PropertyGroup>
       <SemVer>$(Major).$(Minor).$(Patch)</SemVer>
       <SemVer Condition="'$(GitBranch)' != '' AND '$(GitBranch)' != 'HEAD' AND '$(GitBranch)' != 'master'">$(SemVer)-$(GitBranch)</SemVer>

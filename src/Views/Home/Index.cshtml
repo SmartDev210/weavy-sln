@@ -5,8 +5,15 @@
 }
 
 @section navbar_left {
+
     <div class="navbar-icons">
         <a class="btn btn-icon" href="@WeavyContext.ApplicationPath">@Html.IconImg(24)</a>
+        <form action="@(Url.Action<HomeController>(c => c.Search(null, null)))" method="get" class="main-search navbar-search-box" data-turboform>
+            <div class="form-group" role="search">
+                <input id="weavy-main-search" class="form-control" type="search" name="q" value="" placeholder="@T["Search"]" />
+                <button type="submit" class="btn btn-icon">@Svg.Icon("magnify")</button>
+            </div>
+        </form>
     </div>
 }
 
@@ -31,7 +38,7 @@
 <div class="container d-flex flex-column my-4">
 
     <h5 class="d-flex">
-        <a href="@(Url.Action<SpaceController>(c => c.Index(null, null)))" class="text-hyphens">@T["Spaces"]</a>
+        <a href="@(Url.Action<SpaceController>(c => c.Index(null, null)))" class="text-hyphens">@T["Spaces"] (Joined)</a>
         <a href="@(Url.Action<SpaceController>(c => c.New()))" class="btn btn-icon ml-auto" title="@T["Add space"]">@Svg.Icon("plus-box-outline")</a>
     </h5>
 
