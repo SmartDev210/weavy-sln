@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Web.Http;
 using System.Web.Http.Description;
 using Weavy.Areas.Api.Models;
+using Weavy.Areas.Apps.Models;
 using Weavy.Core.Models;
 using Weavy.Core.Services;
 using Weavy.Web.Api.Controllers;
@@ -50,6 +52,119 @@ namespace Weavy.Areas.Api.Controllers {
         }
 
         /// <summary>
+        /// Creates a new start collab channel space or Find if it's existing.
+        /// </summary>
+        /// <param name="request">The collab channel space to insert.</param>
+        /// <example>
+        /// POST /api/collab-spaces
+        ///
+        /// {
+        ///   "name": "A space",
+        ///   "key": "ext_222",
+        ///   "user": 2
+        /// }
+        /// </example>
+        /// <returns>The created space.</returns>
+        [HttpPost]
+        [ResponseType(typeof(Space))]
+        [Route("collab-spaces")]
+        public IHttpActionResult InsertOrFindExistingCollab(SpaceCreationRequest request) {
+
+            var space = SpaceService.GetByKey(request.Key);            
+            if (space == null)
+            {
+                var spaceModel = new Space() { Key = request.Key, Name = request.Name, Tags = new List<string>() { "Channel" }, CreatedById = request.user };
+                space = SpaceService.Insert(spaceModel);
+                
+                var postPlugin = PluginService.GetApp<Posts>();
+                var postApp = AppService.New(postPlugin.Id);
+                postApp.Name = "Posts";
+
+                AppService.Insert(postApp, space);
+
+                var taskPlugin = PluginService.GetApp<Tasks>();
+                var taskApp = AppService.New(taskPlugin.Id);
+                taskApp.Name = "Tasks";
+
+                AppService.Insert(taskApp, space);
+
+                var filesPlugin = PluginService.GetApp<Files>();
+                var filesApp = AppService.New(filesPlugin.Id);
+                filesApp.Name = "Files";
+
+                AppService.Insert(filesApp, space);
+
+                var commentsPlugin = PluginService.GetApp<Comments>();
+                var commentsApp = AppService.New(commentsPlugin.Id);
+                commentsApp.Name = "Comments";
+
+                AppService.Insert(commentsApp, space);
+
+                return Created($"/api/spaces/{space.Id}", space);
+            }
+            return Ok(space);
+            
+        }
+        /// <summary>
+        /// Creates a new service request channel space or Find if it's existing.
+        /// </summary>
+        /// <param name="request">The service request space to insert.</param>
+        /// <example>
+        /// POST /api/service-request-spaces
+        ///
+        /// {
+        ///   "name": "A space",
+        ///   "key": "ext_222",
+        ///   "user": 2
+        /// }
+        /// </example>
+        /// <returns>The created space.</returns>
+        [HttpPost]
+        [ResponseType(typeof(Space))]
+        [Route("service-request-spaces")]
+        public IHttpActionResult InsertOrFindExistingServiceRequest(SpaceCreationRequest request)
+        {
+            var space = SpaceService.GetByKey(request.Key);
+            if (space == null)
+            {
+                var spaceModel = new Space() { Key = request.Key, Name = request.Name, Tags = new List<string>() { "Gigs", "Service Request" }, CreatedById = request.user };
+                space = SpaceService.Insert(spaceModel);
+
+                var commentsPlugin = PluginService.GetApp<Comments>();
+                var commentsApp = AppService.New(commentsPlugin.Id);
+                commentsApp.Name = "Service Request";
+
+                AppService.Insert(commentsApp, space);
+
+                var postPlugin = PluginService.GetApp<Posts>();
+                var postApp = AppService.New(postPlugin.Id);
+                postApp.Name = "Scope Detail";
+
+                AppService.Insert(postApp, space);
+
+                var taskPlugin = PluginService.GetApp<Tasks>();
+                var taskApp = AppService.New(taskPlugin.Id);
+                taskApp.Name = "Requirements";
+
+                AppService.Insert(taskApp, space);
+
+                var comments2App = AppService.New(commentsPlugin.Id);
+                comments2App.Name = "Delivery";
+
+                AppService.Insert(comments2App, space);
+
+                var filesPlugin = PluginService.GetApp<Files>();
+                var filesApp = AppService.New(filesPlugin.Id);
+                filesApp.Name = "Files";
+
+                AppService.Insert(filesApp, space);
+
+                return Created($"/api/spaces/{space.Id}", space);
+            }
+            return Ok(space);
+
+        }
+        /// <summary>
         /// Creates a new space.
         /// </summary>
         /// <param name="model">The space to insert.</param>
@@ -65,11 +180,11 @@ namespace Weavy.Areas.Api.Controllers {
         [HttpPost]
         [ResponseType(typeof(Space))]
         [Route("spaces")]
-        public IHttpActionResult Insert(Space model) {
+        public IHttpActionResult Insert(Space model)
+        {
             var space = SpaceService.Insert(model);
             return Created($"/api/spaces/{space.Id}", space);
         }
-
         /// <summary>
         /// Updates the specified space by setting the values of the parameters passed. 
         /// Any parameters not provided will be left unchanged. 

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Web.Http;
@@ -164,6 +165,47 @@ namespace Weavy.Areas.Api.Controllers {
                 ThrowResponseException(HttpStatusCode.NotFound, "User with email " + email + " not found");
             }
             return Ok(user);
+        }
+
+        /// <summary>
+        /// Bulk register/retrive users by email
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns>A list of users.</returns>
+        /// <example>
+        /// POST /api/users/bulk-register
+        ///
+        /// [
+        ///   {
+        ///     email: "aa@aa.com",
+        ///     "user_name": "aa"
+        ///   }
+        /// ]
+        /// </example>
+        [HttpPost]
+        [ResponseType(typeof(IList<User>))]
+        [Route("users/bulk-register")]
+        public IHttpActionResult BulkRegister(List<UserRequest> request)
+        {
+            var res = new List<User>();
+            foreach (var user in request)
+            {
+                var dbUser = UserService.GetByEmail(user.Email);
+                if (dbUser == null)
+                {
+                    try
+                    {
+                        dbUser = UserService.Insert(new User() { Email = user.Email, Username = user.UserName });
+                    } catch (Exception)
+                    {
+
+                    }
+                    
+                }
+                if (dbUser != null)
+                    res.Add(dbUser);
+            }
+            return Ok(res);
         }
     }
 }
