@@ -4,10 +4,16 @@ using System.Linq;
 using System.Web;
 using Weavy.Core.Models;
 
-namespace Weavy.Areas.Apps.Models
+namespace Weavy.Areas.CustomPages.Models
 {
+    /// <summary>
+    /// Custom home page view model
+    /// </summary>
     public class MyHomeViewModel
     {
+        /// <summary>
+        /// constructor
+        /// </summary>
         public MyHomeViewModel()
         {
             JoinedSpaces = new List<Space>();
@@ -17,11 +23,29 @@ namespace Weavy.Areas.Apps.Models
             Notifications = new List<Notification>();
             Stars = new List<Entity>();
         }
+        /// <summary>
+        /// List of Joined spaces
+        /// </summary>
         public IEnumerable<Space> JoinedSpaces { get; set; }
+        /// <summary>
+        /// List of spaces with Tag "Pods"
+        /// </summary>
         public IEnumerable<Space> PodsSpaces { get; set; }
+        /// <summary>
+        /// List of spaces with Tag "Gigs"
+        /// </summary>
         public IEnumerable<Space> GigsSpaces { get; set; }
+        /// <summary>
+        /// List of public spaces
+        /// </summary>
         public IEnumerable<Space> PubSpaces { get; set; }
+        /// <summary>
+        /// List of notifications
+        /// </summary>
         public IEnumerable<Notification> Notifications { get; set; }
+        /// <summary>
+        /// List of stars
+        /// </summary>
         public IEnumerable<Entity> Stars { get; set; }
     }
 }

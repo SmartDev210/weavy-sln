@@ -1,0 +1,140 @@
+﻿@model Weavy.Areas.CustomPages.Models.ClubhouseAviationHomePageViewModel
+
+@{
+    Title = T["Start"].ToString();
+}
+
+@section navbar_left {
+
+    <div class="navbar-icons">
+        <a class="btn btn-icon" href="@WeavyContext.ApplicationPath">@Html.IconImg(24)</a>
+        <form action="@(Url.Action<HomeController>(c => c.Search(null, null)))" method="get" class="main-search navbar-search-box" data-turboform>
+            <div class="form-group" role="search">
+                <input id="weavy-main-search" class="form-control" type="search" name="q" value="" placeholder="@T["Search"]" />
+                <button type="submit" class="btn btn-icon">@Svg.Icon("magnify")</button>
+            </div>
+        </form>
+    </div>
+}
+
+@section navbar_middle {
+    @Html.Partial("_NavbarMenu")
+}
+
+
+<div class="container d-flex flex-column my-4">
+    <h1 class="custome-page-title">Free Aviation Marketplace</h1>
+    <div class="d-flex flex-column align-items-center mb-5">
+        <div class="d-flex mt-3 mb-3 flex-wrap">
+            <span class="google-cse-title">Aviation Jobs</span>
+            <div class="google-cse-search-group">
+                <script async src="https://cse.google.com/cse.js?cx=004286895403006624284:uqhunc1oxii"></script>
+                <div class="gcse-searchbox-only"></div>
+            </div>
+        </div>
+        <div class="d-flex mt-3 mb-3 flex-wrap">
+            <span class="google-cse-title">Aircraft for Sale</span>
+            <div class="google-cse-search-group">
+                <script async src="https://cse.google.com/cse.js?cx=004286895403006624284:8dyrm0inbkf"></script>
+                <div class="gcse-searchbox-only"></div>
+            </div>
+        </div>
+        <div class="d-flex mt-3 mb-3 flex-wrap">
+            <span class="google-cse-title">Pilot Supplies</span>
+            <div class="google-cse-search-group">
+                <script async src="https://cse.google.com/cse.js?cx=004286895403006624284:ojacjdzpco3"></script>
+                <div class="gcse-searchbox-only"></div>
+            </div>
+        </div>
+    </div>
+    <h2 class="custome-page-title">Assets for Sale</h2>
+    <div class="custome-page-categories mb-5">
+        <ul>
+            <li><a href="/aviation-marketplace">Engines</a></li>
+            <li><a href="/aviation-marketplace">APUs</a></li>
+            <li><a href="/aviation-marketplace">Inventory Lots</a></li>
+            <li><a href="/aviation-marketplace">Landing Gear</a></li>
+            <li><a href="/aviation-marketplace">Aircraft</a></li>
+            <li><a href="/aviation-marketplace">Avionics</a></li>
+            <li><a href="/aviation-marketplace">GSE</a></li>
+            <li><a href="/aviation-marketplace">Chemicals</a></li>
+            <li><a href="/aviation-marketplace">Teardowns</a></li>
+            <li><a href="/aviation-marketplace">Test Equipment</a></li>
+            <li><a href="/aviation-marketplace">Tooling</a></li>
+            <li><a href="/aviation-marketplace">Hangars</a></li>
+        </ul>
+    </div>
+    <div class="d-flex flex-column align-items-center mt-5 mb-5">
+        <div class="d-flex mt-3 mb-3 flex-wrap">
+            <span class="parts-search-title">Aircraft Spare Parts</span>
+            <form action="https://find-parts-aero.narratr.org/parts" method="get" class="main-search navbar-search-box" data-turboform>
+                <div class="form-group" role="search">
+                    <input id="weavy-main-search" class="form-control" type="search" name="Search" value="" placeholder="@T["Search"]" />
+                    <button type="submit" class="btn btn-icon">@Svg.Icon("magnify")</button>
+                </div>
+            </form>
+        </div>
+        <div class="d-flex mt-3 mb-3 flex-wrap">
+            <span class="parts-search-title">Repair Capabilities</span>
+            <form action="https://find-components-mro.narratr.org/parts" method="get" class="main-search navbar-search-box" data-turboform>
+                <div class="form-group" role="search">
+                    <input id="weavy-main-search" class="form-control" type="search" name="Search" value="" placeholder="@T["Search"]" />
+                    <button type="submit" class="btn btn-icon">@Svg.Icon("magnify")</button>
+                </div>
+            </form>
+        </div>     
+    </div>
+    <h2 class="custome-page-title mt-5">Aviation Industry Vendors</h2>
+    <div class="custome-page-industry-vendors">
+        <ul>
+            <li><a href="/aviation-marketplace">Machine Shops</a></li>
+            <li><a href="/aviation-marketplace">Composities</a></li>
+            <li><a href="/aviation-marketplace">Paint</a></li>
+            <li><a href="/aviation-marketplace">NDT</a></li>
+            <li><a href="/aviation-marketplace">Line MROs</a></li>
+            <li><a href="/aviation-marketplace">Heavy MROs</a></li>
+            <li><a href="/aviation-marketplace">Engine MROs</a></li>
+            <li><a href="/aviation-marketplace">Landing Gear MROs</a></li>
+            <li><a href="/aviation-marketplace">Tooling Repair</a></li>
+            <li><a href="/aviation-marketplace">Sheet Metal Repair</a></li>
+            <li><a href="/aviation-marketplace">Structural Repair</a></li>
+            <li><a href="/aviation-marketplace">Calibration</a></li>
+            <li><a href="/aviation-marketplace">Logistics</a></li>
+            <li><a href="/aviation-marketplace">3D Printing</a></li>
+            <li><a href="/aviation-marketplace">Asset Tagging</a></li>
+            <li><a href="/aviation-marketplace">Augumented Reality</a></li>
+        </ul>
+    </div>
+   
+    <h5 class="d-flex mt-5">
+        <a href="@(Url.Action<SpaceController>(c => c.Index(null, null)))" class="text-hyphens">Clubs</a>
+    </h5>
+
+    @if (Model.PubSpaces.Any())
+    {
+        <div class="space-cards">
+            @foreach (var space in Model.PubSpaces)
+            {
+                <a class="card" href="@space.Url()">
+                    <div class="card-cover">
+                        @space.AvatarImg(64)
+                        <div class="facepile">
+                            @SpaceService.GetMembers(space.Id, new MemberQuery { Top = 5, OrderBy = "Random" }).Facepile(size: 24)
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-title text-truncate" title="@space.Name">@space.Name</div>
+                    </div>
+                    @Html.StarToggle(space)
+                </a>
+            }
+        </div>
+    }
+    else
+    {
+        <p class="text-muted">
+            @T["All your spaces will show up here."]
+            <a href="@(Url.Action<SpaceController>(c => c.New()).ToLower())">@T[@"We suggest creating your first space to get started."]</a>
+        </p>
+    }
+</div>

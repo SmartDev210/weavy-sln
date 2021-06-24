@@ -4,14 +4,22 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Weavy.Areas.Apps.Models;
+using Weavy.Areas.CustomPages.Models;
 using Weavy.Core.Models;
 using Weavy.Core.Services;
 using Weavy.Web.Controllers;
 
-namespace Weavy.Areas.Apps.Controllers
+namespace Weavy.Areas.CustomPages.Controllers
 {
+    /// <summary>
+    /// My Custom controller for customized homepage and some other pages
+    /// </summary>
     public class MyHomeController : AppController
     {
+        /// <summary>
+        /// Original home page
+        /// </summary>
+        /// <returns></returns>
         // GET: aviation-marketplace
         [Route("aviation-marketplace")]
         public ActionResult Index()
@@ -43,7 +51,25 @@ namespace Weavy.Areas.Apps.Controllers
                 Stars = stars
             };
 
-            return View("~/Areas/Apps/Views/MyHome/Index.cshtml", viewModel);
+            return View("~/Areas/CustomPages/Views/MyHome/Index.cshtml", viewModel);
+        }
+        /// <summary>
+        /// Marketplace homepage with categories
+        /// </summary>
+        /// <returns></returns>
+        [Route("clubhouse-aviation-marketplace")]
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult ClubhouseAviationMarketplace()
+        {   
+            var pubs = SpaceService.Search(new SpaceQuery { Top = 20 });
+            
+            ClubhouseAviationHomePageViewModel viewModel = new ClubhouseAviationHomePageViewModel
+            {
+                PubSpaces = pubs.ToList()
+            };
+
+            return View("~/Areas/CustomPages/Views/MyHome/ClubhouseAviatonMarketplace.cshtml", viewModel);
         }
     }
 }
