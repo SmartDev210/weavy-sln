@@ -1,5 +1,19 @@
 # Changelog for Weavy
 
+## 8.3.2 (2021-06-10)
+
+* Fixed an issue with postal when using multiple Weavy client instances.
+* Fixed an issue with third party cookies in iOS 14.
+
+## 8.3.1 (2021-06-02)
+
+* Fixed an issue with third party cookies in iOS.
+
+## 8.3.0 (2021-05-26)
+
+* Added Storage Access API usage flow for third party cookies in client.
+* Improved support for strict tracking protection in browsers.
+
 ## 8.2.2 (2021-05-19)
 
 * Added ability to add cssclass for theming (beta).
