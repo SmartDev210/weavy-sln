@@ -219,6 +219,10 @@
                             parentQueue.forEach(function (message) {
                                 console.debug("wvy.postal: sending queued to parent:", message.name);
 
+                                if (message.weavyId === undefined) {
+                                    message.weavyId = _parentWeavyId;
+                                }
+
                                 postToParent(message)
                             });
                             parentQueue = [];
@@ -240,7 +244,9 @@
 
                         break;
                     case "reload":
-                        window.location.reload();
+                        console.log("wvy.postal: reload", _parentName, e.data.force);
+                        window.location.reload(e.data.force);
+
                         break;
                     default:
                         if (e.source === window || _parentWindow || contentWindowsByWeavyId.size) {
@@ -428,16 +434,16 @@
                 return;
             }
 
-            if (message.weavyId === undefined) {
-                message.weavyId = _parentWeavyId;
-            }
-
             if (transfer === null) {
                 // Chrome does not allow transfer to be null
                 transfer = undefined;
             }
 
             if (_parentWindow) {
+                if (message.weavyId === undefined) {
+                    message.weavyId = _parentWeavyId;
+                }
+
                 try {
                     if (_parentWindow && _parentWindow !== window) {
                         _parentWindow.postMessage(message, _parentOrigin || "*", transfer);
@@ -499,7 +505,7 @@
 
             // Find all parent windows
             var nextWindow = window.self;
-            while (nextWindow.top !== nextWindow) {
+            while ((nextWindow.opener || nextWindow.parent) !== nextWindow) {
                 nextWindow = nextWindow.opener || nextWindow.parent;
                 parents.unshift(nextWindow);
             }
