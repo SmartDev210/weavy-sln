@@ -3262,6 +3262,7 @@
     <Content Include="img\eo\3297.svg" />
     <Content Include="img\eo\3299.svg" />
     <Content Include="img\favicon.ico" />
+    <Content Include="img\horizontal blue-logo.png" />
     <Content Include="img\icon.svg" />
     <Content Include="img\icons\access-point.svg" />
     <Content Include="img\icons\account.svg" />
@@ -3437,6 +3438,7 @@
     <Content Include="img\icons\wrench.svg" />
     <Content Include="img\icons\zip-box.svg" />
     <Content Include="img\icons\zoom.svg" />
+    <Content Include="img\jitsi-placeholder-image.png" />
     <Content Include="img\pixel.png" />
     <Content Include="img\role.svg" />
     <Content Include="img\space.svg" />
@@ -4316,8 +4318,9 @@
     <Compile Include="Areas\Apps\Controllers\TaskItemController.cs" />
     <Compile Include="Areas\Apps\Controllers\TasksController.cs" />
     <Compile Include="Areas\Apps\Models\Messenger.cs" />
-    <Compile Include="Areas\CustomPages\Models\ClubhouseAviationHomePageViewModel.cs" />
-    <Compile Include="Areas\CustomPages\Models\MyHomeViewModel.cs" />
+    <Compile Include="Areas\CustomPages\Models\AviationClubhouseHomePageViewModel.cs" />
+    <Compile Include="Areas\CustomPages\Models\ClubhouseAviationMarketplaceHomePageViewModel.cs" />
+    <Compile Include="Areas\CustomPages\Models\AviationMarketplaceHomePageViewModel.cs" />
     <Compile Include="Areas\Apps\Models\Notifications.cs" />
     <Compile Include="Areas\Apps\Models\TaskItem.cs" />
     <Compile Include="Areas\Apps\Models\Tasks.cs" />
@@ -4335,6 +4338,7 @@
     <Content Include="Areas\CustomPages\Views\MyHome\ClubhouseAviatonMarketplace.cshtml" />
     <Content Include="Areas\CustomPages\Views\Web.config" />
     <Content Include="Areas\CustomPages\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\CustomPages\Views\MyHome\AviationClubhouse.cshtml" />
     <None Include="Resources\Resources.txt" />
     <None Include="Resources\Resources.en.txt" />
     <None Include="packages.config" />

@@ -21,14 +21,14 @@ namespace Weavy.Areas.CustomPages.Controllers
         /// </summary>
         /// <returns></returns>
         // GET: aviation-marketplace
-        [Route("aviation-marketplace")]
-        public ActionResult Index()
+        [Route("aviation-marketplace")]        
+        public ActionResult AviationMarketplace()
         {
             var joined = SpaceService.GetVisited(10);
 
-            var pods = SpaceService.Search(new SpaceQuery { Tag = "pods", Top = 10 });
-            var gigs = SpaceService.Search(new SpaceQuery { Tag = "gigs", Top = 10 });
-            var pubs = SpaceService.Search(new SpaceQuery { Top = 10 });
+            var pods = SpaceService.Search(new SpaceQuery { Tag = "pods", Top = 10, Sudo = true });
+            var gigs = SpaceService.Search(new SpaceQuery { Tag = "gigs", Top = 10, Sudo = true });
+            var pubs = SpaceService.Search(new SpaceQuery { Top = 10, Sudo = true });
 
             var notifications = NotificationService.Search(new NotificationQuery
             {
@@ -41,7 +41,7 @@ namespace Weavy.Areas.CustomPages.Controllers
             {
                 StarredById = User.Id
             }).ToList();
-            MyHomeViewModel viewModel = new MyHomeViewModel
+            AviationMarketplaceHomePageViewModel viewModel = new AviationMarketplaceHomePageViewModel
             {
                 JoinedSpaces = joined,
                 PodsSpaces = pods.Where(x => x.Tags.Any(y => y.ToLower() == "pods")),
@@ -54,6 +54,26 @@ namespace Weavy.Areas.CustomPages.Controllers
             return View("~/Areas/CustomPages/Views/MyHome/Index.cshtml", viewModel);
         }
         /// <summary>
+        /// Aviation clubhouse homepage
+        /// </summary>
+        /// <returns></returns>
+        // GET: aviation-clubhouse
+        [Route("aviation-clubhouse")]
+        public ActionResult AviationClubhouse()
+        {
+            var joined = SpaceService.GetVisited(100).Where(x => x.Tags.Contains("Aviation")).ToList();
+
+            var aviationClubs = SpaceService.Search(new SpaceQuery { Tag = "Aviation", Top = 20, Sudo = true }).Where(x => !x.IsMember).ToList();
+
+            AviationClubhouseHomePageViewModel viewModel = new AviationClubhouseHomePageViewModel
+            {
+                JoinedSpaces = joined,
+                AviationSpaces = aviationClubs.Where(x => x.Tags.Any(y => y.ToLower() == "aviation")).ToList()
+            };
+            
+            return View("~/Areas/CustomPages/Views/MyHome/AviationClubhouse.cshtml", viewModel);
+        }
+        /// <summary>
         /// Marketplace homepage with categories
         /// </summary>
         /// <returns></returns>
@@ -62,9 +82,9 @@ namespace Weavy.Areas.CustomPages.Controllers
         [AllowAnonymous]
         public ActionResult ClubhouseAviationMarketplace()
         {   
-            var pubs = SpaceService.Search(new SpaceQuery { Top = 20 });
+            var pubs = SpaceService.Search(new SpaceQuery { Top = 20, Sudo = true });
             
-            ClubhouseAviationHomePageViewModel viewModel = new ClubhouseAviationHomePageViewModel
+            ClubhouseAviationMarketplaceHomePageViewModel viewModel = new ClubhouseAviationMarketplaceHomePageViewModel
             {
                 PubSpaces = pubs.ToList()
             };

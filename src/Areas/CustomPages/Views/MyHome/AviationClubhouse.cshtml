@@ -1,0 +1,95 @@
+﻿
+@model Weavy.Areas.CustomPages.Models.AviationClubhouseHomePageViewModel
+
+@{
+    Title = T["Start"].ToString();
+}
+
+@section navbar_left {
+
+    <div class="navbar-icons">
+        @Html.Partial("_NavbarMenu")
+        <form action="@(Url.Action<HomeController>(c => c.Search(null, null)))" method="get" class="main-search navbar-search-box" data-turboform>
+            <div class="form-group" role="search">
+                <input id="weavy-main-search" class="form-control" type="search" name="q" value="" placeholder="@T["Search"]" />
+                <button type="submit" class="btn btn-icon">@Svg.Icon("magnify")</button>
+            </div>
+        </form>
+    </div>
+}
+
+@section navbar_middle {
+    
+}
+
+
+<div class="container d-flex flex-column my-4">
+    <img class="mb-4" style="width: 70%; align-self: center;" src="~/img/horizontal blue-logo.png" />
+    <h2 class="custome-page-title" style="color: #7FB4CC;">AVIATION CLUBHOUSE SCHEDULE</h2>
+    <div class="d-flex mt-3 mb-5" style="height: 600px; justify-content: center;">
+        <iframe src="https://calendar.google.com/calendar/embed?height=600&amp;wkst=1&amp;bgcolor=%230091b2&amp;ctz=America%2FNew_York&amp;src=YXZpYXRpb25jbHViaG91c2VAZ21haWwuY29t&amp;color=%23039BE5&amp;showTitle=0&amp;showNav=1&amp;showDate=1&amp;showPrint=1&amp;showCalendars=0&amp;showTz=1" style="border:solid 1px #777; width: 100%; height: 100%; max-width: 600px;" frameborder="0" scrolling="no"></iframe>
+    </div>
+    <div class="d-flex justify-content-center align-items-center mt-5 mb-5" style="background: url(/img/jitsi-placeholder-image.png) center  no-repeat; height: 450px;">
+        <a class="join-jitsi-room-button" href="@(ConfigurationService.AppSetting("findparts-url"))/video-call/global-room" target="_blank">
+            Join Room
+        </a>
+    </div>
+
+    <h5 class="d-flex mt-5">
+        <a href="@(Url.Action<SpaceController>(c => c.Index(null, null)))" class="text-hyphens">My Channels</a>
+    </h5>
+    @if (Model.JoinedSpaces.Any())
+    {
+        <div class="space-cards">
+            @foreach (var space in Model.JoinedSpaces)
+            {
+                <a class="card" href="@space.Url()">
+                    <div class="card-cover">
+                        @space.AvatarImg(64)
+                        <div class="facepile">
+                            @SpaceService.GetMembers(space.Id, new MemberQuery { Top = 5, OrderBy = "Random" }).Facepile(size: 24)
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-title text-truncate" title="@space.Name">@space.Name</div>
+                    </div>
+                    @Html.StarToggle(space)
+                </a>
+            }
+        </div>
+    }
+    else
+    {
+        <p class="text-muted">
+            @T["All your spaces will show up here."]
+            <a href="@(Url.Action<SpaceController>(c => c.New()).ToLower())">@T[@"We suggest creating your first space to get started."]</a>
+        </p>
+    }
+
+
+    @if (Model.AviationSpaces.Any())
+    {
+        <h5 class="d-flex mt-5">
+            <a href="@(Url.Action<SpaceController>(c => c.Index(null, null)))" class="text-hyphens">Aviation Clubhouse Channels</a>
+        </h5>
+
+        <div class="space-cards">
+            @foreach (var space in Model.AviationSpaces)
+            {
+                <a class="card" href="@space.Url()">
+                    <div class="card-cover">
+                        @space.AvatarImg(64)
+                        <div class="facepile">
+                            @SpaceService.GetMembers(space.Id, new MemberQuery { Top = 5, OrderBy = "Random" }).Facepile(size: 24)
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-title text-truncate" title="@space.Name">@space.Name</div>
+                    </div>
+                    @Html.StarToggle(space)
+                </a>
+            }
+        </div>
+    }
+
+</div>

@@ -9,7 +9,7 @@ namespace Weavy.Areas.CustomPages.Models
     /// <summary>
     /// Clubhouse aviation homepage with marketplace categories
     /// </summary>
-    public class ClubhouseAviationHomePageViewModel
+    public class ClubhouseAviationMarketplaceHomePageViewModel
     {
         /// <summary>
         /// List of public spaces

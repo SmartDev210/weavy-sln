@@ -21,11 +21,12 @@
         position: relative !important;
 
         .dropdown-menu {
-            left: 50%;
+            left: 0;
+            top: 24px;
             right: unset;
             margin-left: unset;
             margin-right: unset;
-            transform: translate(-50%,0);
+            //transform: translate(-50%,0);
         }
     }
     @media(max-width: 767px) {
@@ -123,4 +124,11 @@ h2.custome-page-title {
             margin: 4px 0;
         }
     }
+}
+.join-jitsi-room-button {
+    padding: 8px 32px;
+    background: #FF00FE;
+    color: white;
+    border-radius: 8px;
+    text-transform: uppercase;
 }

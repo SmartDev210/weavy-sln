@@ -9,12 +9,12 @@ namespace Weavy.Areas.CustomPages.Models
     /// <summary>
     /// Custom home page view model
     /// </summary>
-    public class MyHomeViewModel
+    public class AviationMarketplaceHomePageViewModel
     {
         /// <summary>
         /// constructor
         /// </summary>
-        public MyHomeViewModel()
+        public AviationMarketplaceHomePageViewModel()
         {
             JoinedSpaces = new List<Space>();
             PodsSpaces = new List<Space>();
