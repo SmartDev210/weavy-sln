@@ -7,7 +7,7 @@
 @section navbar_left {
 
     <div class="navbar-icons">
-        @Html.Partial("_NavbarMenu")
+        @Html.Partial("_AppIcon", 34)
         <form action="@(Url.Action<HomeController>(c => c.Search(null, null)))" method="get" class="main-search navbar-search-box" data-turboform>
             <div class="form-group" role="search">
                 <input id="weavy-main-search" class="form-control" type="search" name="q" value="" placeholder="@T["Search"]" />
@@ -18,7 +18,7 @@
 }
 
 @section navbar_middle {
-    
+    @Html.Partial("_NavbarMenu")
 }
 
 
@@ -82,7 +82,7 @@
                     <button type="submit" class="btn btn-icon">@Svg.Icon("magnify")</button>
                 </div>
             </form>
-        </div>     
+        </div>
     </div>
     <h2 class="custome-page-title mt-5">Aviation Industry Vendors</h2>
     <div class="custome-page-industry-vendors">
@@ -105,7 +105,7 @@
             <li><a href="/aviation-marketplace">Augumented Reality</a></li>
         </ul>
     </div>
-   
+
     <h5 class="d-flex mt-5">
         <a href="@(Url.Action<SpaceController>(c => c.Index(null, null)))" class="text-hyphens">Clubs</a>
     </h5>

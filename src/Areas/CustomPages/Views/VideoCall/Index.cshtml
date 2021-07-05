@@ -1,0 +1,31 @@
+﻿
+@model Weavy.Areas.CustomPages.Models.VideoCallViewModel
+@{
+    Title = T["Start"].ToString();
+}
+
+<style>
+    html, body, main {
+        height: 100%;
+    }
+</style>
+
+<div style="height: 100%; width: 100%; display: flex; flex-direction: column">
+    <div style="flex:1" id="meet-container">
+
+    </div>
+</div>
+<script src='https://8x8.vc/libs/external_api.min.js'></script>
+
+<script>
+    const domain = '8x8.vc';
+    const options = {
+        roomName: '@Model.RoomName',
+        configOverwrite: {
+            disableInviteFunctions: true,
+        },
+        jwt: '@Model.Token',
+        parentNode: document.querySelector('#meet-container')
+    };
+    const api = new JitsiMeetExternalAPI(domain, options);
+</script>

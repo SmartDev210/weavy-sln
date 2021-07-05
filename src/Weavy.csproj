@@ -433,6 +433,7 @@
     <Content Include="Areas\Docs\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Docs\Views\Web.config" />
     <Content Include="Global.asax" />
+    <Content Include="img\backchannel-icon.png" />
     <Content Include="img\bot.svg" />
     <Content Include="img\eo\0023-20e3.svg" />
     <Content Include="img\eo\0023.svg" />
@@ -4318,12 +4319,16 @@
     <Compile Include="Areas\Apps\Controllers\TaskItemController.cs" />
     <Compile Include="Areas\Apps\Controllers\TasksController.cs" />
     <Compile Include="Areas\Apps\Models\Messenger.cs" />
+    <Compile Include="Areas\CustomPages\Controller\VideoCallController.cs" />
+    <Compile Include="Areas\CustomPages\Helpers\JaaSJwtBuilder.cs" />
+    <Compile Include="Areas\CustomPages\Hooks\AfterSignInHook.cs" />
     <Compile Include="Areas\CustomPages\Models\AviationClubhouseHomePageViewModel.cs" />
     <Compile Include="Areas\CustomPages\Models\ClubhouseAviationMarketplaceHomePageViewModel.cs" />
     <Compile Include="Areas\CustomPages\Models\AviationMarketplaceHomePageViewModel.cs" />
     <Compile Include="Areas\Apps\Models\Notifications.cs" />
     <Compile Include="Areas\Apps\Models\TaskItem.cs" />
     <Compile Include="Areas\Apps\Models\Tasks.cs" />
+    <Compile Include="Areas\CustomPages\Models\VideoCallViewModel.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -4339,10 +4344,12 @@
     <Content Include="Areas\CustomPages\Views\Web.config" />
     <Content Include="Areas\CustomPages\Views\_ViewStart.cshtml" />
     <Content Include="Areas\CustomPages\Views\MyHome\AviationClubhouse.cshtml" />
+    <Content Include="Areas\CustomPages\Views\VideoCall\Index.cshtml" />
     <None Include="Resources\Resources.txt" />
     <None Include="Resources\Resources.en.txt" />
     <None Include="packages.config" />
     <None Include="packages.config" />
+    <Content Include="Views\Shared\_AppIcon.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

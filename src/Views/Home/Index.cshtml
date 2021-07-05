@@ -7,7 +7,7 @@
 @section navbar_left {
 
     <div class="navbar-icons">
-        <a class="btn btn-icon" href="@WeavyContext.ApplicationPath">@Html.IconImg(24)</a>
+        @Html.Partial("_AppIcon", 34)
         <form action="@(Url.Action<HomeController>(c => c.Search(null, null)))" method="get" class="main-search navbar-search-box" data-turboform>
             <div class="form-group" role="search">
                 <input id="weavy-main-search" class="form-control" type="search" name="q" value="" placeholder="@T["Search"]" />
