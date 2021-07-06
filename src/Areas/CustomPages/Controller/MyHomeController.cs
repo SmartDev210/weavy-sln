@@ -67,20 +67,11 @@ namespace Weavy.Areas.CustomPages.Controllers
             var almostAnythingSpace = SpaceService.GetByKey("almost-anything", true);
             if (almostAnythingSpace != null) joined.Add(almostAnythingSpace);
 
-            var chWelcomeSpace = SpaceService.GetByKey("ch-welcome", true);
-            if (chWelcomeSpace != null) joined.Add(chWelcomeSpace);
+            var welcomeSpace = SpaceService.GetByKey("welcome", true);
+            if (welcomeSpace != null) joined.Add(welcomeSpace);
 
-            var foodSpace = SpaceService.GetByKey("food", true);
-            if (foodSpace != null) joined.Add(foodSpace);
-
-            var funnyShtSpace = SpaceService.GetByKey("funny-sht", true);
-            if (funnyShtSpace != null) joined.Add(funnyShtSpace);
-
-            var humanConnectionSpace = SpaceService.GetByKey("human-connection", true);
-            if (humanConnectionSpace != null) joined.Add(humanConnectionSpace);
-
-            var wellnessSpace = SpaceService.GetByKey("wellness", true);
-            if (wellnessSpace != null) joined.Add(wellnessSpace);
+            var watercoolerSpace = SpaceService.GetByKey("watercooler", true);
+            if (watercoolerSpace != null) joined.Add(watercoolerSpace);
             
 
             var aviationClubs = SpaceService.Search(new SpaceQuery { Tag = "Aviation", Top = 100, Sudo = true }).Where(x => !x.IsMember).ToList();

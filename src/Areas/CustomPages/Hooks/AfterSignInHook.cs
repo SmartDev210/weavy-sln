@@ -29,20 +29,11 @@ namespace Weavy.Areas.CustomPages.Hooks
             var almostAnythingSpace = SpaceService.GetByKey("almost-anything", true);
             if (almostAnythingSpace != null && !almostAnythingSpace.IsMember) { SpaceService.AddMember(almostAnythingSpace.Id, e.User.Id, Access.Write, true); }
 
-            var chWelcomeSpace = SpaceService.GetByKey("ch-welcome", true);
-            if (chWelcomeSpace != null && !chWelcomeSpace.IsMember) { SpaceService.AddMember(chWelcomeSpace.Id, e.User.Id, Access.Write, true); }
+            var welcomeSpace = SpaceService.GetByKey("welcome", true);
+            if (welcomeSpace != null && !welcomeSpace.IsMember) { SpaceService.AddMember(welcomeSpace.Id, e.User.Id, Access.Write, true); }
 
-            var foodSpace = SpaceService.GetByKey("food", true);
-            if (foodSpace != null && !foodSpace.IsMember) { SpaceService.AddMember(foodSpace.Id, e.User.Id, Access.Write, true); }
-
-            var funnyShtSpace = SpaceService.GetByKey("funny-sht", true);
-            if (funnyShtSpace != null && !funnyShtSpace.IsMember) { SpaceService.AddMember(funnyShtSpace.Id, e.User.Id, Access.Write, true); }
-
-            var humanConnectionSpace = SpaceService.GetByKey("human-connection", true);
-            if (humanConnectionSpace != null && !humanConnectionSpace.IsMember) { SpaceService.AddMember(humanConnectionSpace.Id, e.User.Id, Access.Write, true); }
-
-            var wellnessSpace = SpaceService.GetByKey("wellness", true);
-            if (wellnessSpace != null && !wellnessSpace.IsMember) { SpaceService.AddMember(wellnessSpace.Id, e.User.Id, Access.Write, true); }
+            var watercoolerSpace = SpaceService.GetByKey("watercooler", true);
+            if (watercoolerSpace != null && !watercoolerSpace.IsMember) { SpaceService.AddMember(watercoolerSpace.Id, e.User.Id, Access.Write, true); }
         }
     }
 

@@ -1,0 +1,26 @@
+﻿@model Weavy.Areas.CustomPages.Models.SigningInPageViewModel
+@{
+    Layout = "~/Views/Shared/_LayoutBasic.cshtml";
+    ViewBag.Title = T["Signing in, please wait..."].ToString();
+}
+
+<div class="container">
+    <div class="text-center my-5">
+        <p>@T["Signing in..."]</p>
+        @Svg.Spinner(spin: true, size: 48)
+    </div>
+</div>
+<script>
+   
+    wvy.whenLoaded.then(function () {
+
+        wvy.authentication.get().signIn('@Model.JwtToken').then(function (user) {
+            console.log('user', user);
+            var returnUrl = '@Model.Path';
+            if (!returnUrl)
+                returnUrl = "/";
+            window.location.replace(returnUrl);
+        });
+    });
+   
+</script>

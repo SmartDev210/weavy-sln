@@ -3264,6 +3264,7 @@
     <Content Include="img\eo\3299.svg" />
     <Content Include="img\favicon.ico" />
     <Content Include="img\horizontal blue-logo.png" />
+    <Content Include="img\horizontal dotcom blue-logo.png" />
     <Content Include="img\icon.svg" />
     <Content Include="img\icons\access-point.svg" />
     <Content Include="img\icons\account.svg" />
@@ -3440,6 +3441,7 @@
     <Content Include="img\icons\zip-box.svg" />
     <Content Include="img\icons\zoom.svg" />
     <Content Include="img\jitsi-placeholder-image.png" />
+    <Content Include="img\linkedin.png" />
     <Content Include="img\pixel.png" />
     <Content Include="img\role.svg" />
     <Content Include="img\space.svg" />
@@ -4319,6 +4321,7 @@
     <Compile Include="Areas\Apps\Controllers\TaskItemController.cs" />
     <Compile Include="Areas\Apps\Controllers\TasksController.cs" />
     <Compile Include="Areas\Apps\Models\Messenger.cs" />
+    <Compile Include="Areas\CustomPages\Controller\MyAccountController.cs" />
     <Compile Include="Areas\CustomPages\Controller\VideoCallController.cs" />
     <Compile Include="Areas\CustomPages\Helpers\JaaSJwtBuilder.cs" />
     <Compile Include="Areas\CustomPages\Hooks\AfterSignInHook.cs" />
@@ -4328,6 +4331,7 @@
     <Compile Include="Areas\Apps\Models\Notifications.cs" />
     <Compile Include="Areas\Apps\Models\TaskItem.cs" />
     <Compile Include="Areas\Apps\Models\Tasks.cs" />
+    <Compile Include="Areas\CustomPages\Models\SigningInPageViewModel.cs" />
     <Compile Include="Areas\CustomPages\Models\VideoCallViewModel.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -4345,11 +4349,13 @@
     <Content Include="Areas\CustomPages\Views\_ViewStart.cshtml" />
     <Content Include="Areas\CustomPages\Views\MyHome\AviationClubhouse.cshtml" />
     <Content Include="Areas\CustomPages\Views\VideoCall\Index.cshtml" />
+    <Content Include="Areas\CustomPages\Views\Account\SigningIn.cshtml" />
     <None Include="Resources\Resources.txt" />
     <None Include="Resources\Resources.en.txt" />
     <None Include="packages.config" />
     <None Include="packages.config" />
     <Content Include="Views\Shared\_AppIcon.cshtml" />
+    <Content Include="Views\Account\AdminSignIn.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
