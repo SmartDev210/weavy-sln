@@ -7,8 +7,10 @@ using Weavy.Areas.Api.Models;
 using Weavy.Areas.Apps.Models;
 using Weavy.Core.Models;
 using Weavy.Core.Services;
+using Weavy.Core.Utils;
 using Weavy.Web.Api.Controllers;
 using Weavy.Web.Api.Models;
+using Weavy.Web.Utils;
 
 namespace Weavy.Areas.Api.Controllers {
 
@@ -353,6 +355,54 @@ namespace Weavy.Areas.Api.Controllers {
                 ThrowResponseException(HttpStatusCode.NotFound, $"Space with id {id} not found.");
             }
             return Ok(SpaceService.RemoveMember(id, userid));
+        }
+
+        /// <summary>
+        /// request current user to join space
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpPost]        
+        [Route("spaces/{id:int}/request-join")]
+        public IHttpActionResult RequestToJoin(int id)
+        {   
+            var bot = UserService.GetByEmail("bot@mail.back-channel.com");
+            var admins = SpaceService.GetMembers(id, new MemberQuery() { Admin = true, Sudo = true }).ToList();            
+            var space = SpaceService.Get(id, true);
+            
+            if (space != null && bot != null && admins.Count > 0)
+            {   
+                var memberList = new List<int>();
+                memberList.Add(bot.Id);
+                memberList.AddRange(admins.Select(x => x.Id));
+                var conversation = ConversationService.Insert(new Conversation
+                {
+                    CreatedById = bot.Id,
+                    Name = "Join Request",
+                }, memberList);
+                
+                var userLink = "";
+                if (User.Username == User.GetTitle())
+                {   
+                    userLink = $@"<a href=""{User.Url()}"">{User.AvatarImg(32, presence: true).ToHtmlString()}<small class=""text-muted"">@{User.Username}</small></a>";
+                } else
+                {
+                    userLink = $@"<a href=""{User.Url()}"">{User.AvatarImg(32, presence: true).ToHtmlString()}{User.GetTitle()}<small class=""text-muted"">@{User.Username}</small></a>";
+                }
+
+                var message = $@"<p>{userLink} wants to join <a href=""{space.Url()}"" target=""_blank"">{space.Name}</a></p>"
+                    + $@"<p><a href=""/spaces/{id}/join-member/{User.Id}/{conversation.Id}"" target=""_blank"" class=""mr-3"">Approve</a><a href=""/spaces/{id}/deny-member/{User.Id}/{conversation.Id}"" target=""_blank"">Deny</a></p>";
+
+                MessageService.Insert(new Message
+                {
+                    CreatedById = bot.Id,
+                    Html = message
+                }, conversation, sudo: true);
+
+                return Ok();
+            } 
+
+            return BadRequest();            
         }
     }
 }

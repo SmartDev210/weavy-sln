@@ -12,7 +12,7 @@ using Weavy.Web.Owin;
 using Weavy.Web.Models;
 using Microsoft.Owin.Security;
 
-namespace Weavy.Areas.CustomPages.Controller
+namespace Weavy.Areas.CustomPages.Controllers
 {
     /// <summary>
     /// my account controller to login from findparts

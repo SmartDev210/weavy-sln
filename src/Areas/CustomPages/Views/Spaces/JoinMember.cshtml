@@ -1,0 +1,33 @@
+﻿@using Weavy.Areas.CustomPages.Controllers
+@model Weavy.Areas.CustomPages.Models.JoinMemberViewModel
+@{
+
+    Title = "Process Join Request";
+}
+@section navbar_left {
+
+    <div class="navbar-icons">
+        <a href="@(Url.Action<MyHomeController>(c => c.AviationClubhouse()))">@Html.Partial("_AppIcon", 34)</a>       
+    </div>
+}
+@if (Model.Join)
+{
+    if (Model.Success)
+    {
+        <p class="text-center mt-3">
+            @Model.UserName is joined to @Model.SpaceName
+        </p>
+    }
+    else
+    {
+        <p class="text-center mt-3">
+            @Model.UserName is not joined to @Model.SpaceName
+        </p>
+    }
+}
+else
+{
+    <p class="text-center mt-3">
+        @Model.UserName is denied to join @Model.SpaceName
+    </p>
+}

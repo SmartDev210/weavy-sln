@@ -9,7 +9,7 @@ using Weavy.Core.Services;
 using Weavy.Web.Controllers;
 using Weavy.Web.Utils;
 
-namespace Weavy.Areas.CustomPages.Controller
+namespace Weavy.Areas.CustomPages.Controllers
 {
     /// <summary>
     /// jitsi video call controller

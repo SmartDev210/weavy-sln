@@ -1,4 +1,4 @@
-﻿
+﻿@using Weavy.Areas.CustomPages.Controllers
 @model Weavy.Areas.CustomPages.Models.AviationClubhouseHomePageViewModel
 
 @{
@@ -8,7 +8,7 @@
 @section navbar_left {
 
     <div class="navbar-icons">
-        @Html.Partial("_AppIcon", 34)
+        <a href="@(Url.Action<MyHomeController>(c => c.AviationClubhouse()))">@Html.Partial("_AppIcon", 34)</a>
         <form action="@(Url.Action<HomeController>(c => c.Search(null, null)))" method="get" class="main-search navbar-search-box" data-turboform>
             <div class="form-group" role="search">
                 <input id="weavy-main-search" class="form-control" type="search" name="q" value="" placeholder="@T["Search"]" />
@@ -76,7 +76,7 @@
         <div class="space-cards">
             @foreach (var space in Model.AviationSpaces)
             {
-                <a class="card" href="@space.Url()">
+                <a class="card" href="javascript:void(0);" onclick="OpenRequestJoinConfirmDialog(@space.Id, '@space.Name', '@space.Description')">
                     <div class="card-cover">
                         @space.AvatarImg(64)
                         <div class="facepile">
@@ -93,3 +93,48 @@
     }
 
 </div>
+
+<div id="request-join-dialog" class="modal" tabindex="-1" role="dialog">
+    <input hidden name="space-id" id="space-id" />
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header pane-header">
+                <div class="pane-title text-truncate" style="font-size: 20px; font-weight: bolder; ">Join Request</div>
+                <button type="button" class="btn btn-icon" data-dismiss="modal" aria-label="Close">
+                    <svg height="24" viewBox="0 0 24 24" width="24" class="i i-close"><path d="m19 6.41-1.41-1.41-5.59 5.59-5.59-5.59-1.41 1.41 5.59 5.59-5.59 5.59 1.41 1.41 5.59-5.59 5.59 5.59 1.41-1.41-5.59-5.59z"></path></svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p id="space-detail"></p>
+                <p>We will send message to administrator of channel and you will be joined immediately after administrator approves you.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="JoinChannel();">Request to Join</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function OpenRequestJoinConfirmDialog(id, name, description) {
+        $("#space-id").val(id);
+        $("#request-join-dialog .modal-body #space-detail").html('Are you sure to join "' + name + '"' + '<br/>' + description);
+        $("#request-join-dialog").modal('show');
+    }
+    function JoinChannel() {
+        $("#request-join-dialog").modal('hide');
+        var id = $("#space-id").val();
+        $.ajax({
+            type: 'POST',
+            url: '/api/spaces/' + id + '/request-join',
+            success: function () {               
+                wvy.alert.success("Join request is sent successfully. Please wait untill administrator approves you.");
+            },
+            error: function () {
+                wvy.alert.danger("Failed to send join request");
+            }
+        })
+    }
+</script>
+

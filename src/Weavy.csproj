@@ -4314,15 +4314,16 @@
     <Compile Include="Areas\Apps\Controllers\FilesController.cs" />
     <Compile Include="Areas\Apps\Controllers\FolderController.cs" />
     <Compile Include="Areas\Apps\Controllers\MessengerController.cs" />
-    <Compile Include="Areas\CustomPages\Controller\MyHomeController.cs" />
+    <Compile Include="Areas\CustomPages\Controllers\MyHomeController.cs" />
     <Compile Include="Areas\Apps\Controllers\NotificationsController.cs" />
     <Compile Include="Areas\Apps\Controllers\PostsController.cs" />
     <Compile Include="Areas\Apps\Controllers\SearchController.cs" />
     <Compile Include="Areas\Apps\Controllers\TaskItemController.cs" />
     <Compile Include="Areas\Apps\Controllers\TasksController.cs" />
     <Compile Include="Areas\Apps\Models\Messenger.cs" />
-    <Compile Include="Areas\CustomPages\Controller\MyAccountController.cs" />
-    <Compile Include="Areas\CustomPages\Controller\VideoCallController.cs" />
+    <Compile Include="Areas\CustomPages\Controllers\MyAccountController.cs" />
+    <Compile Include="Areas\CustomPages\Controllers\SpacesController.cs" />
+    <Compile Include="Areas\CustomPages\Controllers\VideoCallController.cs" />
     <Compile Include="Areas\CustomPages\Helpers\JaaSJwtBuilder.cs" />
     <Compile Include="Areas\CustomPages\Hooks\AfterSignInHook.cs" />
     <Compile Include="Areas\CustomPages\Models\AviationClubhouseHomePageViewModel.cs" />
@@ -4331,6 +4332,7 @@
     <Compile Include="Areas\Apps\Models\Notifications.cs" />
     <Compile Include="Areas\Apps\Models\TaskItem.cs" />
     <Compile Include="Areas\Apps\Models\Tasks.cs" />
+    <Compile Include="Areas\CustomPages\Models\JoinMemberViewModel.cs" />
     <Compile Include="Areas\CustomPages\Models\SigningInPageViewModel.cs" />
     <Compile Include="Areas\CustomPages\Models\VideoCallViewModel.cs" />
     <Compile Include="Global.asax.cs">
@@ -4350,6 +4352,7 @@
     <Content Include="Areas\CustomPages\Views\MyHome\AviationClubhouse.cshtml" />
     <Content Include="Areas\CustomPages\Views\VideoCall\Index.cshtml" />
     <Content Include="Areas\CustomPages\Views\Account\SigningIn.cshtml" />
+    <Content Include="Areas\CustomPages\Views\Spaces\JoinMember.cshtml" />
     <None Include="Resources\Resources.txt" />
     <None Include="Resources\Resources.en.txt" />
     <None Include="packages.config" />

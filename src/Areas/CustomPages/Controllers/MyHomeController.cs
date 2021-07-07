@@ -60,21 +60,10 @@ namespace Weavy.Areas.CustomPages.Controllers
         // GET: aviation-clubhouse
         [Route("aviation-clubhouse")]
         public ActionResult AviationClubhouse()
-        {
-            List<Space> joined = new List<Space>();
-            
+        {            
+            var joined = SpaceService.Search(new SpaceQuery { Tag = "aviation", Top = 100, Sudo = true, MemberId = User.Id }).Where(x => x.Tags.Any(y => y.ToLower() == "aviation")).ToList();
 
-            var almostAnythingSpace = SpaceService.GetByKey("almost-anything", true);
-            if (almostAnythingSpace != null) joined.Add(almostAnythingSpace);
-
-            var welcomeSpace = SpaceService.GetByKey("welcome", true);
-            if (welcomeSpace != null) joined.Add(welcomeSpace);
-
-            var watercoolerSpace = SpaceService.GetByKey("watercooler", true);
-            if (watercoolerSpace != null) joined.Add(watercoolerSpace);
-            
-
-            var aviationClubs = SpaceService.Search(new SpaceQuery { Tag = "Aviation", Top = 100, Sudo = true }).Where(x => !x.IsMember).ToList();
+            var aviationClubs = SpaceService.Search(new SpaceQuery { Tag = "aviation", Top = 100, Sudo = true }).Where(x => !x.IsMember).ToList();
 
             AviationClubhouseHomePageViewModel viewModel = new AviationClubhouseHomePageViewModel
             {

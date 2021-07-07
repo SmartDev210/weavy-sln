@@ -1,4 +1,5 @@
-﻿@model Weavy.Areas.CustomPages.Models.ClubhouseAviationMarketplaceHomePageViewModel
+﻿@using Weavy.Areas.CustomPages.Controllers
+@model Weavy.Areas.CustomPages.Models.ClubhouseAviationMarketplaceHomePageViewModel
 
 @{
     Title = T["Start"].ToString();
@@ -7,7 +8,7 @@
 @section navbar_left {
 
     <div class="navbar-icons">
-        @Html.Partial("_AppIcon", 34)
+        <a href="@(Url.Action<MyHomeController>(c => c.AviationClubhouse()))">@Html.Partial("_AppIcon", 34)</a>
         <form action="@(Url.Action<HomeController>(c => c.Search(null, null)))" method="get" class="main-search navbar-search-box" data-turboform>
             <div class="form-group" role="search">
                 <input id="weavy-main-search" class="form-control" type="search" name="q" value="" placeholder="@T["Search"]" />

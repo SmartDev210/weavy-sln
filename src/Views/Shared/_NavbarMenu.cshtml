@@ -1,4 +1,6 @@
-﻿@{
+﻿@using System.Text.RegularExpressions
+@using Weavy.Areas.CustomPages.Controllers
+@{
     var navtitle = WeavyContext.Space?.Name ?? Title;
     if (WeavyContext.Space != null) {
         EntityService.Visit(WeavyContext.Space);
@@ -8,7 +10,7 @@
 
 <div class="navbar-middle d-framed">
     @Html.StarToggle(WeavyContext.Space)
-    <a href="@(WeavyContext.Space?.Url() ?? Url.Action<HomeController>(c => c.Index()))" class="navbar-text">
+    <a href="@(WeavyContext.Space?.Url() ?? Url.Action<MyHomeController>(c => c.AviationClubhouse()))" class="navbar-text">
         @navtitle
         @if (WeavyContext.Space?.Teamname != null) {
             <small class="d-none d-sm-inline">@@@WeavyContext.Space.Teamname</small>
@@ -32,7 +34,7 @@
                         @Svg.Icon("menu-up")
                     </div>
                 </div>
-                <a class="dropdown-item@(ActionName == nameof(HomeController.Index) && ControllerName == typeof(HomeController).ControllerName() && AreaName.IsNullOrEmpty() ? " active" : "")" href="@(Url.Action<HomeController>(c => c.Index()))">
+                <a class="dropdown-item@(ActionName == nameof(MyHomeController.AviationClubhouse) && ControllerName == typeof(MyHomeController).ControllerName() && AreaName.IsNullOrEmpty() ? " active" : "")" href="@(Url.Action<MyHomeController>(c => c.AviationClubhouse()))">
                     @Html.IconImg(24)<span>@T["Start"]</span>
                 </a>
                 @if (visited.Any())
@@ -74,7 +76,7 @@
     @if (WeavyContext.Space != null)
     {
         <div>
-            <a class="custom-nav-link ml-2" href="/video-call/@WeavyContext.Space.Name-@WeavyContext.Space.Id" target="_blank">Join Room</a>
+            <a class="custom-nav-link ml-2" href="/video-call/@(Regex.Replace($"{WeavyContext.Space.Name}-{WeavyContext.Space.Id}", "[^a-zA-Z0-9- ]+", "", RegexOptions.Compiled))" target="_blank">Join Room</a>
         </div>
     }
 </div>
