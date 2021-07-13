@@ -29,7 +29,7 @@
         @Html.EditorFor(x => Model.Email)
         @Html.EditorFor(x => Model.Username)
 
-        @Html.EditorsForModel(Model.Profile, exclude: new string[] { nameof(Model.Profile.Avatar), nameof(Model.Profile.Name) })
+        @Html.EditorsForModel(Model.Profile, exclude: new string[] { nameof(Model.Profile.Avatar), nameof(Model.Profile.Name), "Title", "Department", "Location", "Phone", nameof(Model.Profile.Tags)})
 
         <div class="form-buttons">
             <button type="submit" class="btn btn-primary btn-load" title="@T["Save"]">@T["Save"]</button>
