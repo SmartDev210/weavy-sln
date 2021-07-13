@@ -40,7 +40,7 @@ namespace Weavy.Areas.CustomPages.Controllers
                 SpaceName = space.Name
             };
             var admins = SpaceService.GetMembers(spaceId, new Core.Models.MemberQuery { Admin = true, Sudo = true }).ToList();
-            if (admins.Any(y => y.Access == Core.Models.Access.Admin && y.Id == User.Id))
+            if (User.IsAdmin || admins.Any(y => y.Access == Core.Models.Access.Admin && y.Id == User.Id))
             {
                 SpaceService.AddMember(spaceId, userId);
                 ConversationService.Delete(conversationId, sudo: true);

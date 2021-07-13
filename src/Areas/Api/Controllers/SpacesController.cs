@@ -365,16 +365,22 @@ namespace Weavy.Areas.Api.Controllers {
         [HttpPost]        
         [Route("spaces/{id:int}/request-join")]
         public IHttpActionResult RequestToJoin(int id)
-        {   
+        {
+            List<int> adminList = new List<int>();
             var bot = UserService.GetByEmail("bot@mail.back-channel.com");
-            var admins = SpaceService.GetMembers(id, new MemberQuery() { Admin = true, Sudo = true }).ToList();            
+            adminList = SpaceService.GetMembers(id, new MemberQuery() { Admin = true, Sudo = true }).Select(x => x.Id).ToList();            
             var space = SpaceService.Get(id, true);
-            
-            if (space != null && bot != null && admins.Count > 0)
+            if (space == null || bot == null) return NotFound();
+            if (adminList.Count == 0)
+            {
+                adminList = RoleService.GetMembers(-1, new UserQuery { Sudo = true }).Select(x => x.Id).ToList(); // global system administrators
+                
+            }
+            if (space != null && bot != null && adminList.Count > 0)
             {   
                 var memberList = new List<int>();
                 memberList.Add(bot.Id);
-                memberList.AddRange(admins.Select(x => x.Id));
+                memberList.AddRange(adminList);
                 var conversation = ConversationService.Insert(new Conversation
                 {
                     CreatedById = bot.Id,
