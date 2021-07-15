@@ -11,6 +11,15 @@ wvy.stars = (function ($) {
         wvy.api.star(entity, id);
     }
 
+    // flag specified entity
+    function flag(entity, id) {
+       
+        // call api to flag entity
+        wvy.api.flag(entity, id);
+
+        wvy.alert.alert("success", wvy.t("Thank you for reporting content that may break our Terms, we will check on this within 24 hours."), 5000, "alert-flag-" + entity + "-" + id);
+    }
+
     // unstar specified entity
     function unstar(entity, id) {
         // find all stars for the entity and remove the .on class
@@ -34,6 +43,16 @@ wvy.stars = (function ($) {
         } else {
             star(this.dataset.type, this.dataset.id);
         }
+    });
+
+    // attach click event handler to [data-toggle=flag]
+    $(document).on("click", "[data-toggle=flag]", function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+
+
+        flag(this.dataset.type, this.dataset.id);
+        
     });
 
     // close dropdown on button click
@@ -76,7 +95,8 @@ wvy.stars = (function ($) {
     return {
         star: star,
         unstar: unstar,
-        prune: removeUnstarredInTab
+        prune: removeUnstarredInTab,
+        flag: flag
     };
 
 })(jQuery);

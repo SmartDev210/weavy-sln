@@ -19,6 +19,15 @@ wvy.api = (function ($) {
         });
     }
 
+    // flag entity
+    function flag(entityType, entityId, method) {
+        return $.ajax({
+            url: '/api/flag/' + entityId + '/' + entityType,
+            method: method || "POST",
+            contentType: "application/json"
+        });
+    }
+
     // restore entity
     function restore(entityType, entityId, method) {
         return $.ajax({
@@ -171,6 +180,7 @@ wvy.api = (function ($) {
         readAllForParent: readAllForParent,
         pin: pin,
         unpin: unpin,
-        badges: badges
+        badges: badges,
+        flag: flag
     };
 })(jQuery);

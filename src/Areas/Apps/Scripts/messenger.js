@@ -491,6 +491,9 @@ wvy.messenger = (function ($) {
             case "unstar":
                 unstar(this.dataset.id, true);
                 break;
+            case "flag":
+                flag(this.dataset.id, true);
+                break;
             default:
                 console.warn("unhandled action: " + action);
         }
@@ -1157,6 +1160,14 @@ wvy.messenger = (function ($) {
 
         // let turbolinks fetch the page (will show loading spinner etc.)
         Turbolinks.visit($c.attr("href"));
+    }
+
+    function flag(id, ajax) {
+        
+        if (ajax) {
+            $.post({ url: '/api/flag/' + id + '/conversation', method: 'POST' });
+            wvy.alert.alert("success", wvy.t("Thank you for reporting content that may break our Terms, we will check on this within 24 hours."), 5000, "alert-flag-conversation-" + id);
+        }
     }
 
     function star(id, ajax) {

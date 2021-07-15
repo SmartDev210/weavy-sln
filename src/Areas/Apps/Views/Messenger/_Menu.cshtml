@@ -9,7 +9,9 @@
     <button type="button" class="dropdown-item" data-action="unpin" data-id="@Model.Id">@T["Unpin conversation"]</button>
     <button type="button" class="dropdown-item" data-action="read" data-id="@Model.Id">@T["Mark as read"]</button>
     <button type="button" class="dropdown-item" data-action="unread" data-id="@Model.Id">@T["Mark as unread"]</button>
-    @if (Model.IsRoom && Model.HasPermission(Permission.Members)) {
+    <button type="button" class="dropdown-item" style="display: block;" data-action="flag" data-id="@Model.Id">@T["Flag conversation"]</button>
+    @if (Model.IsRoom && Model.HasPermission(Permission.Members))
+    {
         <button type="button" class="dropdown-item" data-action="add-people" data-id="@Model.Id">@T["Add people"]</button>
     }
     <button type="button" class="dropdown-item" data-action="leave" data-id="@Model.Id">@T["Leave conversation"]</button>

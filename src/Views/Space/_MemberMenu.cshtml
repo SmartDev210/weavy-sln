@@ -30,6 +30,7 @@
                 @Html.HttpMethodOverride(HttpVerbs.Delete)
                 <button type="submit" class="dropdown-item">@Svg.Icon("close") @T["Remove from space"]</button>
             </form>
+            <button class="dropdown-item toggle-dropdown" type="button" data-toggle="flag" data-type="@Model.Type.ToString().ToLower()" data-id="@Model.Id">@Svg.Icon("minus-circle-outline", "danger") @T["Flag this user"]</button>
         }
 
 

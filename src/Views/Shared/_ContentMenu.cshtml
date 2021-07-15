@@ -75,7 +75,9 @@
         @if (Model is IFollowable followable) {
             @Html.SubscribeToggle(followable, htmlAttributes: new { @class = "dropdown-item toggle-dropdown" })
         }
-
+        
+        <button class="dropdown-item toggle-dropdown" type="button" data-toggle="flag" data-type="content" data-id="@Model.Id">@Svg.Icon("minus-circle-outline", "danger") @T["Flag content"]</button>
+        
 
         @* NOTE: to avoid some issues with overlays and navigation we avoid trashing from the details view *@
         @if (Model != null && !overrideMenu && Model.HasPermission(Permission.Delete)) {

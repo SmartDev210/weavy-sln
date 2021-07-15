@@ -4301,6 +4301,7 @@
     <Compile Include="App_Start\Startup.cs" />
     <Compile Include="Areas\Api\Controllers\AppsController.cs" />
     <Compile Include="Areas\Api\Controllers\ConversationsController.cs" />
+    <Compile Include="Areas\Api\Controllers\FlagController.cs" />
     <Compile Include="Areas\Api\Controllers\SearchController.cs" />
     <Compile Include="Areas\Api\Controllers\SpacesController.cs" />
     <Compile Include="Areas\Api\Controllers\UsersController.cs" />
@@ -4342,7 +4343,9 @@
     <Compile Include="Properties\BuildInfo.cs" />
     <Compile Include="Utils\HtmlUtils.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Areas\Api\Views\Flag\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\CustomPages\Styles\customize.scss" />
     <Content Include="Areas\CustomPages\Views\MyHome\Index.cshtml" />

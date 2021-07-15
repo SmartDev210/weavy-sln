@@ -22,6 +22,8 @@
                     <button type="button" class="dropdown-item" data-toggle="modal" data-target="#share-modal" data-share-type="@Model.Type" data-share-id="@Model.Id" data-share-title="Share @Model.Kind()">@Svg.Icon("share-variant", "success") @T["Share"]</button>
                     @Html.StarToggle(Model, false, htmlAttributes: new { @class = "dropdown-item toggle-dropdown" })
                     @Html.SubscribeToggle(Model, htmlAttributes: new { @class = "dropdown-item toggle-dropdown" })
+                    <button class="dropdown-item toggle-dropdown" type="button" data-toggle="flag" data-type="@Model.Type.ToString().ToLower()" data-id="@Model.Id">@Svg.Icon("minus-circle-outline", "danger") @T["Flag content"]</button>
+                    
                 </div>
             </div>
         </div>

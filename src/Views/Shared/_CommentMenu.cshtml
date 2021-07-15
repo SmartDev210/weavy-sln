@@ -10,8 +10,9 @@
             
             @if (Model.HasPermission(Permission.Edit)) {
                 <button class="dropdown-item" type="button" data-toggle="modal" data-target="#edit-comment-modal" data-path="@(Url.Action<CommentController>(c => c.Edit(Model.Id)))" title="@T["Edit comment"]">@Svg.Icon("pencil", "success") @T["Edit"]</button>
+            } else { 
+                <button class="dropdown-item toggle-dropdown" type="button" data-toggle="flag" data-type="@Model.Type.ToString().ToLower()" data-id="@Model.Id">@Svg.Icon("minus-circle-outline", "danger") @T["Flag comment"]</button>
             }
-            
             @if (Model.HasPermission(Permission.Delete)) {
                 <a href="#" data-comment-trash="@Model.Id" class="dropdown-item">@Svg.Icon("delete", "danger") @T["Trash"]</a>
             }
