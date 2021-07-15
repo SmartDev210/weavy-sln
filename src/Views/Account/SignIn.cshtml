@@ -11,12 +11,18 @@
             <div class="text-center mb-5">
                 <img style="width: 100%;" src="~/img/horizontal dotcom blue-logo.png" />
             </div>
-
-            <div id="appleid-signin" data-color="black" data-border="true" data-type="sign in" style="height: 46px; width: 220px; margin: auto; margin-bottom: 20px;"></div>
+            <p class="text-center">By continuing, you agree to our <a href="@ConfigurationService.AppSetting("findparts-url")/terms" target="_blank">User Agreement</a> and <a href="@ConfigurationService.AppSetting("findparts-url")/privacy" target="_blank">Privacy Policy</a>.</p>
+            <br />
+            <div id="appleid-signin" data-color="black" data-border="true" data-type="continue" style="height: 46px; width: 240px; margin: auto; margin-bottom: 20px;"></div>
 
             <form action="@ConfigurationService.AppSetting("findparts-url")/Account/ExternalLoginFromBackChannel?path=@Model.Path" method="post" style="text-align: center;">
-                <button type="submit" class="btn btn-primary" id="LinkedIn" name="provider" value="LinkedIn" title="Sign in with LinkedIn" style="margin: 10px; width: 220px;"><img src="~/img/linkedin.png" style="width: 30px; height:30px; border-radius: 4px;" />&nbsp;&nbsp; Sign In with LinkedIn</button>
+                <button type="submit" class="btn btn-primary" id="LinkedIn" name="provider" value="LinkedIn" title="Sign in with LinkedIn" style="margin: 10px; width: 240px;"><img src="~/img/linkedin.png" style="width: 30px; height:30px; border-radius: 4px;" />&nbsp;&nbsp; Continue with LinkedIn </button>
             </form>
+
+            <p class="text-center mt-3" style="font-size: 24px; font-weight: bold;">
+            Free<br/>
+            Aviation<br/>
+            Social Network<br/></p>            
         </div>
     </div>
 </div>
