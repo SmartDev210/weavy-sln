@@ -34,6 +34,9 @@ namespace Weavy.Areas.CustomPages.Hooks
 
             var watercoolerSpace = SpaceService.GetByKey("watercooler", true);
             if (watercoolerSpace != null && !watercoolerSpace.IsMember) { SpaceService.AddMember(watercoolerSpace.Id, e.User.Id, Access.Write, true); }
+
+            var techSupport = SpaceService.GetByKey("tech-support", true);
+            if (techSupport != null && !techSupport.IsMember) { SpaceService.AddMember(techSupport.Id, e.User.Id, Access.Write, true); }
         }
     }
 
