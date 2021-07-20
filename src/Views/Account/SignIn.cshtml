@@ -5,6 +5,11 @@
     Layout = "~/Views/Shared/_LayoutBasic.cshtml";
     Title = T["Sign in"].ToString();
 }
+<style>
+    #appleid-signin {
+        cursor: pointer;
+    }
+</style>
 <div class="container mt-5">
     <div class="row justify-content-sm-center">
         <div class="col-sm-8 col-md-6 col-lg-5">
@@ -13,7 +18,7 @@
             </div>
             <p class="text-center">By continuing, you agree to our <a href="@ConfigurationService.AppSetting("findparts-url")/terms" target="_blank">User Agreement</a> and <a href="@ConfigurationService.AppSetting("findparts-url")/privacy" target="_blank">Privacy Policy</a>.</p>
             <br />
-            <div id="appleid-signin" data-color="black" data-border="true" data-type="continue" style="height: 46px; width: 240px; margin: auto; margin-bottom: 20px;"></div>
+            <div id="appleid-signin" role="button" data-color="black" data-border="true" data-type="continue" style="height: 46px; width: 240px; margin: auto; margin-bottom: 20px;"></div>
 
             <form action="@ConfigurationService.AppSetting("findparts-url")/Account/ExternalLoginFromBackChannel?path=@Model.Path" method="post" style="text-align: center;">
                 <button type="submit" class="btn btn-primary" id="LinkedIn" name="provider" value="LinkedIn" title="Sign in with LinkedIn" style="margin: 10px; width: 240px;"><img src="~/img/linkedin.png" style="width: 30px; height:30px; border-radius: 4px;" />&nbsp;&nbsp; Continue with LinkedIn </button>
