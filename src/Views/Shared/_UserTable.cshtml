@@ -19,8 +19,15 @@
                 }
                 @Html.Badge(user)
                 @Html.Shield(user)
-            </td>
-            <td>@user.Email</td>
+            </td>            
+            @if (User.IsAdmin)
+            {
+                <td>@user.Email</td>
+            } else
+            {
+                <td>@user.Profile["Bio"]</td>
+            }
+            
             <td class="table-icon">@{ Html.RenderPartial("_UserMenu", user);}</td>
         </tr>
     }

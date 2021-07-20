@@ -17,8 +17,15 @@
             <thead>
                 <tr>
                     <th class="table-icon"></th>
-                    <th><a href="@Url.OrderBy("name")">@T["Name"]</a></th>
-                    <th><a href="@Url.OrderBy("email")">@T["Email"]</a></th>
+                    <th><a href="@Url.OrderBy("name")">@T["Name"]</a></th>                    
+                    @if (User.IsAdmin)
+                    {
+                        <th><a href="@Url.OrderBy("email")">@T["Email"]</a></th>
+                    }
+                    else
+                    {
+                        <th>Bio</th>
+                    }
                     <th class="table-icon"></th>
                 </tr>
             </thead>
