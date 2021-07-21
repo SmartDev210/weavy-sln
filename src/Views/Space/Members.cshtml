@@ -26,7 +26,15 @@
                 <tr>
                     <th class="table-icon"></th>
                     <th>@T["Name"]</th>
-                    <th>@T["Email"]</th>
+                    @if (WeavyContext.Space.HasPermission(Permission.Admin))
+                    {
+                        <th>@T["Email"]</th>
+                    }
+                    else
+                    {
+                        <th>@T["Bio"]</th>
+                    }
+
                     <th class="table-icon"></th>
                 </tr>
             </thead>
@@ -43,7 +51,12 @@
                             @Html.Badge(member)
                             @Html.Shield(member)
                         </td>
-                        <td>@member.Email</td>
+                        @if (WeavyContext.Space.HasPermission(Permission.Admin)) { 
+                            <td>@member.Email</td>
+                        } else { 
+                            <td>@member.Profile["Bio"]</td>
+                        }
+                        
                         <td class="table-icon">
                             <div class="d-flex justify-content-end">
                                 @{ Html.RenderPartial("_MemberMenu", member);}
@@ -58,7 +71,7 @@
 
 </div>
 
-@if (WeavyContext.Space.HasPermission(Permission.Members)) {
+@if (WeavyContext.Space.HasPermission(Permission.Admin)) {
     @section fab {
         <div class="fab">
             <button type="button" class="btn btn-round btn-primary" data-toggle="modal" data-target="#members-modal" data-keyboard="true" title="@T["Add members"]">@Svg.Icon("plus")</button>

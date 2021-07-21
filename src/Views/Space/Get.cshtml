@@ -7,7 +7,7 @@
     @{ Html.RenderPartial("_NavbarMenu");}
 }
 
-@if (WeavyContext.Space.HasPermission(Permission.Apps)) {
+@if (WeavyContext.Space.HasPermission(Permission.Admin)) {
     @section navbar_secondary {
         <nav class="navbar navbar-theme">
             <div class="navbar-icons">
@@ -23,7 +23,7 @@
     </div>
     <div class="facepile">
         @Model.Members.Facepile(size: 32, link: true, presence: true)
-        @if (WeavyContext.Space.HasPermission(Permission.Members)) {
+        @if (WeavyContext.Space.HasPermission(Permission.Admin)) {
             <button type="button" class="btn btn-round btn-primary btn-sm" data-toggle="modal" data-target="#members-modal" data-keyboard="true" title="@T["Add members"]">@Svg.Icon("plus")</button>
         }
     </div>

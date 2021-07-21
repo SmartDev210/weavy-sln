@@ -25,7 +25,7 @@
                 @Html.HttpMethodOverride(HttpVerbs.Delete)
                 <button type="submit" class="dropdown-item">@Svg.Icon("close") @T["Leave space"]</button>
             </form>
-        } else if (WeavyContext.Space.HasPermission(Permission.Members)) {
+        } else if (WeavyContext.Space.HasPermission(Permission.Admin)) {
             <form action="@(Url.Action<SpaceController>(c => c.RemoveMember(WeavyContext.Space.Id, Model.Id )))" method="post" data-turboform>
                 @Html.HttpMethodOverride(HttpVerbs.Delete)
                 <button type="submit" class="dropdown-item">@Svg.Icon("close") @T["Remove from space"]</button>

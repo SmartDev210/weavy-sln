@@ -31,7 +31,7 @@
 
         <div class="dropdown-divider"></div>
 
-        @if (Model.HasPermission(Permission.Edit)) {
+        @if (WeavyContext.Space.HasPermission(Permission.Admin) || Model.HasPermission(Permission.Admin)) {
             if (lockable?.LockedById == User.Id) {
                 if (Model.MetaData().ModifyMode == UpsertMode.Page) {
                     <a class="dropdown-item" href="@Model.Url()/edit" target="overlay">@Svg.Icon("pencil", "primary")<span>@T["Continue editing"]</span></a>
@@ -80,7 +80,7 @@
         
 
         @* NOTE: to avoid some issues with overlays and navigation we avoid trashing from the details view *@
-        @if (Model != null && !overrideMenu && Model.HasPermission(Permission.Delete)) {
+        @if (Model != null && !overrideMenu && (WeavyContext.Space.HasPermission(Permission.Admin) || Model.HasPermission(Permission.Admin))) {
             <form action="@(Url.Action<ContentController>(c => c.Trash(Model.Id)))" method="post" data-turboform>
                 <button type="submit" class="dropdown-item">@Svg.Icon("delete", "danger") @T["Trash"]</button>
             </form>

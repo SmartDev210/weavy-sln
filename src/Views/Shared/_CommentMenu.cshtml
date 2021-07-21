@@ -13,7 +13,7 @@
             } else { 
                 <button class="dropdown-item toggle-dropdown" type="button" data-toggle="flag" data-type="@Model.Type.ToString().ToLower()" data-id="@Model.Id">@Svg.Icon("minus-circle-outline", "danger") @T["Flag comment"]</button>
             }
-            @if (Model.HasPermission(Permission.Delete)) {
+            @if (WeavyContext.Space.HasPermission(Permission.Admin) || Model.HasPermission(Permission.Edit)) {
                 <a href="#" data-comment-trash="@Model.Id" class="dropdown-item">@Svg.Icon("delete", "danger") @T["Trash"]</a>
             }
         </div>

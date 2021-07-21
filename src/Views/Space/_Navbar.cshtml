@@ -9,7 +9,7 @@
                 </a>
             }
         </nav>
-        if (WeavyContext.Space.HasPermission(Permission.Apps)) {
+        if (WeavyContext.Space.HasPermission(Permission.Admin)) {
             <div class="navbar-icons">
                 @if (WeavyContext.App.HasPermission(Permission.Edit)) {
                     @Html.Partial("_AppMenu", WeavyContext.App)
