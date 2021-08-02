@@ -1,5 +1,56 @@
 # Changelog for Weavy
 
+## 8.5.0 (2021-07-13)
+
+* Added "message"-event on apps in client for postMessage from the panel frame.
+* Added .postMessage() on apps in client to send messages to the panel frame.
+* Fixed an issue with sign out in Messenger.
+* Trigger all downloads in top window for easier WebView handling.
+* Fixed an issue with scrolling in Messenger.
+
+## 8.4.4 (2021-07-09)
+
+* Fixed an issue when downloading files in cross-domain environments.
+* Fixed support for reversed infinite scroll.
+* Reduced errors from connection.
+
+## 8.4.3 (2021-07-07)
+
+* Fixed an issue with fetch() in client when used in Dynamics 365.
+
+## 8.4.2 (2021-07-06)
+
+* Fixed an issue with fetch() in client.
+
+## 8.4.1 (2021-07-05)
+
+* Added origin state check for history in client.
+* Reduced cors-origins error messages in client.
+
+## 8.4.0 (2021-07-02)
+
+* Added .url property in client.
+* Added Cors/frame issue detection in client.
+* Added message delivery promises to postal.
+* Added option for shadowMode in client.
+* Added scope encapsulation to weavy.js.
+* Changed promises to avoid rejection in client.
+* Changed postal to use proper origins and make use of weavy.cors-origins server configuration.
+* Changed .ajax() method in client to use fetch() instead of $.ajax().
+* Improved client logging.
+* Improved image loading.
+* Updated TinyMCE to version 5.8.1.
+* Fixed an issue with css when accessing server after startup.
+* Fixed an issue with file picker when opening authentication.
+* Fixed an issue with unclickable attachments.
+* Fixed an issue with blocked scrolling in Safari.
+* Fixed issues with scrolling in Messenger on Windows.
+* Removed .httpsUrl() method in client.
+* Removed .extendDefaults() method in client.
+* Removed messenger panel in standalone.
+* Removed preview panel polyfill in standalone.
+* Removed authentication-panel plugin in client.
+
 ## 8.3.2 (2021-06-10)
 
 * Fixed an issue with postal when using multiple Weavy client instances.

@@ -20,10 +20,10 @@
         );
     } else {
         // Browser globals (root is window)
-        root.WeavyApp = factory(root.WeavyUtils, root.WeavyPromise);
+        root.WeavyApp = factory(root.wvy.utils, root.wvy.promise);
     }
-}(typeof self !== 'undefined' ? self : this, function (utils, WeavyPromise) {
-    console.debug("app.js");
+}(typeof self !== 'undefined' ? self : this, function (WeavyUtils, WeavyPromise) {
+    //console.debug("app.js");
 
     /**
      * @class WeavyApp
@@ -46,7 +46,7 @@
      */
     var WeavyApp = function (weavy, space, options, data) {
 
-        weavy.log("new WeavyApp", options);
+        weavy.debug("new WeavyApp", options);
 
         /** 
          * Reference to this instance
@@ -316,7 +316,7 @@
          */
         app.configure = function (options, data) {
             if (options && typeof options === "object") {
-                app.options = app.weavy.extendDefaults(app.options, options, true);
+                app.options = WeavyUtils.assign(app.options, options, true);
             }
 
             if (data && typeof data === "object") {
@@ -356,7 +356,7 @@
 
                 // Check if app.data needs to be added in space.data.apps
                 if (app.space.data && app.space.data.apps) {
-                    var dataApps = utils.asArray(app.space.data.apps);
+                    var dataApps = WeavyUtils.asArray(app.space.data.apps);
 
                     var foundAppData = dataApps.filter(function (appData) { return app.match(appData) }).pop();
                     if (!foundAppData) {
@@ -393,16 +393,16 @@
 
             if (app.options && typeof app.options === "object") {
 
-                var initAppUrl = weavy.httpsUrl("/client/app", weavy.options.url);
+                var initAppUrl = new URL("/client/app", weavy.url);
 
-                var optionsWithSpace = weavy.extendDefaults({ space: space.id || space.key }, app.options);
+                var optionsWithSpace = WeavyUtils.assign({ space: space.id || space.key }, app.options);
 
                 weavy.ajax(initAppUrl, optionsWithSpace, "POST").then(function (data) {
                         app.data = data;
                         app.configure.call(app);
-                    }).catch(function (xhr, status, error) {
-                        app.weavy.error("WeavyApp.fetchOrCreate()", xhr.responseJSON && xhr.responseJSON.message || xhr);
-                        app.whenLoaded.reject(xhr.responseJSON && xhr.responseJSON.message || xhr);
+                    }).catch(function (error) {
+                        app.weavy.error("WeavyApp.fetchOrCreate()", error.message);
+                        app.whenLoaded.reject(error);
                     });
             } else {
                 app.whenLoaded.reject(new Error("WeavyApp.fetchOrCreate() requires options"));
@@ -511,6 +511,22 @@
                          * @extends WeavyPanel#event:panel-close
                          */
                         weavy.on("panel-close", bridgePanelEvent.bind(app, "close", panelId, { space: app.space, app: app }));
+
+                        /**
+                         * Triggered when the app receives a postMessage sent from the panel frame.
+                         * 
+                         * @category events
+                         * @event WeavyApp#message
+                         * @returns {Object}
+                         * @property {WeavySpace} space - The space that the app belongs to
+                         * @property {WeavyApp} app - The app that fires the event
+                         * @extends WeavyPanels#event:message
+                         */
+                        app.on("before:message", (e, message) => {
+                            if (message.panelId === panelId) {
+                                return WeavyUtils.assign(message, { space: app.space, app: app });
+                            }
+                        });
 
                         app.whenBuilt.resolve(app);
                     }
@@ -652,6 +668,25 @@
     }
 
     /**
+     * Sends postMessage to the app panel frame. 
+     * Returns a promise that is resolved when the message has been delivered and rejected if the message fails or has timed out.
+     * 
+     * @category panel
+     * @function WeavyApp#postMessage
+     * @param {object} message - The Message to send
+     * @param {Transferable[]} [transfer] - A sequence of Transferable objects that are transferred with the message.
+     * @see {@link https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage}
+     * @returns {external:Promise}
+     * */
+    WeavyApp.prototype.postMessage = function (message, transfer) {
+        var app = this;
+        return app.whenBuilt().then(function () {
+            return app.panel.postMessage(message, transfer);
+        });
+    }
+
+
+    /**
      * Check if another app or an object is matching this app. It checks for a match of the id property or the key property.
      * 
      * @category methods
@@ -668,7 +703,7 @@
             }
 
             if (options.key && this.key) {
-                return utils.eqString(options.key, this.key);
+                return WeavyUtils.eqString(options.key, this.key);
             }
         }
 
