@@ -3,6 +3,7 @@
 
 @{
     Title = T["Start"].ToString();
+    var companySpace = SpaceService.GetByKey($"company_{User.Id}", sudo: true);
 }
 
 @section navbar_left {
@@ -22,6 +23,50 @@
     @Html.Partial("_NavbarMenu")
 }
 
+@section navbar_right {
+    <div class="navbar-icons">
+        <div class="dropdown">
+            <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
+                @Svg.Icon("plus-circle-outline")
+            </button>
+            <div class="dropdown-menu dropdown-menu-right">
+                <div class="scroll-y">
+                    <a class="dropdown-item" href="@(companySpace == null ? "/companies/new" : "companies/edit")">
+                        @Svg.Icon("plus-box-outline")<span>@(companySpace == null ? T["Create Company Page"] : T["Edit Company Page"])</span>
+                    </a>
+                    <a class="dropdown-item" href="#">
+                        @Svg.Icon("upload")<span>@T["List ✈ Spare Parts"]</span>
+                    </a>
+                    <a class="dropdown-item" href="#">
+                        @Svg.Icon("upload")<span>@T["List MRO Repair Capabilities"]</span>
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">
+                        @Svg.Icon("send")<span>@T["Advertise Asset(s)"]</span>
+                    </a>
+                    <a class="dropdown-item" href="#">
+                        @Svg.Icon("wrench")<span>@T["Advertise Service(s)"]</span>
+                    </a>
+                    <a class="dropdown-item" href="#">
+                        @Svg.Icon("video")<span>@T["Advertise Your Brand"]</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <button type="button" class="btn btn-icon" data-toggle="drawer" data-target="#drawer-user">
+            @User.AvatarImg(24)
+            @if (WeavyContext.Browser.Desktop)
+            {
+                @Html.TotalBadge()
+            }
+            else
+            {
+                @Html.NotificationsBadge()
+            }
+        </button>
+    </div>
+}
 
 <div class="container d-flex flex-column my-4">
     <h1 class="custome-page-title">Free Aviation Marketplace</h1>

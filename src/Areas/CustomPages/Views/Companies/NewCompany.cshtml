@@ -1,0 +1,60 @@
+﻿@model Weavy.Areas.CustomPages.Models.CompanyViewModel
+@using Weavy.Web.Models
+@using Weavy.Areas.CustomPages.Controllers
+@{
+    Title = T["Companies"].ToString();
+    Back = Url.Back(Url.Action<MyHomeController>(c => c.ClubhouseAviationMarketplace()));
+}
+
+
+@section navbar_middle {
+    @Html.Partial("_NavbarMenu")
+}
+
+
+<div class="container my-3">
+    @using (Html.BeginForm(nameof(CompaniesController.Insert), typeof(CompaniesController).ControllerName(), FormMethod.Post, new { autocomplete = "off", data_turboform = "", novalidate = "" }))
+    {
+        <div class="text-center">
+            @Html.EditorFor(x => Model.Avatar, additionalViewData: new { Avatar = Model })
+        </div>
+        @Html.EditorsForModel(exclude: new string[] { nameof(Model.Avatar), nameof(Model.Tags) })
+        <h2 class="custome-page-title mt-2">Select Categories</h2>
+        <div class="custome-page-industry-vendors">
+            <ul>
+                <li><a href="javascript:void(0)">Machine Shops</a></li>
+                <li><a href="javascript:void(0)">Composities</a></li>
+                <li><a href="javascript:void(0)">Paint</a></li>
+                <li><a href="javascript:void(0)">NDT</a></li>
+                <li><a href="javascript:void(0)">Line MROs</a></li>
+                <li><a href="javascript:void(0)">Heavy MROs</a></li>
+                <li><a href="javascript:void(0)">Engine MROs</a></li>
+                <li><a href="javascript:void(0)">Landing Gear MROs</a></li>
+                <li><a href="javascript:void(0)">Tooling Repair</a></li>
+                <li><a href="javascript:void(0)">Sheet Metal Repair</a></li>
+                <li><a href="javascript:void(0)">Structural Repair</a></li>
+                <li><a href="javascript:void(0)">Calibration</a></li>
+                <li><a href="javascript:void(0)">Logistics</a></li>
+                <li><a href="javascript:void(0)">3D Printing</a></li>
+                <li><a href="javascript:void(0)">Asset Tagging</a></li>
+                <li><a href="javascript:void(0)">Augumented Reality</a></li>
+            </ul>
+        </div>
+        @Html.EditorFor(x => Model.Tags)
+        <div class="form-buttons">
+            <button type="submit" class="btn btn-primary btn-load" title="Save">@T["Save"]</button>
+            <a href="@Back" class="btn btn-outline-secondary mr-auto">@T["Cancel"]</a>
+        </div>
+    }
+</div>
+
+@section scripts {
+    <script>
+        $(function () {
+            $(document).on('click', '.custome-page-industry-vendors li', function () {
+                $this = $(this);
+                $("#Tags").tagsinput('add', $this.find("a").text().replace(" ", "-"));
+            });
+        })
+    </script>
+}

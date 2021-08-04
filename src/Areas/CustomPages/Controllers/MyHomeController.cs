@@ -14,7 +14,7 @@ namespace Weavy.Areas.CustomPages.Controllers
     /// <summary>
     /// My Custom controller for customized homepage and some other pages
     /// </summary>
-    public class MyHomeController : AppController
+    public class MyHomeController : WeavyController
     {
         /// <summary>
         /// Original home page

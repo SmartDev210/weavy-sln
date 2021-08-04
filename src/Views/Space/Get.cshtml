@@ -1,6 +1,11 @@
 ﻿@model SpaceModel
 @{
     Title = WeavyContext.Space.Name;
+
+    if (!Model.Space.Key.IsNullOrEmpty() && Model.Space.Key.StartsWith("company_"))
+    {
+        Response.Redirect($"/companies/{Model.Space.Id}");
+    }
 }
 
 @section navbar_middle {

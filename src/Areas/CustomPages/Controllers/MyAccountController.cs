@@ -17,7 +17,7 @@ namespace Weavy.Areas.CustomPages.Controllers
     /// <summary>
     /// my account controller to login from findparts
     /// </summary>
-    public class MyAccountController : AppController
+    public class MyAccountController : WeavyController
     {
        
         [HttpGet]

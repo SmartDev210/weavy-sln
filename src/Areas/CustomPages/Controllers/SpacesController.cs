@@ -12,9 +12,9 @@ using Weavy.Web.Utils;
 namespace Weavy.Areas.CustomPages.Controllers
 {
     /// <summary>
-    /// jitsi video call controller
+    /// customized spaces controller
     /// </summary>
-    public class SpacesController : AppController
+    public class SpacesController : WeavyController
     {
         /// <summary>
         /// add member to space and delete converstaion
@@ -75,7 +75,7 @@ namespace Weavy.Areas.CustomPages.Controllers
 
             ConversationService.Delete(conversationId, sudo: true);
             
-            return View("~/Areas/CustomPages/Views/Spaces/joinMember.cshtml", viewModel);
+            return View("~/Areas/CustomPages/Views/Spaces/JoinMember.cshtml", viewModel);
         }
     }
 }

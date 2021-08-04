@@ -1,0 +1,115 @@
+﻿@model Weavy.Core.Models.Space
+@{
+    Title = Model.Name;
+    var adminMembers = SpaceService.GetMembers(Model.Id, new MemberQuery { Admin = true, Count = true });
+}
+
+
+@section navbar_middle {
+    @{ Html.RenderPartial("_NavbarMenu");}
+}
+
+@section navbar_right {
+    <div class="navbar-icons">
+        <div class="dropdown">
+            <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
+                @Svg.Icon("plus-circle-outline")
+            </button>
+            <div class="dropdown-menu dropdown-menu-right">
+                <div class="scroll-y">
+                    <a class="dropdown-item" href="@(Model.CreatedById == User.Id ? "/companies/edit" : "/companies/new")">
+                        @Svg.Icon("plus-box-outline")<span>@(Model.CreatedById == User.Id ? T["Edit Company Page"] : T["Create Company Page"])</span>
+                    </a>
+                    <a class="dropdown-item" href="#">
+                        @Svg.Icon("upload")<span>@T["List ✈ Spare Parts"]</span>
+                    </a>
+                    <a class="dropdown-item" href="#">
+                        @Svg.Icon("upload")<span>@T["List MRO Repair Capabilities"]</span>
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">
+                        @Svg.Icon("send")<span>@T["Advertise Asset(s)"]</span>
+                    </a>
+                    <a class="dropdown-item" href="#">
+                        @Svg.Icon("wrench")<span>@T["Advertise Service(s)"]</span>
+                    </a>
+                    <a class="dropdown-item" href="#">
+                        @Svg.Icon("video")<span>@T["Advertise Your Brand"]</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <button type="button" class="btn btn-icon" data-toggle="drawer" data-target="#drawer-user">
+            @User.AvatarImg(24)
+            @if (WeavyContext.Browser.Desktop)
+            {
+                @Html.TotalBadge()
+            }
+            else
+            {
+                @Html.NotificationsBadge()
+            }
+        </button>
+    </div>
+}
+
+
+<div class="cover cover-bg cover-under-navbar">
+    <div class="cover-content">
+        @Model.AvatarImg(128)
+    </div>
+    <div class="facepile">
+        @adminMembers.Facepile(size: 32, link: true, presence: true)
+        @if (Model.HasPermission(Permission.Admin))
+        {
+            <button type="button" class="btn btn-round btn-primary btn-sm" data-toggle="modal" data-target="#members-modal" data-keyboard="true" title="@T["Add members"]">@Svg.Icon("plus")</button>
+        }
+    </div>
+</div>
+
+<div class="container my-4">
+    @if (!Model.Description.IsNullOrEmpty())
+    {
+        <p class="lead text-center text-muted mb-2">@Model.Description</p>
+    }
+    <div class="justify-content-center mt-4 mb-4" style="gap: 32px; display: flex;">
+        <a href="/video-call/@Model.Id-@Model.Name" target="_blank" role="button" class="btn btn-light">Video Call</a>
+        <a href="/companies/@Model.Id/message" target="_blank"  role="button" class="btn btn-light">Send Message</a>
+        <a href="/companies/@Model.Id/private-channel" target="_blank" role="button" class="btn btn-light">Start Private Channel</a>
+    </div>
+    @if (!Model.Teamname.IsNullOrEmpty())
+    {
+        <p class="text-center"> AvDb Handle - @@@Model.Teamname</p>
+    }
+    @if (Model["Location"] != null)
+    {
+        <p class="text-center"> Location - @Model["Location"]</p>
+    }
+    @if (Model["Website"] != null)
+    {
+        <p class="text-center"> Website - @Model["Website"]</p>
+    }
+    @if (Model["Email"] != null)
+    {
+        <p class="text-center"> Email - @Model["Email"]</p>
+    }
+    @if (Model["Phone"] != null)
+    {
+        <p class="text-center"> Phone - @Model["Phone"]</p>
+    }
+    @if (Model["Certs"] != null)
+    {
+        <p class="text-center"> Certs - @Model["Certs"]</p>
+    }
+    <div class="mt-3 text-center">
+        <h4 class="text-center">Services, Capabilities & Tags</h4>
+        @Html.DisplayFor(model => model.Tags)
+    </div>
+
+    @if (!Model.IsMember)
+    {
+        <p class="text-center text-danger">@T["Only members have access to apps and content in the space."]</p>
+    }
+</div>
+

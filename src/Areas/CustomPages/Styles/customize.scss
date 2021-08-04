@@ -143,3 +143,17 @@ a.custom-nav-link {
     color: white;
     line-height: 1.5;
 }
+.navbar-icons {
+    button.dropdown-toggle {
+        background: transparent;
+        border: 0;
+        color: #FCFCFC;
+        padding: 0;
+        -webkit-box-flex: 0;
+    }
+
+    .dropdown .dropdown-menu {
+        max-width: 20rem;
+        width: 20rem;
+    }
+}

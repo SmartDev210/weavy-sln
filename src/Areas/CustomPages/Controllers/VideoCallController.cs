@@ -14,7 +14,7 @@ namespace Weavy.Areas.CustomPages.Controllers
     /// <summary>
     /// jitsi video call controller
     /// </summary>
-    public class VideoCallController : AppController
+    public class VideoCallController : WeavyController
     {
         /// <summary>
         /// open jitsi call room
