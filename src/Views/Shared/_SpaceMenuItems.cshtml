@@ -34,7 +34,7 @@
     if (!Model.HasPermission(Permission.Edit)) {
         <button class="dropdown-item toggle-dropdown" type="button" data-toggle="flag" data-type="space" data-id="@Model.Id">@Svg.Icon("minus-circle-outline", "danger") @T["Flag space"]</button>
     }
-    if (Model.HasPermission(Permission.View) && (Model.Key.IsNullOrEmpty() || !Model.Key.StartsWith("company_"))) {
+    if (Model.HasPermission(Permission.View) && (Model.HasPermission(Permission.Admin) || Model.Key.IsNullOrEmpty() || !Model.Key.StartsWith("company_"))) {
         <a class="dropdown-item" href="@(Url.Action<SpaceController>(c => c.Members(Model.Id, null)))">@Svg.Icon("account-multiple", "success") @T["Members"]</a>
     }
 

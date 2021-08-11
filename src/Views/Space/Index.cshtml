@@ -46,7 +46,10 @@
     <p class="text-muted text-center"><small><a href="@(Url.Action<SpaceController>(c => c.Index(null, "trashed")))">@T["See trashed spaces."]</a></small></p>
 }
 
-
+<div class="d-flex flex-column align-items-center mt-5 mb-3">
+    <h5 class="custome-page-title">Filter By Tag</h5>
+    <div style="width: 75%"><input id="vendor-tag-filter" type="text" data-role="tagsinput" /></div>
+</div>
 
 @section fab {
     <div class="fab">
@@ -54,3 +57,39 @@
     </div>
 }
 
+@section scripts {
+    <script>
+        function RefreshByFilter(tags) {
+            var query = '';
+            if (tags.length == 0) {
+                window.location.href = '/spaces';
+            } else {
+                query = 'tag:' + tags[0];
+                for (var i = 1; i < tags.length; i++) {
+                    query += ' | tag:' + tags[i];
+                }
+                window.location.href = '/spaces?q=' + query;
+            }
+        }
+        $(function () {
+
+            const urlParams = new URLSearchParams(window.location.search);
+            if (!!urlParams.get("q")) {
+                var query = urlParams.get('q');
+                query = query.replaceAll("tag:", "");
+                query = query.replaceAll(" | ", ",");
+                var tags = query.split(',');
+                for (var i = 0; i < tags.length; i ++)
+                $("#vendor-tag-filter").tagsinput('add', tags[i]);
+            }
+
+
+            $('#vendor-tag-filter').on('itemAdded', function (e) {
+                RefreshByFilter($("#vendor-tag-filter").tagsinput('items'));
+            })
+            $('#vendor-tag-filter').on('itemRemoved', function (e) {
+                RefreshByFilter($("#vendor-tag-filter").tagsinput('items'));
+            })
+        })
+    </script>
+    }

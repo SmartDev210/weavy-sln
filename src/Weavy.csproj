@@ -4332,6 +4332,7 @@
     <Compile Include="Areas\CustomPages\Controllers\VideoCallController.cs" />
     <Compile Include="Areas\CustomPages\Helpers\JaaSJwtBuilder.cs" />
     <Compile Include="Areas\CustomPages\Hooks\AfterCompanyInsertedHook.cs" />
+    <Compile Include="Areas\CustomPages\Hooks\AfterAdminAddedToCompanyHook.cs" />
     <Compile Include="Areas\CustomPages\Hooks\AfterSignInHook.cs" />
     <Compile Include="Areas\CustomPages\Models\AviationClubhouseHomePageViewModel.cs" />
     <Compile Include="Areas\CustomPages\Models\ClubhouseAviationMarketplaceHomePageViewModel.cs" />
@@ -4365,6 +4366,9 @@
     <Content Include="Areas\CustomPages\Views\Spaces\JoinMember.cshtml" />
     <Content Include="Areas\CustomPages\Views\Companies\NewCompany.cshtml" />
     <Content Include="Areas\CustomPages\Views\Companies\Get.cshtml" />
+    <Content Include="Areas\CustomPages\Views\MyHome\Partials\_FilteredSpaces.cshtml" />
+    <Content Include="Areas\CustomPages\Views\MyHome\Partials\_SpaceList.cshtml" />
+    <Content Include="Areas\CustomPages\Views\MyHome\Partials\_FilteredAviationCompanies.cshtml" />
     <None Include="Resources\Resources.txt" />
     <None Include="Resources\Resources.en.txt" />
     <None Include="packages.config" />

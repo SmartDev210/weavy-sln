@@ -39,7 +39,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var member in Model.Members) {
+                @foreach (var member in Model.Members.OrderByDescending(x => x.Access)) {
                     <tr data-href="@member.Url()" class="@(member.IsSuspended ? "table-muted": "")" data-modal>
                         <td class="table-icon">@(member.AvatarImg(32, presence: true))</td>
                         <td>
@@ -67,8 +67,6 @@
             </tbody>
         </table>
     }
-
-
 </div>
 
 @if (WeavyContext.Space.HasPermission(Permission.Admin)) {

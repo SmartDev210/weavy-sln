@@ -4,183 +4,187 @@
 @{
     Title = T["Start"].ToString();
     var companySpace = SpaceService.GetByKey($"company_{User.Id}", sudo: true);
+    List<string> tags = new List<string>();
 }
 
-@section navbar_left {
-
-    <div class="navbar-icons">
-        <a href="@(Url.Action<MyHomeController>(c => c.AviationClubhouse()))">@Html.Partial("_AppIcon", 34)</a>
-        <form action="@(Url.Action<HomeController>(c => c.Search(null, null)))" method="get" class="main-search navbar-search-box" data-turboform>
-            <div class="form-group" role="search">
-                <input id="weavy-main-search" class="form-control" type="search" name="q" value="" placeholder="@T["Search"]" />
-                <button type="submit" class="btn btn-icon">@Svg.Icon("magnify")</button>
-            </div>
-        </form>
-    </div>
-}
 
 @section navbar_middle {
     @Html.Partial("_NavbarMenu")
 }
-
-@section navbar_right {
-    <div class="navbar-icons">
-        <div class="dropdown">
-            <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
-                @Svg.Icon("plus-circle-outline")
-            </button>
-            <div class="dropdown-menu dropdown-menu-right">
-                <div class="scroll-y">
-                    <a class="dropdown-item" href="@(companySpace == null ? "/companies/new" : "companies/edit")">
-                        @Svg.Icon("plus-box-outline")<span>@(companySpace == null ? T["Create Company Page"] : T["Edit Company Page"])</span>
-                    </a>
-                    <a class="dropdown-item" href="#">
-                        @Svg.Icon("upload")<span>@T["List ✈ Spare Parts"]</span>
-                    </a>
-                    <a class="dropdown-item" href="#">
-                        @Svg.Icon("upload")<span>@T["List MRO Repair Capabilities"]</span>
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">
-                        @Svg.Icon("send")<span>@T["Advertise Asset(s)"]</span>
-                    </a>
-                    <a class="dropdown-item" href="#">
-                        @Svg.Icon("wrench")<span>@T["Advertise Service(s)"]</span>
-                    </a>
-                    <a class="dropdown-item" href="#">
-                        @Svg.Icon("video")<span>@T["Advertise Your Brand"]</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-        
-        <button type="button" class="btn btn-icon" data-toggle="drawer" data-target="#drawer-user">
-            @User.AvatarImg(24)
-            @if (WeavyContext.Browser.Desktop)
-            {
-                @Html.TotalBadge()
-            }
-            else
-            {
-                @Html.NotificationsBadge()
-            }
-        </button>
-    </div>
-}
-
-<div class="container d-flex flex-column my-4">
+<style>
+    .nav-item {
+        background-color: var(--primary);
+    }
+    .nav-item .nav-link {
+        color: white;
+    }
+    .nav-item .nav-link.active {
+        background-color: var(--theme);
+    }
+</style>
+<div class="container d-flex flex-column my-4 align-items-center">
     <h1 class="custome-page-title">Free Aviation Marketplace</h1>
-    <div class="d-flex flex-column align-items-center mb-5">
-        <div class="d-flex mt-3 mb-3 flex-wrap">
-            <span class="google-cse-title">Aviation Jobs</span>
-            <div class="google-cse-search-group">
-                <script async src="https://cse.google.com/cse.js?cx=004286895403006624284:uqhunc1oxii"></script>
-                <div class="gcse-searchbox-only"></div>
+    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="pills-myavdb-tab" data-toggle="pill" href="#pills-myavdb" role="tab" aria-controls="pills-myavdb" aria-selected="true">MyAvDB</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="pills-repairs-tab" data-toggle="pill" href="#pills-repairs" role="tab" aria-controls="pills-profile" aria-selected="false">Repairs (MRO)</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="pills-spare-parts-tab" data-toggle="pill" href="#pills-spare-parts" role="tab" aria-controls="pills-spare-parts" aria-selected="false">✈Spare Parts</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="pills-planes-tab" data-toggle="pill" href="#pills-planes" role="tab" aria-controls="pills-planes" aria-selected="false">Planes</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="pills-pilot-supplies-tab" data-toggle="pill" href="#pills-pilot-supplies" role="tab" aria-controls="pills-pilot-supplies" aria-selected="false">Pilot Supplies</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="pills-jobs-tab" data-toggle="pill" href="#pills-jobs" role="tab" aria-controls="pills-jobs" aria-selected="false">Jobs</a>
+        </li>
+    </ul>
+    <div class="tab-content" id="pills-tabContent">
+        <div class="tab-pane fade show active" id="pills-myavdb" role="tabpanel" aria-labelledby="pills-myavdb-tab">
+            <div class="d-flex mt-3 mb-3">
+                <form action="@(Url.Action<HomeController>(c => c.Search(null, null)))" method="get" class="main-search navbar-search-box" data-turboform>
+                    <div class="form-group" role="search">
+                        <input id="weavy-main-search" class="form-control" type="search" name="q" value="" placeholder="@T["Search"]" />
+                        <button type="submit" class="btn btn-icon">@Svg.Icon("magnify")</button>
+                    </div>
+                </form>
             </div>
         </div>
-        <div class="d-flex mt-3 mb-3 flex-wrap">
-            <span class="google-cse-title">Aircraft for Sale</span>
-            <div class="google-cse-search-group">
-                <script async src="https://cse.google.com/cse.js?cx=004286895403006624284:8dyrm0inbkf"></script>
-                <div class="gcse-searchbox-only"></div>
+        <div class="tab-pane fade" id="pills-repairs" role="tabpanel" aria-labelledby="pills-repairs-tab">
+            <div class="d-flex mt-3 mb-3 flex-wrap">
+                <span class="parts-search-title">Repair Capabilities</span>
+                <form action="https://find-components-mro.narratr.org/parts" method="get" class="main-search navbar-search-box" data-turboform>
+                    <div class="form-group" role="search">
+                        <input id="weavy-main-search" class="form-control" type="search" name="Search" value="" placeholder="@T["Search"]" />
+                        <button type="submit" class="btn btn-icon">@Svg.Icon("magnify")</button>
+                    </div>
+                </form>
             </div>
         </div>
-        <div class="d-flex mt-3 mb-3 flex-wrap">
-            <span class="google-cse-title">Pilot Supplies</span>
-            <div class="google-cse-search-group">
-                <script async src="https://cse.google.com/cse.js?cx=004286895403006624284:ojacjdzpco3"></script>
-                <div class="gcse-searchbox-only"></div>
+        <div class="tab-pane fade" id="pills-spare-parts" role="tabpanel" aria-labelledby="pills-spare-parts-tab">
+            <div class="d-flex mt-3 mb-3 flex-wrap">
+                <span class="parts-search-title">Aircraft Spare Parts</span>
+                <form action="https://find-parts-aero.narratr.org/parts" method="get" class="main-search navbar-search-box" data-turboform>
+                    <div class="form-group" role="search">
+                        <input id="weavy-main-search" class="form-control" type="search" name="Search" value="" placeholder="@T["Search"]" />
+                        <button type="submit" class="btn btn-icon">@Svg.Icon("magnify")</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="pills-planes" role="tabpanel" aria-labelledby="pills-planes-tab">
+            <div class="d-flex mt-3 mb-3 flex-wrap">
+                <span class="google-cse-title">Aircraft for Sale</span>
+                <div class="google-cse-search-group">
+                    <script async src="https://cse.google.com/cse.js?cx=004286895403006624284:8dyrm0inbkf"></script>
+                    <div class="gcse-searchbox-only"></div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="pills-pilot-supplies" role="tabpanel" aria-labelledby="pills-pilot-supplies-tab">
+            <div class="d-flex mt-3 mb-3 flex-wrap">
+                <span class="google-cse-title">Pilot Supplies</span>
+                <div class="google-cse-search-group">
+                    <script async src="https://cse.google.com/cse.js?cx=004286895403006624284:ojacjdzpco3"></script>
+                    <div class="gcse-searchbox-only"></div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="pills-jobs" role="tabpanel" aria-labelledby="pills-jobs-tab">
+            <div class="d-flex mt-3 mb-3 flex-wrap">
+                <span class="google-cse-title">Aviation Jobs</span>
+                <div class="google-cse-search-group">
+                    <script async src="https://cse.google.com/cse.js?cx=004286895403006624284:uqhunc1oxii"></script>
+                    <div class="gcse-searchbox-only"></div>
+                </div>
             </div>
         </div>
     </div>
-    <h2 class="custome-page-title">Assets for Sale</h2>
+</div>
+
+<div class="container d-flex flex-column my-4 ">
+
+    <h2 class="custome-page-title mt-5">Assets for Sale</h2>
     <div class="custome-page-categories mb-5">
-        <ul>
-            <li><a href="/aviation-marketplace">Engines</a></li>
-            <li><a href="/aviation-marketplace">APUs</a></li>
-            <li><a href="/aviation-marketplace">Inventory Lots</a></li>
-            <li><a href="/aviation-marketplace">Landing Gear</a></li>
-            <li><a href="/aviation-marketplace">Aircraft</a></li>
-            <li><a href="/aviation-marketplace">Avionics</a></li>
-            <li><a href="/aviation-marketplace">GSE</a></li>
-            <li><a href="/aviation-marketplace">Chemicals</a></li>
-            <li><a href="/aviation-marketplace">Teardowns</a></li>
-            <li><a href="/aviation-marketplace">Test Equipment</a></li>
-            <li><a href="/aviation-marketplace">Tooling</a></li>
-            <li><a href="/aviation-marketplace">Hangars</a></li>
+        <ul data-role="tags">
+            <li><a href="javascript:void(0)">Engines</a></li>
+            <li><a href="javascript:void(0)">APUs</a></li>
+            <li><a href="javascript:void(0)">Inventory Lots</a></li>
+            <li><a href="javascript:void(0)">Landing Gear</a></li>
+            <li><a href="javascript:void(0)">Aircraft</a></li>
+            <li><a href="javascript:void(0)">Avionics</a></li>
+            <li><a href="javascript:void(0)">GSE</a></li>
+            <li><a href="javascript:void(0)">Chemicals</a></li>
+            <li><a href="javascript:void(0)">Teardowns</a></li>
+            <li><a href="javascript:void(0)">Test Equipment</a></li>
+            <li><a href="javascript:void(0)">Tooling</a></li>
+            <li><a href="javascript:void(0)">Hangars</a></li>
         </ul>
-    </div>
-    <div class="d-flex flex-column align-items-center mt-5 mb-5">
-        <div class="d-flex mt-3 mb-3 flex-wrap">
-            <span class="parts-search-title">Aircraft Spare Parts</span>
-            <form action="https://find-parts-aero.narratr.org/parts" method="get" class="main-search navbar-search-box" data-turboform>
-                <div class="form-group" role="search">
-                    <input id="weavy-main-search" class="form-control" type="search" name="Search" value="" placeholder="@T["Search"]" />
-                    <button type="submit" class="btn btn-icon">@Svg.Icon("magnify")</button>
-                </div>
-            </form>
-        </div>
-        <div class="d-flex mt-3 mb-3 flex-wrap">
-            <span class="parts-search-title">Repair Capabilities</span>
-            <form action="https://find-components-mro.narratr.org/parts" method="get" class="main-search navbar-search-box" data-turboform>
-                <div class="form-group" role="search">
-                    <input id="weavy-main-search" class="form-control" type="search" name="Search" value="" placeholder="@T["Search"]" />
-                    <button type="submit" class="btn btn-icon">@Svg.Icon("magnify")</button>
-                </div>
-            </form>
-        </div>
     </div>
     <h2 class="custome-page-title mt-5">Aviation Industry Vendors</h2>
     <div class="custome-page-industry-vendors">
-        <ul>
-            <li><a href="/aviation-marketplace">Machine Shops</a></li>
-            <li><a href="/aviation-marketplace">Composities</a></li>
-            <li><a href="/aviation-marketplace">Paint</a></li>
-            <li><a href="/aviation-marketplace">NDT</a></li>
-            <li><a href="/aviation-marketplace">Line MROs</a></li>
-            <li><a href="/aviation-marketplace">Heavy MROs</a></li>
-            <li><a href="/aviation-marketplace">Engine MROs</a></li>
-            <li><a href="/aviation-marketplace">Landing Gear MROs</a></li>
-            <li><a href="/aviation-marketplace">Tooling Repair</a></li>
-            <li><a href="/aviation-marketplace">Sheet Metal Repair</a></li>
-            <li><a href="/aviation-marketplace">Structural Repair</a></li>
-            <li><a href="/aviation-marketplace">Calibration</a></li>
-            <li><a href="/aviation-marketplace">Logistics</a></li>
-            <li><a href="/aviation-marketplace">3D Printing</a></li>
-            <li><a href="/aviation-marketplace">Asset Tagging</a></li>
-            <li><a href="/aviation-marketplace">Augumented Reality</a></li>
+        <ul data-role="tags">
+            <li><a href="javascript:void(0)">Machine Shops</a></li>
+            <li><a href="javascript:void(0)">Composities</a></li>
+            <li><a href="javascript:void(0)">Paint</a></li>
+            <li><a href="javascript:void(0)">NDT</a></li>
+            <li><a href="javascript:void(0)">Line MROs</a></li>
+            <li><a href="javascript:void(0)">Heavy MROs</a></li>
+            <li><a href="javascript:void(0)">Engine MROs</a></li>
+            <li><a href="javascript:void(0)">Landing Gear MROs</a></li>
+            <li><a href="javascript:void(0)">Tooling Repair</a></li>
+            <li><a href="javascript:void(0)">Sheet Metal Repair</a></li>
+            <li><a href="javascript:void(0)">Structural Repair</a></li>
+            <li><a href="javascript:void(0)">Calibration</a></li>
+            <li><a href="javascript:void(0)">Logistics</a></li>
+            <li><a href="javascript:void(0)">3D Printing</a></li>
+            <li><a href="javascript:void(0)">Asset Tagging</a></li>
+            <li><a href="javascript:void(0)">Augumented Reality</a></li>
         </ul>
     </div>
 
-    <h5 class="d-flex mt-5">
-        <a href="@(Url.Action<SpaceController>(c => c.Index(null, null)))" class="text-hyphens">Clubs</a>
-    </h5>
+    <div class="d-flex flex-column align-items-center mt-5 mb-3">
+        <h5 class="custome-page-title">Filter By Tag</h5>
+        <div style="width: 75%"><input id="vendor-tag-filter" type="text" data-role="tagsinput" /></div>
+    </div>
 
-    @if (Model.PubSpaces.Any())
-    {
-        <div class="space-cards">
-            @foreach (var space in Model.PubSpaces)
-            {
-                <a class="card" href="@space.Url()">
-                    <div class="card-cover">
-                        @space.AvatarImg(64)
-                        <div class="facepile">
-                            @SpaceService.GetMembers(space.Id, new MemberQuery { Top = 5, OrderBy = "Random" }).Facepile(size: 24)
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="card-title text-truncate" title="@space.Name">@space.Name</div>
-                    </div>
-                    @Html.StarToggle(space)
-                </a>
-            }
-        </div>
-    }
-    else
-    {
-        <p class="text-muted">
-            @T["All your spaces will show up here."]
-            <a href="@(Url.Action<SpaceController>(c => c.New()).ToLower())">@T[@"We suggest creating your first space to get started."]</a>
-        </p>
-    }
+    <h5 class="d-flex mt-5">
+        <a href="@(Url.Action<SpaceController>(c => c.Index(null, null)))" class="text-hyphens">Vendors</a>
+    </h5>
+    <div id="vendor-filtered-result">
+        @Html.Partial("~/Areas/CustomPages/Views/MyHome/Partials/_FilteredSpaces.cshtml", Model.PubSpaces)
+    </div>
+    
 </div>
+
+@section scripts {
+    <script>
+        function LoadFilteredCompanies(tags) {
+            $.ajax({
+                url: '/filter-companies',
+                type: 'POST',
+                data: { tags: tags },
+                success: function (res) {
+                    $("#vendor-filtered-result").html(res);
+                }
+            });
+        }
+        $(function () {
+            $(document).on('click', 'ul[data-role=tags] li', function (e) {
+                $this = $(this);
+                $("#vendor-tag-filter").tagsinput('add', $this.find("a").text().replaceAll(" ", "-"))
+            });
+            $('#vendor-tag-filter').on('itemAdded', function (e) {                
+                LoadFilteredCompanies($("#vendor-tag-filter").val());
+            })
+            $('#vendor-tag-filter').on('itemRemoved', function (e) {
+                LoadFilteredCompanies($("#vendor-tag-filter").val());
+            })
+        })
+    </script>
+}

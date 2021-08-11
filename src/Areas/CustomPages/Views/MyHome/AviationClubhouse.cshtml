@@ -35,62 +35,14 @@
         </a>
     </div>
 
-    <h5 class="d-flex mt-5">
-        <a href="@(Url.Action<SpaceController>(c => c.Index(null, null)))" class="text-hyphens">My Channels</a>
-    </h5>
-    @if (Model.JoinedSpaces.Any())
-    {
-        <div class="space-cards">
-            @foreach (var space in Model.JoinedSpaces)
-            {
-                <a class="card" href="@space.Url()">
-                    <div class="card-cover">
-                        @space.AvatarImg(64)
-                        <div class="facepile">
-                            @SpaceService.GetMembers(space.Id, new MemberQuery { Top = 5, OrderBy = "Random" }).Facepile(size: 24)
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="card-title text-truncate" title="@space.Name">@space.Name</div>
-                    </div>
-                    @Html.StarToggle(space)
-                </a>
-            }
-        </div>
-    }
-    else
-    {
-        <p class="text-muted">
-            @T["All your spaces will show up here."]
-            <a href="@(Url.Action<SpaceController>(c => c.New()).ToLower())">@T[@"We suggest creating your first space to get started."]</a>
-        </p>
-    }
-
-
-    @if (Model.AviationSpaces.Any())
-    {
-        <h5 class="d-flex mt-5">
-            <a href="@(Url.Action<SpaceController>(c => c.Index(null, null)))" class="text-hyphens">Aviation Clubhouse Channels</a>
-        </h5>
-
-        <div class="space-cards">
-            @foreach (var space in Model.AviationSpaces)
-            {
-                <a class="card" href="javascript:void(0);" onclick="OpenRequestJoinConfirmDialog(@space.Id, '@space.Name', '@space.Description')">
-                    <div class="card-cover">
-                        @space.AvatarImg(64)
-                        <div class="facepile">
-                            @SpaceService.GetMembers(space.Id, new MemberQuery { Top = 5, OrderBy = "Random" }).Facepile(size: 24)
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="card-title text-truncate" title="@space.Name">@space.Name</div>
-                    </div>
-                    @Html.StarToggle(space)
-                </a>
-            }
-        </div>
-    }
+    <div class="d-flex flex-column align-items-center mt-5 mb-3">
+        <h5 class="custome-page-title">Filter By Tag</h5>
+        <div style="width: 75%"><input id="vendor-tag-filter" type="text" data-role="tagsinput" /></div>
+    </div>
+    <div id="filtered-aviation-spaces-result">
+        @Html.Partial("~/Areas/CustomPages/Views/MyHome/Partials/_FilteredAviationCompanies.cshtml", Model)
+    </div>
+    
 
 </div>
 
@@ -116,25 +68,46 @@
     </div>
 </div>
 
-<script>
-    function OpenRequestJoinConfirmDialog(id, name, description) {
-        $("#space-id").val(id);
-        $("#request-join-dialog .modal-body #space-detail").html('Are you sure to join "' + name + '"' + '<br/>' + description);
-        $("#request-join-dialog").modal('show');
-    }
-    function JoinChannel() {
-        $("#request-join-dialog").modal('hide');
-        var id = $("#space-id").val();
-        $.ajax({
-            type: 'POST',
-            url: '/api/spaces/' + id + '/request-join',
-            success: function () {               
-                wvy.alert.success("Join request is sent successfully. Please wait untill administrator approves you.");
-            },
-            error: function () {
-                wvy.alert.danger("Failed to send join request");
-            }
+@section scripts {
+    <script>
+        function OpenRequestJoinConfirmDialog(id, name, description) {
+            $("#space-id").val(id);
+            $("#request-join-dialog .modal-body #space-detail").html('Are you sure to join "' + name + '"' + '<br/>' + description);
+            $("#request-join-dialog").modal('show');
+        }
+        function JoinChannel() {
+            $("#request-join-dialog").modal('hide');
+            var id = $("#space-id").val();
+            $.ajax({
+                type: 'POST',
+                url: '/api/spaces/' + id + '/request-join',
+                success: function () {
+                    wvy.alert.success("Join request is sent successfully. Please wait untill administrator approves you.");
+                },
+                error: function () {
+                    wvy.alert.danger("Failed to send join request");
+                }
+            })
+        }
+        function LoadFilteredAviatonCompanies(tags) {
+            $.ajax({
+                url: '/filter-aviation-companies',
+                type: 'POST',
+                data: { tags: tags },
+                success: function (res) {
+                    $("#filtered-aviation-spaces-result").html(res);
+                }
+            });
+        }
+        $(function () {
+           
+            $('#vendor-tag-filter').on('itemAdded', function (e) {
+                LoadFilteredAviatonCompanies($("#vendor-tag-filter").val());
+            })
+            $('#vendor-tag-filter').on('itemRemoved', function (e) {
+                LoadFilteredAviatonCompanies($("#vendor-tag-filter").val());
+            })
         })
-    }
-</script>
-
+    </script>
+   
+}

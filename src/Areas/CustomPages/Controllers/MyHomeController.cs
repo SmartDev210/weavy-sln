@@ -7,6 +7,7 @@ using Weavy.Areas.Apps.Models;
 using Weavy.Areas.CustomPages.Models;
 using Weavy.Core.Models;
 using Weavy.Core.Services;
+using Weavy.Core.Utils;
 using Weavy.Web.Controllers;
 
 namespace Weavy.Areas.CustomPages.Controllers
@@ -26,8 +27,8 @@ namespace Weavy.Areas.CustomPages.Controllers
         {
             var joined = SpaceService.GetVisited(10);
 
-            var pods = SpaceService.Search(new SpaceQuery { Tag = "pods", Top = 10, Sudo = true });
-            var gigs = SpaceService.Search(new SpaceQuery { Tag = "gigs", Top = 10, Sudo = true });
+            var pods = SpaceService.Search(new SpaceQuery { Text = "tag:pods", Top = 10, Sudo = true });
+            var gigs = SpaceService.Search(new SpaceQuery { Text = "tag:gigs", Top = 10, Sudo = true });
             var pubs = SpaceService.Search(new SpaceQuery { Top = 10, Sudo = true });
 
             var notifications = NotificationService.Search(new NotificationQuery
@@ -61,14 +62,14 @@ namespace Weavy.Areas.CustomPages.Controllers
         [Route("aviation-clubhouse")]
         public ActionResult AviationClubhouse()
         {            
-            var joined = SpaceService.Search(new SpaceQuery { Tag = "aviation", Top = 100, Sudo = true, MemberId = User.Id }).Where(x => x.Tags.Any(y => y.ToLower() == "aviation")).ToList();
+            var joined = SpaceService.Search(new SpaceQuery { Text = "tag:aviation", Top = 100, Sudo = true, MemberId = User.Id }).ToList();
 
-            var aviationClubs = SpaceService.Search(new SpaceQuery { Tag = "aviation", Top = 100, Sudo = true }).Where(x => !x.IsMember).ToList();
+            var aviationClubs = SpaceService.Search(new SpaceQuery { Text = "tag:aviation", Top = 100, Sudo = true }).Where(x => !x.IsMember).ToList();
 
             AviationClubhouseHomePageViewModel viewModel = new AviationClubhouseHomePageViewModel
             {
                 JoinedSpaces = joined,
-                AviationSpaces = aviationClubs.Where(x => x.Tags.Any(y => y.ToLower() == "aviation")).ToList()
+                AviationSpaces = aviationClubs
             };
             
             return View("~/Areas/CustomPages/Views/MyHome/AviationClubhouse.cshtml", viewModel);
@@ -80,9 +81,9 @@ namespace Weavy.Areas.CustomPages.Controllers
         [Route("clubhouse-aviation-marketplace")]
         [HttpGet]
         [AllowAnonymous]
-        public ActionResult ClubhouseAviationMarketplace()
+        public ActionResult ClubhouseAviationMarketplace(string tag)
         {   
-            var pubs = SpaceService.Search(new SpaceQuery { Top = 20, Sudo = true });
+            var pubs = SpaceService.Search(new SpaceQuery { Top = 30, Text = tag, Sudo = true });
             
             ClubhouseAviationMarketplaceHomePageViewModel viewModel = new ClubhouseAviationMarketplaceHomePageViewModel
             {
@@ -90,6 +91,62 @@ namespace Weavy.Areas.CustomPages.Controllers
             };
 
             return View("~/Areas/CustomPages/Views/MyHome/ClubhouseAviatonMarketplace.cshtml", viewModel);
+        }
+        /// <summary>
+        /// return filtered vendors page
+        /// </summary>
+        /// <param name="tags"></param>
+        /// <returns></returns>
+        [Route("filter-companies")]
+        [HttpPost]
+        [AllowAnonymous]
+        public ActionResult FilterCompanies(string tags)
+        {
+            List<Space> result = new List<Space>();
+            if (tags.IsNullOrWhiteSpace())
+            {
+                result = SpaceService.Search(new SpaceQuery { Top = 30, Sudo = true }).ToList();
+            } else {
+                var searchText = "";
+                foreach (var tag in tags.Split(','))
+                {
+                    searchText += $"tag:{tag} | ";
+                }
+                searchText = searchText.RemoveTrailing(" | ");
+                result = SpaceService.Search(new SpaceQuery { Top = 100, Text = searchText, Sudo = true }).ToList();
+            }   
+            
+            return PartialView("~/Areas/CustomPages/Views/MyHome/Partials/_FilteredSpaces.cshtml", result);
+        }
+        /// <summary>
+        /// return filtered vendors page
+        /// </summary>
+        /// <param name="tags"></param>
+        /// <returns></returns>
+        [Route("filter-aviation-companies")]
+        [HttpPost]
+        [AllowAnonymous]
+        public ActionResult FilterAviationCompanies(string tags)
+        {
+           
+            var searchText = "tag:aviation";
+            if (!tags.IsNullOrWhiteSpace())
+            {
+                foreach (var tag in tags.Split(','))
+                {
+                    searchText += $" | tag:{tag}";
+                }
+             
+            }
+            var joined = SpaceService.Search(new SpaceQuery { Top = 100, Text = searchText, Sudo = true, MemberId = User.Id }).ToList();
+            var aviationClubs = SpaceService.Search(new SpaceQuery { Top = 100, Text = searchText, Sudo = true }).Where(x => !x.IsMember).ToList();
+            AviationClubhouseHomePageViewModel viewModel = new AviationClubhouseHomePageViewModel
+            {
+                JoinedSpaces = joined,
+                AviationSpaces = aviationClubs
+            };
+
+            return PartialView("~/Areas/CustomPages/Views/MyHome/Partials/_FilteredAviationCompanies.cshtml", viewModel);
         }
     }
 }
