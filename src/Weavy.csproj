@@ -4328,6 +4328,7 @@
     <Compile Include="Areas\Apps\Controllers\TasksController.cs" />
     <Compile Include="Areas\Apps\Models\Messenger.cs" />
     <Compile Include="Areas\CustomPages\Controllers\MyAccountController.cs" />
+    <Compile Include="Areas\CustomPages\Controllers\MyProfileController.cs" />
     <Compile Include="Areas\CustomPages\Controllers\SpacesController.cs" />
     <Compile Include="Areas\CustomPages\Controllers\VideoCallController.cs" />
     <Compile Include="Areas\CustomPages\Helpers\JaaSJwtBuilder.cs" />
@@ -4354,6 +4355,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Api\Views\Flag\" />
+    <Folder Include="Areas\CustomPages\Views\MyProfile\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\CustomPages\Styles\customize.scss" />

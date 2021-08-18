@@ -37,19 +37,22 @@
     }
 </div>
 
-@if (profiledata.IsNullOrWhiteSpace()) {
-    <div class="modal-body text-center">
-        @Svg.Spinner()
-    </div>
-} else {
-    <div class="container my-3">
-        <div class="d-flex flex-wrap justify-conent-center mb-3">
-            <a class="btn btn-outline-primary ml-2 mr-2">@Svg.Icon("video") Video</a>
-            <a class="btn btn-outline-primary ml-2 mr-2">@Svg.Icon("forum") Message</a>
-            <a class="btn btn-outline-primary ml-2 mr-2">@Svg.Icon("account-network") Space</a>
+
+<div class="container my-3">
+    @if (User.Id != Model.Id)
+    {
+        <div class="d-flex flex-wrap justify-content-center mb-3">
+            <a class="btn btn-outline-primary ml-2 mr-2" href="/direct-call/@Model.Id" target="_blank">@Svg.Icon("video") Video</a>
+            <a class="btn btn-outline-primary ml-2 mr-2" href="/direct-message/@Model.Id" target="_blank">@Svg.Icon("forum") Message</a>
+            <a class="btn btn-outline-primary ml-2 mr-2" href="/direct-space/@Model.Id" target="_blank">@Svg.Icon("account-network") Space</a>
         </div>
+    }
+    @if (!profiledata.IsNullOrWhiteSpace())
+    {
         @Html.Raw(profiledata)
-        @*
+    }
+
+    @*
         @if (Model.Email != null) {
             <div class="display-group" data-type="string">
                 <label class="font-weight-bold">@T["Email"]</label>
@@ -57,6 +60,6 @@
                 <div>@Html.DisplayFor(x => Model.Email)</div>
             </div>
         }
-            *@
-    </div>
-}
+    *@
+</div>
+

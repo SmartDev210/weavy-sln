@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Weavy.Areas.CustomPages.Helpers;
 using Weavy.Areas.CustomPages.Models;
+using Weavy.Core.Models;
 using Weavy.Core.Services;
 using Weavy.Web.Controllers;
 using Weavy.Web.Utils;
@@ -26,10 +27,10 @@ namespace Weavy.Areas.CustomPages.Controllers
         [Route("video-call/{roomName}")]
         public ActionResult Index(string roomName)
         {   
-            /// Read private key from file.
+            // Read private key from file.
             var rsaPrivateKey = JaaSJwtBuilder.ReadPrivateKeyFromFile(ConfigurationService.AppSetting("JitsiPrivateKeyPath"));
 
-            /// Create new JaaSJwtBuilder and setup the claims and sign using the private key.
+            // Create new JaaSJwtBuilder and setup the claims and sign using the private key.
             var token = JaaSJwtBuilder.Builder()
                                 .WithDefaults()
                                 .WithApiKey(ConfigurationService.AppSetting("JitsiApiKey"))
@@ -46,6 +47,6 @@ namespace Weavy.Areas.CustomPages.Controllers
             };
 
             return View("~/Areas/CustomPages/Views/VideoCall/Index.cshtml", viewModel);
-        }
+        }        
     }
 }
