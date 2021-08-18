@@ -7,8 +7,18 @@ using Weavy.Core.Models;
 
 namespace Weavy.Areas.CustomPages.Models
 {
+    /// <summary>
+    /// Company view model
+    /// </summary>
     public class CompanyViewModel
     {
+        /// <summary>
+        /// company view model
+        /// </summary>
+        public CompanyViewModel()
+        {
+            Tags = new List<string>();
+        }
         /// <summary>
         /// Gets or sets the display name.
         /// </summary>        

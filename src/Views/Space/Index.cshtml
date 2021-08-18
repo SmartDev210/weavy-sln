@@ -51,14 +51,9 @@
     <div style="width: 75%"><input id="vendor-tag-filter" type="text" data-role="tagsinput" /></div>
 </div>
 
-@section fab {
-    <div class="fab">
-        <a class="btn btn-round btn-primary" href="@(Url.Action<SpaceController>(c => c.New()))" title="@T["Add space"]">@Svg.Icon("plus")</a>
-    </div>
-}
-
 @section scripts {
     <script>
+
         function RefreshByFilter(tags) {
             var query = '';
             if (tags.length == 0) {
@@ -90,6 +85,22 @@
             $('#vendor-tag-filter').on('itemRemoved', function (e) {
                 RefreshByFilter($("#vendor-tag-filter").tagsinput('items'));
             })
+
+            
+            if (!!urlParams.get("join-company")) {
+                wvy.alert.info("Find Your Company. Then Message a current Admin of your Company's Space to make You a Co-Admin of your Company's Space.", 4000);
+            }
         })
+
+        
+        document.addEventListener("turbolinks:click", function (e) {
+            
+            // anchors in same page should not be requested with turbolinks
+            if (e.target.getAttribute("href") == "/spaces?join-company=true") {            
+                return e.preventDefault();
+            }
+        });
+        
+
     </script>
     }

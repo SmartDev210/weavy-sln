@@ -26,7 +26,7 @@
                 <tr>
                     <th class="table-icon"></th>
                     <th>@T["Name"]</th>
-                    @if (WeavyContext.Space.HasPermission(Permission.Admin))
+                    @if (User.IsAdmin)
                     {
                         <th>@T["Email"]</th>
                     }
@@ -38,7 +38,7 @@
                     <th class="table-icon"></th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="infinite-members-scroll-target">
                 @foreach (var member in Model.Members.OrderByDescending(x => x.Access)) {
                     <tr data-href="@member.Url()" class="@(member.IsSuspended ? "table-muted": "")" data-modal>
                         <td class="table-icon">@(member.AvatarImg(32, presence: true))</td>
@@ -51,7 +51,7 @@
                             @Html.Badge(member)
                             @Html.Shield(member)
                         </td>
-                        @if (WeavyContext.Space.HasPermission(Permission.Admin)) { 
+                        @if (User.IsAdmin) { 
                             <td>@member.Email</td>
                         } else { 
                             <td>@member.Profile["Bio"]</td>
@@ -65,7 +65,7 @@
                     </tr>
                 }
             </tbody>
-        </table>
+        </table>        
     }
 </div>
 

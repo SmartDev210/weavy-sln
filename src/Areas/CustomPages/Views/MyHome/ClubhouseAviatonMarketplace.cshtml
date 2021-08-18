@@ -47,7 +47,7 @@
     <div class="tab-content" id="pills-tabContent">
         <div class="tab-pane fade show active" id="pills-myavdb" role="tabpanel" aria-labelledby="pills-myavdb-tab">
             <div class="d-flex mt-3 mb-3">
-                <form action="@(Url.Action<HomeController>(c => c.Search(null, null)))" method="get" class="main-search navbar-search-box" data-turboform>
+                <form action="@(Url.Action<HomeController>(c => c.Search(null, null)))" method="get" class="main-search navbar-search-box" data-turboform style="display: block !important;">
                     <div class="form-group" role="search">
                         <input id="weavy-main-search" class="form-control" type="search" name="q" value="" placeholder="@T["Search"]" />
                         <button type="submit" class="btn btn-icon">@Svg.Icon("magnify")</button>
@@ -58,7 +58,7 @@
         <div class="tab-pane fade" id="pills-repairs" role="tabpanel" aria-labelledby="pills-repairs-tab">
             <div class="d-flex mt-3 mb-3 flex-wrap">
                 <span class="parts-search-title">Repair Capabilities</span>
-                <form action="https://find-components-mro.narratr.org/parts" method="get" class="main-search navbar-search-box" data-turboform>
+                <form action="https://mrofinder.back-channel.com/parts" method="get" class="main-search navbar-search-box" data-turboform style="display: block !important;">
                     <div class="form-group" role="search">
                         <input id="weavy-main-search" class="form-control" type="search" name="Search" value="" placeholder="@T["Search"]" />
                         <button type="submit" class="btn btn-icon">@Svg.Icon("magnify")</button>
@@ -69,7 +69,7 @@
         <div class="tab-pane fade" id="pills-spare-parts" role="tabpanel" aria-labelledby="pills-spare-parts-tab">
             <div class="d-flex mt-3 mb-3 flex-wrap">
                 <span class="parts-search-title">Aircraft Spare Parts</span>
-                <form action="https://find-parts-aero.narratr.org/parts" method="get" class="main-search navbar-search-box" data-turboform>
+                <form action="https://findparts.back-channel.com/parts" method="get" class="main-search navbar-search-box" data-turboform style="display: block !important;">
                     <div class="form-group" role="search">
                         <input id="weavy-main-search" class="form-control" type="search" name="Search" value="" placeholder="@T["Search"]" />
                         <button type="submit" class="btn btn-icon">@Svg.Icon("magnify")</button>
@@ -147,9 +147,13 @@
             <li><a href="javascript:void(0)">Augumented Reality</a></li>
         </ul>
     </div>
-
-    <div class="d-flex flex-column align-items-center mt-5 mb-3">
-        <h5 class="custome-page-title">Filter By Tag</h5>
+    <div class="d-flex flex-wrap align-items-center mt-5 mb-1 justify-content-center">
+        <a class="btn btn-outline-primary ml-2 mr-2">MORE FILTERS</a>
+        <a class="btn btn-outline-primary ml-2 mr-2">Country</a>
+        <a class="btn btn-outline-primary ml-2 mr-2">City</a>
+        <a class="btn btn-outline-primary ml-2 mr-2">ATA Chapter</a>
+    </div>
+    <div class="d-flex flex-column align-items-center mt-4 mb-3">        
         <div style="width: 75%"><input id="vendor-tag-filter" type="text" data-role="tagsinput" /></div>
     </div>
 

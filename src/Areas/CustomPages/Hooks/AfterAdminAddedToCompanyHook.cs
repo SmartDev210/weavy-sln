@@ -7,6 +7,7 @@ using System.Web;
 using Weavy.Core.Events;
 using Weavy.Core.Models;
 using Weavy.Core.Services;
+using Weavy.Core.Utils;
 
 namespace Weavy.Areas.CustomPages.Hooks
 {
@@ -27,7 +28,30 @@ namespace Weavy.Areas.CustomPages.Hooks
             if (e.Space.Key.StartsWith("company_") && e.Member.Access == Access.Admin)
             {
                 var creator = UserService.Get(e.Space.CreatedById, sudo: true);
-                
+
+
+                var spaces = SpaceService.Search(new SpaceQuery { MemberId = e.Member.Id, Sudo = true }).ToList();
+                foreach (var space in spaces)
+                {   
+                    if (space.Id != e.Space.Id && !string.IsNullOrEmpty(space.Key) && space.Key.StartsWith("company_"))
+                    {   
+                        if (space.HasPermission(Permission.Admin, e.Member))
+                        {
+                            SpaceService.AddMember(e.Space.Id, e.Member.Id, Access.Read, true);
+
+                            var notification = new Notification();
+                            notification.CreatedById = e.Member.Id;
+                            notification.Html = $@"<span class=""actor"">@{e.Member.GetTitle()}</span> <span class=""context"">can't be admin of your company.</span>";
+                            notification.Text = $@"@{e.Member.GetTitle()} can't be admin of your company.";
+                            notification.Link = e.Member;
+                            notification.UserId = e.Space.CreatedById;
+
+                            NotificationService.Insert(notification);
+
+                            return;
+                        }
+                    }
+                }
 
                 HttpClient client = new HttpClient();
 

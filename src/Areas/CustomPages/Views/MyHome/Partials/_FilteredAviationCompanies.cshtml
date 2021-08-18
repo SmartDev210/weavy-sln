@@ -1,7 +1,7 @@
 ﻿@model Weavy.Areas.CustomPages.Models.AviationClubhouseHomePageViewModel
 
 <h5 class="d-flex mt-5">
-    <a href="@(Url.Action<SpaceController>(c => c.Index(null, null)))" class="text-hyphens">My Channels</a>
+    <a href="@(Url.Action<SpaceController>(c => c.Index(null, null)))" class="text-hyphens">My Spaces</a>
 </h5>
 @if (Model.JoinedSpaces.Any())
 {
@@ -19,7 +19,7 @@ else
 @if (Model.AviationSpaces.Any())
 {
     <h5 class="d-flex mt-5">
-        <a href="@(Url.Action<SpaceController>(c => c.Index(null, null)))" class="text-hyphens">Aviation Clubhouse Channels</a>
+        <a href="@(Url.Action<SpaceController>(c => c.Index(null, null)))" class="text-hyphens">Aviation Clubhouse Spaces</a>
     </h5>
 
     @Html.Partial("~/Areas/CustomPages/Views/MyHome/Partials/_SpaceList.cshtml", Model.AviationSpaces)

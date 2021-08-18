@@ -3,6 +3,13 @@
     Title = T["People"].ToString();
     Back = Url.Action<PeopleController>(c => c.Index(null, null));
     var profiledata = Html.DisplayGroups(Model.Profile, exclude: new[] { "Avatar", "Name" })?.ToHtmlString();
+
+    
+    var company = SpaceService.GetByKey($"company_{Model.Id}");
+    if (company == null)
+    {
+        company = SpaceService.Search(new SpaceQuery { MemberId = Model.Id }).Where(x => !string.IsNullOrEmpty(x.Key) && x.Key.StartsWith("company_") && x.HasPermission(Permission.Admin, Model)).FirstOrDefault();
+    }
 }
 
 @section navbar_middle {
@@ -18,6 +25,10 @@
         } else {
             <p class="pt-2 mb-0">@Model.GetTitle() <small>@@@Model.Username</small> @Html.Badge(Model)</p>
         }
+        @if (company != null)
+        {
+            <p class="pt-2 mb-0 display-4"><a style="color: white;" href="@company.Url()">@company.Name</a></p>
+        }
     </div>
     @if (Request.IsAjaxRequest()) {
         <button type="button" class="btn btn-icon top-right" data-dismiss="modal">@Svg.Icon("close")</button>
@@ -32,6 +43,11 @@
     </div>
 } else {
     <div class="container my-3">
+        <div class="d-flex flex-wrap justify-conent-center mb-3">
+            <a class="btn btn-outline-primary ml-2 mr-2">@Svg.Icon("video") Video</a>
+            <a class="btn btn-outline-primary ml-2 mr-2">@Svg.Icon("forum") Message</a>
+            <a class="btn btn-outline-primary ml-2 mr-2">@Svg.Icon("account-network") Space</a>
+        </div>
         @Html.Raw(profiledata)
         @*
         @if (Model.Email != null) {

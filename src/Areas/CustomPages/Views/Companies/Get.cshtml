@@ -9,51 +9,6 @@
     @{ Html.RenderPartial("_NavbarMenu");}
 }
 
-@section navbar_right {
-    <div class="navbar-icons">
-        <div class="dropdown">
-            <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
-                @Svg.Icon("plus-circle-outline")
-            </button>
-            <div class="dropdown-menu dropdown-menu-right">
-                <div class="scroll-y">
-                    <a class="dropdown-item" href="@(Model.CreatedById == User.Id ? "/companies/edit" : "/companies/new")">
-                        @Svg.Icon("plus-box-outline")<span>@(Model.CreatedById == User.Id ? T["Edit Company Page"] : T["Create Company Page"])</span>
-                    </a>
-                    <a class="dropdown-item" href="#">
-                        @Svg.Icon("upload")<span>@T["List ✈ Spare Parts"]</span>
-                    </a>
-                    <a class="dropdown-item" href="#">
-                        @Svg.Icon("upload")<span>@T["List MRO Repair Capabilities"]</span>
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">
-                        @Svg.Icon("send")<span>@T["Advertise Asset(s)"]</span>
-                    </a>
-                    <a class="dropdown-item" href="#">
-                        @Svg.Icon("wrench")<span>@T["Advertise Service(s)"]</span>
-                    </a>
-                    <a class="dropdown-item" href="#">
-                        @Svg.Icon("video")<span>@T["Advertise Your Brand"]</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <button type="button" class="btn btn-icon" data-toggle="drawer" data-target="#drawer-user">
-            @User.AvatarImg(24)
-            @if (WeavyContext.Browser.Desktop)
-            {
-                @Html.TotalBadge()
-            }
-            else
-            {
-                @Html.NotificationsBadge()
-            }
-        </button>
-    </div>
-}
-
 
 <div class="cover cover-bg cover-under-navbar">
     <div class="cover-content">
@@ -76,7 +31,7 @@
     <div class="justify-content-center mt-4 mb-4" style="gap: 32px; display: flex; flex-wrap: wrap;">
         <a href="/video-call/@Model.Id-@Model.Name" target="_blank" role="button" class="btn btn-light">Video Call</a>
         <a href="/companies/@Model.Id/message" target="_blank"  role="button" class="btn btn-light">Send Message</a>
-        <a href="/companies/@Model.Id/private-channel" target="_blank" role="button" class="btn btn-light">Start Private Channel</a>
+        <a href="/companies/@Model.Id/private-channel" target="_blank" role="button" class="btn btn-light">Start Private Space</a>
     </div>
     @if (!Model.Teamname.IsNullOrEmpty())
     {

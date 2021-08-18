@@ -8,6 +8,7 @@ using Weavy.Areas.CustomPages.Models;
 using Weavy.Core;
 using Weavy.Core.Models;
 using Weavy.Core.Services;
+using Weavy.Core.Utils;
 using Weavy.Web.Controllers;
 using Weavy.Web.Models;
 
@@ -56,22 +57,27 @@ namespace Weavy.Areas.CustomPages.Controllers
         [Route("companies/edit")]
         public ActionResult Edit()
         {
+            var companySpace = SpaceService.GetByKey($"company_{User.Id}");
+            if (companySpace == null)
+            {
+                companySpace = SpaceService.Search(new SpaceQuery { MemberId = User.Id, Sudo = true }).Where(x => !string.IsNullOrEmpty(x.Key) && x.Key.StartsWith("company_") && x.HasPermission(Permission.Admin, User)).FirstOrDefault();
+            }
 
-            var space = SpaceService.GetByKey($"company_{User.Id}");
-            if (space == null)
-                return RedirectToAction("Create");
+            if (companySpace == null)
+                RedirectToAction("Create");
+
             var viewModel = new CompanyViewModel()
             {
-                Avatar = space.Avatar,
-                Name = space.Name,
-                Teamname = space.Teamname,
-                Description = space.Description,
-                Tags = space.Tags,
-                Location = space["Location"]?.ToString(),
-                Website = space["Website"]?.ToString(),
-                Email = space["Email"]?.ToString(),
-                Phone = space["Phone"]?.ToString(),
-                Certs = space["Certs"]?.ToString()
+                Avatar = companySpace.Avatar,
+                Name = companySpace.Name,
+                Teamname = companySpace.Teamname,
+                Description = companySpace.Description,
+                Tags = companySpace.Tags,
+                Location = companySpace["Location"]?.ToString(),
+                Website = companySpace["Website"]?.ToString(),
+                Email = companySpace["Email"]?.ToString(),
+                Phone = companySpace["Phone"]?.ToString(),
+                Certs = companySpace["Certs"]?.ToString()
             };
             return View("~/Areas/CustomPages/Views/Companies/NewCompany.cshtml", viewModel);
         }
