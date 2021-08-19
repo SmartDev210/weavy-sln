@@ -1,0 +1,43 @@
+﻿@{ 
+    var companySpace = SpaceService.GetByKey($"company_{User.Id}");
+    if (companySpace == null)
+    {
+        companySpace = SpaceService.Search(new SpaceQuery { MemberId = User.Id, Sudo = true }).Where(x => !string.IsNullOrEmpty(x.Key) && x.Key.StartsWith("company_") && x.HasPermission(Permission.Admin, User)).FirstOrDefault();
+    }
+
+}
+
+<div class="dropdown-menu dropdown-menu-right">
+    <div class="scroll-y">
+        <a class="dropdown-item" href="@(companySpace == null ? "/companies/new" : "/companies/edit")">
+            @Svg.Icon("plus-box-outline")<span>@(companySpace == null ? T["Create Company Page"] : T["Edit Company Page"])</span>
+        </a>
+        @if (companySpace != null)
+        {
+            <a class="dropdown-item" href="/spaces?join-company=true">
+                @Svg.Icon("account-multiple-plus")<span>Join Company Page</span>
+            </a>
+        }
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="#">
+            @Svg.Icon("upload")<span>@T["List ✈ Spare Parts"]</span>
+        </a>
+        <a class="dropdown-item" href="#">
+            @Svg.Icon("upload")<span>@T["List MRO Repair Capabilities"]</span>
+        </a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="#">
+            @Svg.Icon("send")<span>@T["Advertise Asset(s)"]</span>
+        </a>
+        <a class="dropdown-item" href="#">
+            @Svg.Icon("wrench")<span>@T["Advertise Service(s)"]</span>
+        </a>
+        <a class="dropdown-item" href="#">
+            @Svg.Icon("video")<span>@T["Advertise Your Brand"]</span>
+        </a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="@(Url.Action<SpaceController>(c => c.New()))">
+            @Svg.Icon("pencil")<span>@T["Create a Space"]</span>
+        </a>
+    </div>
+</div>

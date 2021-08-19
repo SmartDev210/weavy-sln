@@ -4378,6 +4378,7 @@
     <None Include="packages.config" />
     <Content Include="Views\Shared\_AppIcon.cshtml" />
     <Content Include="Views\Account\AdminSignIn.cshtml" />
+    <Content Include="Views\Shared\_TopPlusButtonMenu.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
