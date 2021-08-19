@@ -7,7 +7,15 @@
             <div class="dropdown-menu dropdown-menu-right">
                 <a class="dropdown-item" href="@(Url.Action<AccountController>(c => c.Edit()))">@Svg.Icon("account") @T["User profile"]</a>
                 <a class="dropdown-item" href="@(Url.Action<AccountController>(c => c.Settings()))">@Svg.Icon("format-list-checks") @T["User settings"]</a>
-                @if (!ConfigurationService.WindowsAuthentication) {
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="@ConfigurationService.AppSetting("findparts-url")/privacy" target="_blank">@Svg.Icon("file") @T["Privacy"]</a>
+                <a class="dropdown-item" href="@ConfigurationService.AppSetting("findparts-url")/terms" target="_blank">@Svg.Icon("file") @T["Terms"]</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="https://apps.apple.com/us/app/aviation-back-channel/id1568332316" target="_blank">@Svg.Icon("download") @T["iOS App"]</a>
+                <a class="dropdown-item" href="#" target="_blank">@Svg.Icon("download") @T["Android App"]</a>
+                <div class="dropdown-divider"></div>
+                @if (!ConfigurationService.WindowsAuthentication)
+                {
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="@(Url.Action<AccountController>(c => c.SignOut(null)))" data-turbolinks="false">@Svg.Icon("logout") @T["Sign out"]</a>
                 }
