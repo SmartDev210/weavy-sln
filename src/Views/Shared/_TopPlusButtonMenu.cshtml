@@ -12,7 +12,7 @@
         <a class="dropdown-item" href="@(companySpace == null ? "/companies/new" : "/companies/edit")">
             @Svg.Icon("plus-box-outline")<span>@(companySpace == null ? T["Create Company Page"] : T["Edit Company Page"])</span>
         </a>
-        @if (companySpace != null)
+        @if (companySpace == null)
         {
             <a class="dropdown-item" href="/spaces?join-company=true">
                 @Svg.Icon("account-multiple-plus")<span>Join Company Page</span>
