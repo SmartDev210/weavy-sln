@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Weavy.Areas.Apps.Models;
 using Weavy.Core.Models;
 using Weavy.Core.Services;
 using Weavy.Web.Controllers;
@@ -90,6 +91,24 @@ namespace Weavy.Areas.CustomPages.Controllers
                 };
 
                 privateSpace = SpaceService.Insert(privateSpace);
+
+                var postPlugin = PluginService.GetApp<Posts>();
+                var postApp = AppService.New(postPlugin.Id);
+                postApp.Name = "Posts";
+
+                AppService.Insert(postApp, privateSpace);
+
+                var taskPlugin = PluginService.GetApp<Tasks>();
+                var taskApp = AppService.New(taskPlugin.Id);
+                taskApp.Name = "Tasks";
+
+                AppService.Insert(taskApp, privateSpace);
+
+                var filesPlugin = PluginService.GetApp<Files>();
+                var filesApp = AppService.New(filesPlugin.Id);
+                filesApp.Name = "Files";
+
+                AppService.Insert(filesApp, privateSpace);
                 SpaceService.AddMember(privateSpace.Id, id, Core.Models.Access.Admin);
             }
 
