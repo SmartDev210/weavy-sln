@@ -4334,7 +4334,7 @@
     <Compile Include="Areas\CustomPages\Helpers\JaaSJwtBuilder.cs" />
     <Compile Include="Areas\CustomPages\Hooks\AfterCompanyInsertedHook.cs" />
     <Compile Include="Areas\CustomPages\Hooks\AfterAdminAddedToCompanyHook.cs" />
-    <Compile Include="Areas\CustomPages\Hooks\AfterSignInHook.cs" />
+    <Compile Include="Areas\CustomPages\Hooks\AfterSignUpHook.cs" />
     <Compile Include="Areas\CustomPages\Models\AviationClubhouseHomePageViewModel.cs" />
     <Compile Include="Areas\CustomPages\Models\ClubhouseAviationMarketplaceHomePageViewModel.cs" />
     <Compile Include="Areas\CustomPages\Models\AviationMarketplaceHomePageViewModel.cs" />
