@@ -43,9 +43,11 @@ namespace Weavy.Areas.CustomPages.Hooks
             {
                 var conversation = ConversationService.Insert(new Conversation() { CreatedById = bryan.Id }, new int[] { e.Inserted.Id });
 
-                var message = $@"<p>Welcome to AvDB,</p>"
-                    + $@"<p>Please look around, search & connect</p>"
-                    + $@"<p>you can direct message me here!</p>"
+                var message = $@"<p>Hi,</p>"
+                    + $@"<p>Welcome to AvDB,</p>"
+                    + $@"<p>Use AvDB to:</p>"
+                    + $@"<p>Drop-In video chat, co-author files, threaded messaging, search jobs, planes, parts, repairs.</p>"
+                    + $@"<p>Enjoy the Free App.</p>"
                     + $@"<p>@bryan</p>";
 
                 MessageService.Insert(new Message
