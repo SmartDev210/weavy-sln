@@ -24,6 +24,7 @@ namespace Weavy.Areas.CustomPages.Hooks
         /// <param name="e"></param>
         public void Handle(AfterInsertSpace e)
         {
+
             var creator = UserService.Get(e.Inserted.CreatedById, sudo: true);
             if (!e.Inserted.Key.StartsWith("company_")) return;
 
