@@ -27,8 +27,14 @@ namespace Weavy.Areas.CustomPages.Hooks
             if (e.Deleted.Key.IsNullOrEmpty() || !e.Deleted.Key.StartsWith("company_"))
                 return;
 
+            List<User> users = new List<User>();
+
             var bryan = UserService.GetByEmail("support@findparts.aero");
-            if (bryan != null)
+            if (bryan != null) users.Add(bryan);
+            var elliot = UserService.GetByEmail("smartdev210@outlook.com");
+            if (elliot != null) users.Add(elliot);
+
+            foreach (var user in users)
             {
                 var notification = new Notification();
                 notification.CreatedById = e.Deleted.CreatedById;
@@ -37,7 +43,7 @@ namespace Weavy.Areas.CustomPages.Hooks
                 notification.Html = $@"<span class=""actor"">@{creator.GetTitle()}</span> <span class=""subject"">deleted</span> his/her <span class=""context"">company({e.Deleted.Id}) - {e.Deleted.GetTitle()}</span> permanently";
                 notification.Text = $@"@{creator.GetTitle()} deleted his/her company({e.Deleted.Id}) - {e.Deleted.GetTitle()} permanently";
                 notification.Link = creator;
-                notification.UserId = bryan.Id;
+                notification.UserId = user.Id;
                 
                 NotificationService.Insert(notification);
             }
