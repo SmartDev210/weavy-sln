@@ -4335,6 +4335,7 @@
     <Compile Include="Areas\CustomPages\Hooks\AfterCompanyInsertedHook.cs" />
     <Compile Include="Areas\CustomPages\Hooks\AfterAdminAddedToCompanyHook.cs" />
     <Compile Include="Areas\CustomPages\Hooks\AfterDeleteCompanyHook.cs" />
+    <Compile Include="Areas\CustomPages\Hooks\AfterInsertBlobHook.cs" />
     <Compile Include="Areas\CustomPages\Hooks\AfterTrashCompanyHook.cs" />
     <Compile Include="Areas\CustomPages\Hooks\AfterSignUpHook.cs" />
     <Compile Include="Areas\CustomPages\Models\AviationClubhouseHomePageViewModel.cs" />
