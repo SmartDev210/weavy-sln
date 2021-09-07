@@ -7,6 +7,7 @@
             <div class="dropdown-menu dropdown-menu-right">
                 <a class="dropdown-item" href="@(Url.Action<AccountController>(c => c.Edit()))">@Svg.Icon("account") @T["User profile"]</a>
                 <a class="dropdown-item" href="@(Url.Action<AccountController>(c => c.Settings()))">@Svg.Icon("format-list-checks") @T["User settings"]</a>
+                <a class="dropdown-item" href="#">@Svg.Icon("find-replace") @T["RFQs/Quotes"]</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="@ConfigurationService.AppSetting("findparts-url")/privacy" target="_blank">@Svg.Icon("file") @T["Privacy"]</a>
                 <a class="dropdown-item" href="@ConfigurationService.AppSetting("findparts-url")/terms" target="_blank">@Svg.Icon("file") @T["Terms"]</a>
