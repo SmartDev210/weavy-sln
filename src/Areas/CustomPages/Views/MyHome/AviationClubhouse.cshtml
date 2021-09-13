@@ -19,7 +19,9 @@
 }
 
 @section navbar_middle {
-    @Html.Partial("_NavbarMenu")
+    @{
+        Html.RenderPartial("_NavbarMenu");
+    }
 }
 
 

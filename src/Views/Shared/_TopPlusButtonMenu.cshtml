@@ -19,12 +19,30 @@
             </a>
         }
         <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="#">
-            @Svg.Icon("upload")<span>@T["List ✈ Spare Parts"]</span>
-        </a>
-        <a class="dropdown-item" href="#">
-            @Svg.Icon("upload")<span>@T["List MRO Repair Capabilities"]</span>
-        </a>
+        @if (companySpace != null)
+        {
+            <a class="dropdown-item" href="@ConfigurationService.AppSetting("findparts-url")/Vendor/UploadList">
+                @Svg.Icon("upload")<span>@T["List ✈ Spare Parts"]</span>
+            </a>
+        }
+        else
+        {
+            <a class="dropdown-item" target="_blank" href="javascript:void(0)" onclick="wvy.alert.info('Please Create or Join Company Page to List Spare Parts & Repair Capabilities.');">
+                @Svg.Icon("upload")<span>@T["List ✈ Spare Parts"]</span>
+            </a>
+        }
+        @if (companySpace != null)
+        {
+            <a class="dropdown-item" target="_blank" href="@ConfigurationService.AppSetting("findparts-url")/Vendor/UploadList">
+                @Svg.Icon("upload")<span>@T["List MRO Repair Capabilities"]</span>
+            </a>
+        }
+        else
+        {
+            <a class="dropdown-item" href="javascript:void(0);" onclick="wvy.alert.info('Please Create or Join Company Page to List Spare Parts & Repair Capabilities.');">
+                @Svg.Icon("upload")<span>@T["List MRO Repair Capabilities"]</span>
+            </a>
+        }
         <div class="dropdown-divider"></div>
         <a class="dropdown-item" href="#">
             @Svg.Icon("send")<span>@T["Advertise Asset(s)"]</span>

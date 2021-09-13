@@ -76,16 +76,21 @@
                 <div class="navbar-middle"><span class="navbar-text">@Title</span></div>
             }
 
-            @if (IsSectionDefined("navbar_right")) {
+            @if (IsSectionDefined("navbar_right"))
+            {
                 @RenderSection("navbar_right", required: false)
-            } else {
+            }
+            else
+            {
                 <div class="navbar-icons">
                     <a class="btn btn-icon" href="/messenger" target="_blank" title="Messenger">@Svg.Icon("message-text")</a>
                     <div class="dropdown">
                         <button type="button" class="btn btn-icon dropdown-toggle" data-toggle="dropdown">
                             @Svg.Icon("plus-circle-outline")
                         </button>
-                        @Html.Partial("~/Views/Shared/_TopPlusButtonMenu.cshtml")
+                        @{ 
+                            Html.RenderPartial("~/Views/Shared/_TopPlusButtonMenu.cshtml");
+                        }
                     </div>
 
                     <button type="button" class="btn btn-icon" data-toggle="drawer" data-target="#drawer-user">
