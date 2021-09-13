@@ -74,7 +74,7 @@
     @if (WeavyContext.Space != null)
     {
         <div>
-            <a class="btn btn-icon" href="/video-call/@(Regex.Replace($"{WeavyContext.Space.Name}-{WeavyContext.Space.Id}", "[^a-zA-Z0-9- ]+", "", RegexOptions.Compiled))" target="_blank" title="Join Room">@Svg.Icon("video")</a>
+            <a class="btn btn-icon" href="/video-call/@(Regex.Replace($"{WeavyContext.Space.Name}-{WeavyContext.Space.Id}", "[^a-zA-Z0-9- ]+", "", RegexOptions.Compiled))" target="_blank" title="Drop-In Video Chat">@Svg.Icon("video")</a>
         </div>
     }
 </div>
