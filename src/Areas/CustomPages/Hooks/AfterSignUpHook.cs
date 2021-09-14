@@ -63,7 +63,7 @@ namespace Weavy.Areas.CustomPages.Hooks
             {
                 if (iter.Current.Key.StartsWith("company_"))
                 {
-                    if (!iter.Current.IsMember) SpaceService.AddMember(iter.Current.Id, e.Inserted.Id, Access.Read, sudo: true);
+                    SpaceService.AddMember(iter.Current.Id, e.Inserted.Id, Access.Read, sudo: true);
                 }
             }
         }
