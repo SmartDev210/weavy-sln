@@ -57,16 +57,19 @@
                 @RenderSection("navbar_left", required: false)
             } else {
             <div class="navbar-icons">
-                @if (Back != null) {
+                @if (Back != null)
+                {
                     <a class="btn btn-icon" href="@Back" data-link>@Svg.Icon("arrow-left")</a>
-                } else {
-                    if (WeavyContext.Space != null) {
+                }
+                else
+                {
+                    if (WeavyContext.Space != null)
+                    {
                         <button type="button" class="btn btn-icon" data-toggle="drawer" data-target="#drawer-space">@WeavyContext.Space.AvatarImg(24)</button>
-                    } else {
-                        <a class="btn btn-icon" href="@WeavyContext.ApplicationPath" title="Home">@Svg.Icon("magnify")</a>
-                    }                    
+                    }
                 }
                 <a class="btn btn-icon" href="/spaces" title="Spaces">@Svg.Icon("view-grid")</a>
+                <a class="btn btn-icon" href="@WeavyContext.ApplicationPath" title="Home">@Svg.Icon("magnify")</a>
             </div>
             }
 
