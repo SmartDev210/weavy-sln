@@ -15,5 +15,6 @@ namespace Weavy.Areas.CustomPages.Models
         /// List of public spaces
         /// </summary>
         public IEnumerable<Space> PubSpaces { get; set; }
+        public IEnumerable<Space> Joined { get; set; }
     }
 }

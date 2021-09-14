@@ -62,9 +62,9 @@ namespace Weavy.Areas.CustomPages.Controllers
         [Route("aviation-clubhouse")]
         public ActionResult AviationClubhouse()
         {            
-            var joined = SpaceService.Search(new SpaceQuery { Text = "tag:aviation", Top = 100, Sudo = true, MemberId = User.Id }).ToList();
+            var joined = SpaceService.Search(new SpaceQuery {Top = 100, Sudo = true, MemberId = User.Id }).ToList();
 
-            var aviationClubs = SpaceService.Search(new SpaceQuery { Text = "tag:aviation", Top = 100, Sudo = true }).Where(x => !x.IsMember).ToList();
+            var aviationClubs = SpaceService.Search(new SpaceQuery { Top = 100, Sudo = true }).Where(x => !x.IsMember).ToList();
 
             AviationClubhouseHomePageViewModel viewModel = new AviationClubhouseHomePageViewModel
             {
@@ -81,12 +81,14 @@ namespace Weavy.Areas.CustomPages.Controllers
         [Route("clubhouse-aviation-marketplace")]
         [HttpGet]
         [AllowAnonymous]
-        public ActionResult ClubhouseAviationMarketplace(string tag)
-        {   
-            var pubs = SpaceService.Search(new SpaceQuery { Top = 30, Text = tag, Sudo = true });
+        public ActionResult ClubhouseAviationMarketplace()
+        {
+            var joined = SpaceService.Search(new SpaceQuery { Text="tag:collab", Top = 100, Sudo = true, MemberId = User.Id }).ToList();
+            var pubs = SpaceService.Search(new SpaceQuery { Top = 30, Text = "tag:master", Sudo = true });
             
             ClubhouseAviationMarketplaceHomePageViewModel viewModel = new ClubhouseAviationMarketplaceHomePageViewModel
             {
+                Joined = joined.ToList(),
                 PubSpaces = pubs.ToList()
             };
 

@@ -170,6 +170,7 @@ namespace Weavy.Areas.CustomPages.Controllers
                     CreatedById = User.Id,
                     Name = $"Private channel for {space.Name} & {User.GetTitle()}",
                     Description = $"Private channel for {space.Name} and {User.GetTitle()}",
+                    Tags = new string[] {"collab"}
                 };
 
                 privateSpace = SpaceService.Insert(privateSpace);

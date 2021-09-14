@@ -34,9 +34,16 @@ namespace Weavy.Areas.CustomPages.Hooks
             {
                 var admins = SpaceService.GetMembers(e.Inserted.Id, new MemberQuery { Admin = true });
                 if (!admins.Any(x => x.Id == iter.Current.Id))
-                {   
+                {
+                    try
+                    {
+                        EntityService.Unfollow<Space>(e.Inserted, iter.Current.Id, sudo: true);
+                    } catch(Exception)
+                    {
+
+                    }
+                    
                     SpaceService.AddMember(e.Inserted.Id, iter.Current.Id, Access.Read, sudo: true);
-                    EntityService.Unfollow<Space>(e.Inserted, iter.Current.Id, sudo: true);
                 }
             }
 

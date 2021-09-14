@@ -75,7 +75,7 @@ namespace Weavy.Areas.Api.Controllers {
             var space = SpaceService.GetByKey(request.Key);            
             if (space == null)
             {
-                var spaceModel = new Space() { Key = request.Key, Name = request.Name, Tags = new List<string>() { "Channel" }, CreatedById = request.user };
+                var spaceModel = new Space() { Key = request.Key, Name = request.Name, Tags = new List<string>() { "collab" }, CreatedById = request.user };
                 space = SpaceService.Insert(spaceModel);
                 
                 var postPlugin = PluginService.GetApp<Posts>();
