@@ -3,7 +3,7 @@
 <div class="space-cards">
     @foreach (var space in Model)
     {
-        <a class="card" href="@space.Url()">
+        <a class="card" href="@(space.IsMember ? space.Url() : "javascript:void(0);")">
             <div class="card-cover">
                 @space.AvatarImg(64)
                 <div class="facepile">

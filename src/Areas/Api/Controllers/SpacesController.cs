@@ -129,7 +129,7 @@ namespace Weavy.Areas.Api.Controllers {
             var space = SpaceService.GetByKey(request.Key);
             if (space == null)
             {
-                var spaceModel = new Space() { Key = request.Key, Name = request.Name, Tags = new List<string>() { "Gigs", "Service Request" }, CreatedById = request.user };
+                var spaceModel = new Space() { Key = request.Key, Name = request.Name, Tags = new List<string>() { "gigs", "service request", "collab" }, CreatedById = request.user };
                 space = SpaceService.Insert(spaceModel);
 
                 var commentsPlugin = PluginService.GetApp<Comments>();

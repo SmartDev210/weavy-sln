@@ -27,9 +27,9 @@ namespace Weavy.Areas.CustomPages.Controllers
         {
             var joined = SpaceService.GetVisited(10);
 
-            var pods = SpaceService.Search(new SpaceQuery { Text = "tag:pods", Top = 10, Sudo = true });
-            var gigs = SpaceService.Search(new SpaceQuery { Text = "tag:gigs", Top = 10, Sudo = true });
-            var pubs = SpaceService.Search(new SpaceQuery { Top = 10, Sudo = true });
+            var pods = SpaceService.Search(new SpaceQuery { Text = "tag:pods", Top = 10, Sudo = true, MemberId = User.Id });
+            var gigs = SpaceService.Search(new SpaceQuery { Text = "tag:gigs", Top = 10, Sudo = true, MemberId = User.Id });
+            var pubs = SpaceService.Search(new SpaceQuery { Top = 10, Sudo = true, MemberId = User.Id });
 
             var notifications = NotificationService.Search(new NotificationQuery
             {
@@ -62,14 +62,14 @@ namespace Weavy.Areas.CustomPages.Controllers
         [Route("aviation-clubhouse")]
         public ActionResult AviationClubhouse()
         {            
-            var joined = SpaceService.Search(new SpaceQuery {Top = 100, Sudo = true, MemberId = User.Id }).ToList();
+            var joined = SpaceService.Search(new SpaceQuery { Text= "tag:aviation", Top = 100, Sudo = true, MemberId = User.Id }).ToList();
 
-            var aviationClubs = SpaceService.Search(new SpaceQuery { Top = 100, Sudo = true }).Where(x => !x.IsMember).ToList();
+            // var aviationClubs = SpaceService.Search(new SpaceQuery { Top = 100, Sudo = true }).Where(x => !x.IsMember).ToList();
 
             AviationClubhouseHomePageViewModel viewModel = new AviationClubhouseHomePageViewModel
             {
                 JoinedSpaces = joined,
-                AviationSpaces = aviationClubs
+                //AviationSpaces = aviationClubs
             };
             
             return View("~/Areas/CustomPages/Views/MyHome/AviationClubhouse.cshtml", viewModel);
@@ -84,7 +84,7 @@ namespace Weavy.Areas.CustomPages.Controllers
         public ActionResult ClubhouseAviationMarketplace()
         {
             var joined = SpaceService.Search(new SpaceQuery { Text="tag:collab", Top = 100, Sudo = true, MemberId = User.Id }).ToList();
-            var pubs = SpaceService.Search(new SpaceQuery { Top = 30, Text = "tag:master", Sudo = true });
+            var pubs = SpaceService.Search(new SpaceQuery { Top = 100, Text = "tag:master", Sudo = true, MemberId = User.Id });
             
             ClubhouseAviationMarketplaceHomePageViewModel viewModel = new ClubhouseAviationMarketplaceHomePageViewModel
             {
@@ -107,15 +107,15 @@ namespace Weavy.Areas.CustomPages.Controllers
             List<Space> result = new List<Space>();
             if (tags.IsNullOrWhiteSpace())
             {
-                result = SpaceService.Search(new SpaceQuery { Top = 30, Sudo = true }).ToList();
+                result = SpaceService.Search(new SpaceQuery { Text="tag:master", Top = 30, Sudo = true, MemberId = User.Id }).ToList();
             } else {
-                var searchText = "";
+                var searchText = "tag:master | ";
                 foreach (var tag in tags.Split(','))
                 {
                     searchText += $"tag:{tag} | ";
                 }
                 searchText = searchText.RemoveTrailing(" | ");
-                result = SpaceService.Search(new SpaceQuery { Top = 100, Text = searchText, Sudo = true }).ToList();
+                result = SpaceService.Search(new SpaceQuery { Top = 100, Text = searchText, Sudo = true, MemberId = User.Id}).ToList();
             }   
             
             return PartialView("~/Areas/CustomPages/Views/MyHome/Partials/_FilteredSpaces.cshtml", result);
@@ -141,11 +141,11 @@ namespace Weavy.Areas.CustomPages.Controllers
              
             }
             var joined = SpaceService.Search(new SpaceQuery { Top = 100, Text = searchText, Sudo = true, MemberId = User.Id }).ToList();
-            var aviationClubs = SpaceService.Search(new SpaceQuery { Top = 100, Text = searchText, Sudo = true }).Where(x => !x.IsMember).ToList();
+            // var aviationClubs = SpaceService.Search(new SpaceQuery { Top = 100, Text = searchText, Sudo = true }).Where(x => !x.IsMember).ToList();
             AviationClubhouseHomePageViewModel viewModel = new AviationClubhouseHomePageViewModel
             {
                 JoinedSpaces = joined,
-                AviationSpaces = aviationClubs
+                // AviationSpaces = aviationClubs
             };
 
             return PartialView("~/Areas/CustomPages/Views/MyHome/Partials/_FilteredAviationCompanies.cshtml", viewModel);
