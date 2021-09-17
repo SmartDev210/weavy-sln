@@ -2,9 +2,8 @@
     var companySpace = SpaceService.GetByKey($"company_{User.Id}");
     if (companySpace == null)
     {
-        companySpace = SpaceService.Search(new SpaceQuery { MemberId = User.Id, Sudo = true }).Where(x => !string.IsNullOrEmpty(x.Key) && x.Key.StartsWith("company_") && x.HasPermission(Permission.Admin, User)).FirstOrDefault();
+        companySpace = SpaceService.Search(new SpaceQuery { MemberId = User.Id }).Where(x => !string.IsNullOrEmpty(x.Key) && x.Key.StartsWith("company_") && x.HasPermission(Permission.Admin)).FirstOrDefault();        
     }
-
 }
 
 <div class="dropdown-menu dropdown-menu-right">

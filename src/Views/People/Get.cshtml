@@ -8,7 +8,7 @@
     var company = SpaceService.GetByKey($"company_{Model.Id}");
     if (company == null)
     {
-        company = SpaceService.Search(new SpaceQuery { MemberId = Model.Id }).Where(x => !string.IsNullOrEmpty(x.Key) && x.Key.StartsWith("company_") && x.HasPermission(Permission.Admin, Model)).FirstOrDefault();
+        company = SpaceService.Search(new SpaceQuery { MemberId = Model.Id, Sudo = true }).Where(x => !string.IsNullOrEmpty(x.Key) && x.Key.StartsWith("company_") && x.HasPermission(Permission.Admin, Model)).FirstOrDefault();
     }
 }
 
