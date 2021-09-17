@@ -57,11 +57,11 @@ namespace Weavy.Areas.CustomPages.Hooks
                 }, conversation, sudo: true);
             }
 
-            var searchResult = SpaceService.Search(new SpaceQuery { });
+            var searchResult = SpaceService.Search(new SpaceQuery { Sudo = true });
             var iter = searchResult.GetEnumerator();
             while(iter.MoveNext())
             {
-                if (iter.Current.Key.StartsWith("company_"))
+                if (!string.IsNullOrEmpty(iter.Current.Key) && iter.Current.Key.StartsWith("company_"))
                 {
                     SpaceService.AddMember(iter.Current.Id, e.Inserted.Id, Access.Read, sudo: true);
                 }
