@@ -29,7 +29,6 @@ namespace Weavy.Areas.CustomPages.Hooks
             {
                 var creator = UserService.Get(e.Space.CreatedById, sudo: true);
 
-
                 var spaces = SpaceService.Search(new SpaceQuery { MemberId = e.Member.Id, Sudo = true }).ToList();
                 foreach (var space in spaces)
                 {   
@@ -41,8 +40,8 @@ namespace Weavy.Areas.CustomPages.Hooks
 
                             var notification = new Notification();
                             notification.CreatedById = e.Member.Id;
-                            notification.Html = $@"<span class=""actor"">@{e.Member.GetTitle()}</span> <span class=""context"">can't be admin of your company.</span>";
-                            notification.Text = $@"@{e.Member.GetTitle()} can't be admin of your company.";
+                            notification.Html = $@"<span class=""actor"">@{e.Member.GetTitle()}</span> <span class=""context"">can only be assigned to manage 1 company profile.</span>";
+                            notification.Text = $@"@{e.Member.GetTitle()} can only be assigned to manage 1 company profile";
                             notification.Link = e.Member;
                             notification.UserId = e.Space.CreatedById;
 
@@ -52,6 +51,8 @@ namespace Weavy.Areas.CustomPages.Hooks
                         }
                     }
                 }
+
+                EntityService.Star(e.Space, e.Member.Id, sudo: true);
 
                 HttpClient client = new HttpClient();
 

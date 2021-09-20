@@ -116,6 +116,8 @@ namespace Weavy.Areas.CustomPages.Controllers
                 space = SpaceService.Insert(space);
             else space = SpaceService.Update(space);
 
+            EntityService.Star(space, User.Id, true);
+
             return RedirectToAction("Get", new { id = space.Id });
         }
         /// <summary>
