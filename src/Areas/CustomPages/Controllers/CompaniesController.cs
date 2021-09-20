@@ -100,6 +100,7 @@ namespace Weavy.Areas.CustomPages.Controllers
                 space = new Weavy.Core.Models.Space();
 
             space.Name = viewModel.Name;
+            space.Avatar = viewModel.Avatar;
             space.Description = viewModel.Description;
             space.Teamname = viewModel.Teamname;
             space.Tags = viewModel.Tags;
@@ -109,6 +110,7 @@ namespace Weavy.Areas.CustomPages.Controllers
             space["Phone"] = viewModel.Phone;
             space["Certs"] = viewModel.Certs;
             
+
             space.CreatedById = User.Id;
             space.Key = $"company_{User.Id}";
 
