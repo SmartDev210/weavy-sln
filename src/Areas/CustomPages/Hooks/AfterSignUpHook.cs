@@ -38,9 +38,16 @@ namespace Weavy.Areas.CustomPages.Hooks
             var techSupport = SpaceService.GetByKey("tech-support", true);
             if (techSupport != null && !techSupport.IsMember) { SpaceService.AddMember(techSupport.Id, e.Inserted.Id, Access.Write, true); }
 
+            var blob = BlobService.Insert(ConfigurationService.AppSetting("shield-log-path"));
+
+            var spaceModel = new Space() { Name = "Welcome", Tags = new List<string>() { "collab" }, CreatedById = e.Inserted.Id, Avatar = blob };
+            var privateWelcomeSpace = SpaceService.Insert(spaceModel);
+
+
             var bryan = UserService.GetByEmail("support@findparts.aero");
             if (bryan != null)
             {
+                SpaceService.AddMember(privateWelcomeSpace.Id, bryan.Id, Access.Admin, sudo: true);
                 var conversation = ConversationService.Insert(new Conversation() { CreatedById = bryan.Id }, new int[] { e.Inserted.Id });
 
                 var message = $@"<p>Hi,</p>"
@@ -55,6 +62,16 @@ namespace Weavy.Areas.CustomPages.Hooks
                     CreatedById = bryan.Id,
                     Html = message
                 }, conversation, sudo: true);
+            }
+            var hana = UserService.GetByEmail("hishibashi@unomaha.edu");
+            if (hana != null)
+            {
+                SpaceService.AddMember(privateWelcomeSpace.Id, hana.Id, Access.Admin, sudo: true);
+            }
+            var rohan = UserService.GetByEmail("rohand9619@gmail.com");
+            if (rohan != null)
+            {
+                SpaceService.AddMember(privateWelcomeSpace.Id, rohan.Id, Access.Admin, sudo: true);
             }
 
             var searchResult = SpaceService.Search(new SpaceQuery { Sudo = true });

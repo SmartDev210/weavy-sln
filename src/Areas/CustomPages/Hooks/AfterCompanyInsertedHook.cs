@@ -7,6 +7,7 @@ using System.Web;
 using Weavy.Core.Events;
 using Weavy.Core.Models;
 using Weavy.Core.Services;
+using Weavy.Core.Utils;
 
 namespace Weavy.Areas.CustomPages.Hooks
 {
@@ -26,7 +27,7 @@ namespace Weavy.Areas.CustomPages.Hooks
         {
 
             var creator = UserService.Get(e.Inserted.CreatedById, sudo: true);
-            if (!e.Inserted.Key.StartsWith("company_")) return;
+            if (e.Inserted.Key.IsNullOrEmpty() || !e.Inserted.Key.StartsWith("company_")) return;
 
             var searchResult = UserService.Search(new UserQuery { });
             var iter = searchResult.GetEnumerator();

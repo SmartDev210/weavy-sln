@@ -3444,6 +3444,7 @@
     <Content Include="img\linkedin.png" />
     <Content Include="img\pixel.png" />
     <Content Include="img\role.svg" />
+    <Content Include="img\shield-logo.png" />
     <Content Include="img\space.svg" />
     <Content Include="img\spinner.svg" />
     <Content Include="img\user.svg" />

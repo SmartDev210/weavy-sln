@@ -25,7 +25,7 @@ namespace Weavy.Areas.CustomPages.Hooks
         /// <param name="e"></param>
         public void Handle(AfterAddMember e)
         {   
-            if (e.Space.Key.StartsWith("company_") && e.Member.Access == Access.Admin)
+            if (!e.Space.Key.IsNullOrEmpty() && e.Space.Key.StartsWith("company_") && e.Member.Access == Access.Admin)
             {
                 var creator = UserService.Get(e.Space.CreatedById, sudo: true);
 
