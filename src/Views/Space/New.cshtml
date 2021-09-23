@@ -3,6 +3,7 @@
 @{
     Title = T["Spaces"].ToString();
     Back = Url.Back(Url.Action<SpaceController>(c => c.Index(null, null)));
+    Model.Tags.Add("collab");
 }
 
 
