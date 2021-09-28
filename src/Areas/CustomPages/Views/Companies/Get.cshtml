@@ -1,9 +1,9 @@
-﻿@model Weavy.Core.Models.Space
+﻿@using Weavy.Areas.CustomPages.Helpers
+@model Weavy.Core.Models.Space
 @{
     Title = Model.Name;
-    var adminMembers = SpaceService.GetMembers(Model.Id, new MemberQuery { Admin = true, Count = true });
+    var adminMembers = SpaceService.GetMembers(Model.Id, new MemberQuery { Admin = true, Count = true, Sudo = true });
 }
-
 
 @section navbar_middle {
     @{ Html.RenderPartial("_NavbarMenu");}
@@ -11,11 +11,11 @@
 
 
 <div class="cover cover-bg cover-under-navbar">
-    <div class="cover-content">
-        @Model.AvatarImg(128)
+    <div class="cover-content">        
+        @Model.PublicAvatarImg(128)        
     </div>
-    <div class="facepile">
-        @adminMembers.Facepile(size: 32, link: true, presence: true)
+    <div class="facepile">        
+        @adminMembers.PublicFacepile(32)
         @if (Model.HasPermission(Permission.Admin))
         {
             <button type="button" class="btn btn-round btn-primary btn-sm" data-toggle="modal" data-target="#members-modal" data-keyboard="true" title="@T["Add members"]">@Svg.Icon("plus")</button>
@@ -62,9 +62,6 @@
         @Html.DisplayFor(model => model.Tags)
     </div>
 
-    @if (!Model.IsMember)
-    {
-        <p class="text-center text-danger">@T["Only members have access to apps and content in the space."]</p>
-    }
+
 </div>
 

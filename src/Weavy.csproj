@@ -4321,6 +4321,7 @@
     <Compile Include="Areas\Apps\Controllers\FolderController.cs" />
     <Compile Include="Areas\Apps\Controllers\MessengerController.cs" />
     <Compile Include="Areas\CustomPages\Controllers\CompaniesController.cs" />
+    <Compile Include="Areas\CustomPages\Controllers\ImagesController.cs" />
     <Compile Include="Areas\CustomPages\Controllers\MyHomeController.cs" />
     <Compile Include="Areas\Apps\Controllers\NotificationsController.cs" />
     <Compile Include="Areas\Apps\Controllers\PostsController.cs" />
@@ -4332,6 +4333,7 @@
     <Compile Include="Areas\CustomPages\Controllers\MyProfileController.cs" />
     <Compile Include="Areas\CustomPages\Controllers\SpacesController.cs" />
     <Compile Include="Areas\CustomPages\Controllers\VideoCallController.cs" />
+    <Compile Include="Areas\CustomPages\Helpers\CustomExtenstions.cs" />
     <Compile Include="Areas\CustomPages\Helpers\JaaSJwtBuilder.cs" />
     <Compile Include="Areas\CustomPages\Hooks\AfterCompanyInsertedHook.cs" />
     <Compile Include="Areas\CustomPages\Hooks\AfterAdminAddedToCompanyHook.cs" />
@@ -4359,6 +4361,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Api\Views\Flag\" />
+    <Folder Include="Areas\CustomPages\Views\Images\" />
     <Folder Include="Areas\CustomPages\Views\MyProfile\" />
   </ItemGroup>
   <ItemGroup>

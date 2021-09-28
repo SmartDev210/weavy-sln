@@ -25,6 +25,7 @@ namespace Weavy.Areas.CustomPages.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
+        [AllowAnonymous]
         [HttpGet]
         [Route("companies/{id}")]
         public ActionResult Get(int id)

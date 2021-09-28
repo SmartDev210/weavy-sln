@@ -1,4 +1,6 @@
-﻿@{ 
+﻿@using Weavy.Areas.CustomPages.Helpers
+
+@{ 
     if (IsSectionDefined("navbar_tertiary")) {
         BodyAttributes.Add("class", "has-navbar-3");
     } else if (IsSectionDefined("navbar_secondary")) {
@@ -65,7 +67,7 @@
                 {
                     if (WeavyContext.Space != null)
                     {
-                        <button type="button" class="btn btn-icon" data-toggle="drawer" data-target="#drawer-space">@WeavyContext.Space.AvatarImg(24)</button>
+                        <button type="button" class="btn btn-icon" data-toggle="drawer" data-target="#drawer-space">@WeavyContext.Space.PublicAvatarImg(24)</button>
                     }
                 }
                 <a class="btn btn-icon" href="/spaces" title="Spaces">@Svg.Icon("view-grid")</a>
