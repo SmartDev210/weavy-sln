@@ -74,6 +74,7 @@ namespace Weavy.Areas.CustomPages.Hooks
                 SpaceService.AddMember(privateWelcomeSpace.Id, rohan.Id, Access.Admin, sudo: true);
             }
 
+            /*
             var searchResult = SpaceService.Search(new SpaceQuery { Sudo = true });
             var iter = searchResult.GetEnumerator();
             while(iter.MoveNext())
@@ -83,6 +84,7 @@ namespace Weavy.Areas.CustomPages.Hooks
                     SpaceService.AddMember(iter.Current.Id, e.Inserted.Id, Access.Read, sudo: true);
                 }
             }
+            */
         }
     }
 

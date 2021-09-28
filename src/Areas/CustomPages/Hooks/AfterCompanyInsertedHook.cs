@@ -25,10 +25,11 @@ namespace Weavy.Areas.CustomPages.Hooks
         /// <param name="e"></param>
         public void Handle(AfterInsertSpace e)
         {
-
+            
             var creator = UserService.Get(e.Inserted.CreatedById, sudo: true);
             if (e.Inserted.Key.IsNullOrEmpty() || !e.Inserted.Key.StartsWith("company_")) return;
 
+            /*
             var searchResult = UserService.Search(new UserQuery { });
             var iter = searchResult.GetEnumerator();
             while (iter.MoveNext())
@@ -47,7 +48,7 @@ namespace Weavy.Areas.CustomPages.Hooks
                     SpaceService.AddMember(e.Inserted.Id, iter.Current.Id, Access.Read, sudo: true);
                 }
             }
-
+            */
             HttpClient client = new HttpClient();
             
             _ = client.PostAsJsonAsync($"{ConfigurationService.AppSetting("findparts-url")}/web-api/update-vendor", new
