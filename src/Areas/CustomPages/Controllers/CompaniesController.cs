@@ -25,7 +25,6 @@ namespace Weavy.Areas.CustomPages.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [AllowAnonymous]
         [HttpGet]
         [Route("companies/{id}")]
         public ActionResult Get(int id)
@@ -173,8 +172,8 @@ namespace Weavy.Areas.CustomPages.Controllers
                 {
                     Key = $"private_channel_{User.Id}_{space.Id}",
                     CreatedById = User.Id,
-                    Name = $"Private channel for {space.Name} & {User.GetTitle()}",
-                    Description = $"Private channel for {space.Name} and {User.GetTitle()}",
+                    Name = $"Space for {space.Name} & {User.GetTitle()}",
+                    Description = $"Space for {space.Name} and {User.GetTitle()}",
                     Tags = new string[] {"collab"}
                 };
 

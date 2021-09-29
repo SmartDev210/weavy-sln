@@ -86,8 +86,8 @@ namespace Weavy.Areas.CustomPages.Controllers
                 {
                     Key = $"direct_space_{User.Id}_{id}",
                     CreatedById = User.Id,
-                    Name = $"Private channel for {UserService.Get(id).GetTitle()} & {User.GetTitle()}",
-                    Description = $"Private channel for {UserService.Get(id).GetTitle()} and {User.GetTitle()}",
+                    Name = $"Space for {UserService.Get(id).GetTitle()} & {User.GetTitle()}",
+                    Description = $"Space for {UserService.Get(id).GetTitle()} and {User.GetTitle()}",
                 };
 
                 privateSpace = SpaceService.Insert(privateSpace);
