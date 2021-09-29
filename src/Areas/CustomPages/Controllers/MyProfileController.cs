@@ -88,6 +88,7 @@ namespace Weavy.Areas.CustomPages.Controllers
                     CreatedById = User.Id,
                     Name = $"Space for {UserService.Get(id).GetTitle()} & {User.GetTitle()}",
                     Description = $"Space for {UserService.Get(id).GetTitle()} and {User.GetTitle()}",
+                    Tags = new string[] { "collab" }
                 };
 
                 privateSpace = SpaceService.Insert(privateSpace);
