@@ -18,6 +18,7 @@
             @Html.EditorFor(x => Model.Avatar, additionalViewData: new { Avatar = Model })
         </div>
         @Html.EditorsForModel(exclude: new string[] { nameof(Model.Avatar) })
+        <span class="text-danger" style="font-style: italic; font-size: 13px;">* Do Not Remove 'collab' Tag</span>
         <div class="form-buttons">
             <button type="submit" class="btn btn-primary btn-load" title="Save">@T["Save"]</button>
             <a href="@Back" class="btn btn-outline-secondary mr-auto">@T["Cancel"]</a>
