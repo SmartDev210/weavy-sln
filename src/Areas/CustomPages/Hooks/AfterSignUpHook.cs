@@ -26,17 +26,19 @@ namespace Weavy.Areas.CustomPages.Hooks
             var globalSpace = SpaceService.GetByKey("global", true);            
             if (globalSpace != null && !globalSpace.IsMember) { SpaceService.AddMember(globalSpace.Id, e.Inserted.Id, Access.Write, true); }
 
-            var almostAnythingSpace = SpaceService.GetByKey("almost-anything", true);
-            if (almostAnythingSpace != null && !almostAnythingSpace.IsMember) { SpaceService.AddMember(almostAnythingSpace.Id, e.Inserted.Id, Access.Write, true); }
+            string[] masterSpaces = new string[0];
+            if (!string.IsNullOrEmpty(ConfigurationService.AppSetting("master-spaces")))
+                masterSpaces = ConfigurationService.AppSetting("master-spaces").Split(',');
 
-            var welcomeSpace = SpaceService.GetByKey("welcome", true);
-            if (welcomeSpace != null && !welcomeSpace.IsMember) { SpaceService.AddMember(welcomeSpace.Id, e.Inserted.Id, Access.Write, true); }
+            foreach (var masterSpace in masterSpaces)
+            {
+                var space = SpaceService.GetByKey(masterSpace, true);
+                if (space != null && !space.IsMember) { 
+                    SpaceService.AddMember(space.Id, e.Inserted.Id, Access.Write, true);
+                    EntityService.Unfollow(space, e.Inserted.Id, true);
+                }
+            }
 
-            var watercoolerSpace = SpaceService.GetByKey("watercooler", true);
-            if (watercoolerSpace != null && !watercoolerSpace.IsMember) { SpaceService.AddMember(watercoolerSpace.Id, e.Inserted.Id, Access.Write, true); }
-
-            var techSupport = SpaceService.GetByKey("tech-support", true);
-            if (techSupport != null && !techSupport.IsMember) { SpaceService.AddMember(techSupport.Id, e.Inserted.Id, Access.Write, true); }
 
             var blob = BlobService.Insert(ConfigurationService.AppSetting("shield-log-path"));
 
