@@ -1,10 +1,12 @@
 ﻿@using Weavy.Areas.CustomPages.Controllers
+@using Weavy.Areas.CustomPages.Helpers
 @model Weavy.Areas.CustomPages.Models.ClubhouseAviationMarketplaceHomePageViewModel
 
 @{
     Title = T["Start"].ToString();
     var companySpace = SpaceService.GetByKey($"company_{User.Id}", sudo: true);
     List<string> tags = new List<string>();
+    var people = UserService.Search(new UserQuery { Sudo = true, Top = 100 }).ToList();
 }
 
 
@@ -122,56 +124,63 @@
     <div id="vendor-filtered-result">
         @Html.Partial("~/Areas/CustomPages/Views/MyHome/Partials/_FilteredSpaces.cshtml", Model.PubSpaces)
     </div>
-    <br/>
-    <br/>
-    <h2 class="custome-page-title mt-5">Assets for Sale</h2>
-    <div class="custome-page-categories mb-5">
-        <ul data-role="tags">
-            <li><a href="javascript:void(0)">Engines</a></li>
-            <li><a href="javascript:void(0)">APUs</a></li>
-            <li><a href="javascript:void(0)">Inventory Lots</a></li>
-            <li><a href="javascript:void(0)">Landing Gear</a></li>
-            <li><a href="javascript:void(0)">Aircraft</a></li>
-            <li><a href="javascript:void(0)">Avionics</a></li>
-            <li><a href="javascript:void(0)">GSE</a></li>
-            <li><a href="javascript:void(0)">Chemicals</a></li>
-            <li><a href="javascript:void(0)">Teardowns</a></li>
-            <li><a href="javascript:void(0)">Test Equipment</a></li>
-            <li><a href="javascript:void(0)">Tooling</a></li>
-            <li><a href="javascript:void(0)">Hangars</a></li>
-        </ul>
+    <br />
+    <br />
+    <h5 class="d-flex mt-5">
+        <a href="@(Url.Action<PeopleController>(c => c.Index(null, null)))" class="text-hyphens">People</a>
+    </h5>
+    <div class="facepile">
+        @people.PublicFacepile(64);
     </div>
-    <h2 class="custome-page-title mt-5">Aviation Industry Vendors</h2>
-    <div class="custome-page-industry-vendors">
-        <ul data-role="tags">
-            <li><a href="javascript:void(0)">Machine Shops</a></li>
-            <li><a href="javascript:void(0)">Composities</a></li>
-            <li><a href="javascript:void(0)">Paint</a></li>
-            <li><a href="javascript:void(0)">NDT</a></li>
-            <li><a href="javascript:void(0)">Line MROs</a></li>
-            <li><a href="javascript:void(0)">Heavy MROs</a></li>
-            <li><a href="javascript:void(0)">Engine MROs</a></li>
-            <li><a href="javascript:void(0)">Landing Gear MROs</a></li>
-            <li><a href="javascript:void(0)">Tooling Repair</a></li>
-            <li><a href="javascript:void(0)">Sheet Metal Repair</a></li>
-            <li><a href="javascript:void(0)">Structural Repair</a></li>
-            <li><a href="javascript:void(0)">Calibration</a></li>
-            <li><a href="javascript:void(0)">Logistics</a></li>
-            <li><a href="javascript:void(0)">3D Printing</a></li>
-            <li><a href="javascript:void(0)">Asset Tagging</a></li>
-            <li><a href="javascript:void(0)">Augumented Reality</a></li>
-        </ul>
-    </div>
-    <div class="d-flex flex-wrap align-items-center mt-5 mb-1 justify-content-center">
-        <a class="btn btn-outline-primary ml-2 mr-2">MORE FILTERS</a>
-        <a class="btn btn-outline-primary ml-2 mr-2">Country</a>
-        <a class="btn btn-outline-primary ml-2 mr-2">City</a>
-        <a class="btn btn-outline-primary ml-2 mr-2">ATA Chapter</a>
-    </div>
-    <div class="d-flex flex-column align-items-center mt-4 mb-3">
-        <div style="width: 75%"><input id="vendor-tag-filter" type="text" data-role="tagsinput" /></div>
-    </div>
-
+    @*
+        <h2 class="custome-page-title mt-5">Assets for Sale</h2>
+        <div class="custome-page-categories mb-5">
+            <ul data-role="tags">
+                <li><a href="javascript:void(0)">Engines</a></li>
+                <li><a href="javascript:void(0)">APUs</a></li>
+                <li><a href="javascript:void(0)">Inventory Lots</a></li>
+                <li><a href="javascript:void(0)">Landing Gear</a></li>
+                <li><a href="javascript:void(0)">Aircraft</a></li>
+                <li><a href="javascript:void(0)">Avionics</a></li>
+                <li><a href="javascript:void(0)">GSE</a></li>
+                <li><a href="javascript:void(0)">Chemicals</a></li>
+                <li><a href="javascript:void(0)">Teardowns</a></li>
+                <li><a href="javascript:void(0)">Test Equipment</a></li>
+                <li><a href="javascript:void(0)">Tooling</a></li>
+                <li><a href="javascript:void(0)">Hangars</a></li>
+            </ul>
+        </div>
+        <h2 class="custome-page-title mt-5">Aviation Industry Vendors</h2>
+        <div class="custome-page-industry-vendors">
+            <ul data-role="tags">
+                <li><a href="javascript:void(0)">Machine Shops</a></li>
+                <li><a href="javascript:void(0)">Composities</a></li>
+                <li><a href="javascript:void(0)">Paint</a></li>
+                <li><a href="javascript:void(0)">NDT</a></li>
+                <li><a href="javascript:void(0)">Line MROs</a></li>
+                <li><a href="javascript:void(0)">Heavy MROs</a></li>
+                <li><a href="javascript:void(0)">Engine MROs</a></li>
+                <li><a href="javascript:void(0)">Landing Gear MROs</a></li>
+                <li><a href="javascript:void(0)">Tooling Repair</a></li>
+                <li><a href="javascript:void(0)">Sheet Metal Repair</a></li>
+                <li><a href="javascript:void(0)">Structural Repair</a></li>
+                <li><a href="javascript:void(0)">Calibration</a></li>
+                <li><a href="javascript:void(0)">Logistics</a></li>
+                <li><a href="javascript:void(0)">3D Printing</a></li>
+                <li><a href="javascript:void(0)">Asset Tagging</a></li>
+                <li><a href="javascript:void(0)">Augumented Reality</a></li>
+            </ul>
+        </div>
+        <div class="d-flex flex-wrap align-items-center mt-5 mb-1 justify-content-center">
+            <a class="btn btn-outline-primary ml-2 mr-2">MORE FILTERS</a>
+            <a class="btn btn-outline-primary ml-2 mr-2">Country</a>
+            <a class="btn btn-outline-primary ml-2 mr-2">City</a>
+            <a class="btn btn-outline-primary ml-2 mr-2">ATA Chapter</a>
+        </div>
+        <div class="d-flex flex-column align-items-center mt-4 mb-3">
+            <div style="width: 75%"><input id="vendor-tag-filter" type="text" data-role="tagsinput" /></div>
+        </div>
+    *@
 </div>
 
 @section scripts {
