@@ -39,41 +39,38 @@ namespace Weavy.Areas.CustomPages.Hooks
                 }
             }
 
-
             var blob = BlobService.Insert(ConfigurationService.AppSetting("shield-log-path"));
 
-            var spaceModel = new Space() { Name = "Welcome", Tags = new List<string>() { "collab" }, CreatedById = e.Inserted.Id, Avatar = blob };
+            var spaceModel = new Space() { Name = "My First Space", Tags = new List<string>() { "collab" }, CreatedById = e.Inserted.Id, Avatar = blob };
             var privateWelcomeSpace = SpaceService.Insert(spaceModel);
 
+            var postPlugin = PluginService.GetApp<Posts>();
+            var postApp = AppService.New(postPlugin.Id);
+            postApp.Name = "Posts";
+            postApp = AppService.Insert(postApp, privateWelcomeSpace, sudo: true);
 
-            var bryan = UserService.GetByEmail("support@findparts.aero");
+            string[] signupMembers = new string[0];
+            if (!string.IsNullOrEmpty(ConfigurationService.AppSetting("signup-members")))
+                signupMembers = ConfigurationService.AppSetting("signup-members").Split(',');
+
+            foreach (var signupMember in signupMembers)
+            {
+                var member = UserService.GetByEmail(signupMember, true);
+                if (member != null)
+                {   
+                    SpaceService.AddMember(privateWelcomeSpace.Id, member.Id, Access.Admin, sudo: true);
+                }
+            }
+
+            var bryan = UserService.GetByEmail(ConfigurationService.AppSetting("bryan-email"), sudo: true);
             if (bryan != null)
             {
-                SpaceService.AddMember(privateWelcomeSpace.Id, bryan.Id, Access.Admin, sudo: true);
-                var conversation = ConversationService.Insert(new Conversation() { CreatedById = bryan.Id }, new int[] { e.Inserted.Id });
-
-                var message = $@"<p>Hi,</p>"
-                    + $@"<p>Welcome to AvDB,</p>"
-                    + $@"<p>Use AvDB to:</p>"
-                    + $@"<p>Drop-In video chat, co-author files, threaded messaging, search jobs, planes, parts, repairs.</p>"
-                    + $@"<p>Enjoy the Free App.</p>"
-                    + $@"<p>@bryan</p>";
-
-                MessageService.Insert(new Message
+                var post = new Post
                 {
                     CreatedById = bryan.Id,
-                    Html = message
-                }, conversation, sudo: true);
-            }
-            var hana = UserService.GetByEmail("hishibashi@unomaha.edu");
-            if (hana != null)
-            {
-                SpaceService.AddMember(privateWelcomeSpace.Id, hana.Id, Access.Admin, sudo: true);
-            }
-            var rohan = UserService.GetByEmail("rohand9619@gmail.com");
-            if (rohan != null)
-            {
-                SpaceService.AddMember(privateWelcomeSpace.Id, rohan.Id, Access.Admin, sudo: true);
+                    Text = $"Hi ✈️ Professional,{Environment.NewLine}{Environment.NewLine}Feel free to ask us any question(s).{Environment.NewLine}{Environment.NewLine}Use our App to search Jobs, Parts, Planes, Repairs.{Environment.NewLine}{Environment.NewLine}Use our App to Collaborate, Make Money and/or Semi-Subliminally Promote your Aviation Company/Entity.{Environment.NewLine}{Environment.NewLine}Best,{Environment.NewLine}{Environment.NewLine}Bryan, Hana, Rohan & Nas",                    
+                };
+                PostService.Insert(post, postApp, sudo: true);
             }
 
             /*
