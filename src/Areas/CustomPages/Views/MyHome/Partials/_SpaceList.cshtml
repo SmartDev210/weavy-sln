@@ -1,19 +1,9 @@
-﻿@model List<Space>
+﻿@using Weavy.Areas.CustomPages.Helpers
+@model List<Space>
 
 <div class="space-cards">
     @foreach (var space in Model)
     {
-        <a class="card" href="@(space.IsMember ? space.Url() : "javascript:void(0);")">
-            <div class="card-cover">
-                @space.AvatarImg(64)
-                <div class="facepile">
-                    @SpaceService.GetMembers(space.Id, new MemberQuery { Top = 5, OrderBy = "Random" }).Facepile(size: 24)
-                </div>
-            </div>
-            <div class="card-body">
-                <div class="card-title text-truncate" title="@space.Name">@space.Name</div>
-            </div>
-            @Html.StarToggle(space)
-        </a>
+        Html.RenderPartial("~/Areas/CustomPages/Views/MyHome/Partials/_Space.cshtml", space);
     }
 </div>

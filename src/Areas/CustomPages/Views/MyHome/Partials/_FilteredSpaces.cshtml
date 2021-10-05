@@ -2,7 +2,7 @@
 
 @if (Model.Any())
 {
-    @Html.Partial("~/Areas/CustomPages/Views/MyHome/Partials/_SpaceList.cshtml", Model)
+    Html.RenderPartial("~/Areas/CustomPages/Views/MyHome/Partials/_SpaceList.cshtml", Model);
 }
 else
 {

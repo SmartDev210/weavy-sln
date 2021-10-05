@@ -5,7 +5,7 @@
 </h5>
 @if (Model.JoinedSpaces.Any())
 {
-    @Html.Partial("~/Areas/CustomPages/Views/MyHome/Partials/_SpaceList.cshtml", Model.JoinedSpaces)
+    Html.RenderPartial("~/Areas/CustomPages/Views/MyHome/Partials/_SpaceList.cshtml", Model.JoinedSpaces);
 }
 else
 {
@@ -22,5 +22,5 @@ else
         <a href="@(Url.Action<SpaceController>(c => c.Index(null, null)))" class="text-hyphens">Aviation Clubhouse Spaces</a>
     </h5>
 
-    @Html.Partial("~/Areas/CustomPages/Views/MyHome/Partials/_SpaceList.cshtml", Model.AviationSpaces)
+    Html.RenderPartial("~/Areas/CustomPages/Views/MyHome/Partials/_SpaceList.cshtml", Model.AviationSpaces);
 }

@@ -4379,6 +4379,7 @@
     <Content Include="Areas\CustomPages\Views\MyHome\Partials\_FilteredSpaces.cshtml" />
     <Content Include="Areas\CustomPages\Views\MyHome\Partials\_SpaceList.cshtml" />
     <Content Include="Areas\CustomPages\Views\MyHome\Partials\_FilteredAviationCompanies.cshtml" />
+    <Content Include="Areas\CustomPages\Views\MyHome\Partials\_Space.cshtml" />
     <None Include="Resources\Resources.txt" />
     <None Include="Resources\Resources.en.txt" />
     <None Include="packages.config" />

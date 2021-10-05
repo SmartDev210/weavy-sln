@@ -89,7 +89,8 @@ namespace Weavy.Areas.CustomPages.Controllers
             ClubhouseAviationMarketplaceHomePageViewModel viewModel = new ClubhouseAviationMarketplaceHomePageViewModel
             {
                 Joined = joined.ToList(),
-                PubSpaces = pubs.ToList()
+                PubSpaces = pubs.ToList(),
+                ModeratorSpace = SpaceService.GetByKey(ConfigurationService.AppSetting("moderator-space"), sudo: true)
             };
 
             return View("~/Areas/CustomPages/Views/MyHome/ClubhouseAviatonMarketplace.cshtml", viewModel);

@@ -1,0 +1,33 @@
+﻿@using Weavy.Areas.CustomPages.Helpers
+@model Space
+@if (Model.IsMember)
+{
+    <a class="card" href="@Model.Url()">
+        <div class="card-cover">
+            @Model.AvatarImg(64)
+            <div class="facepile">
+                @SpaceService.GetMembers(Model.Id, new MemberQuery { Top = 5, OrderBy = "Random" }).Facepile(size: 24)
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="card-title text-truncate" title="@Model.Name">@Model.Name</div>
+        </div>
+        @Html.StarToggle(Model)
+    </a>
+}
+else
+{
+    <a class="card" href="javascript:void(0);">
+        <div class="card-cover">
+            @Model.PublicAvatarImg(64)
+            <div class="facepile">
+                @SpaceService.GetMembers(Model.Id, new MemberQuery { Top = 5, OrderBy = "Random" }).PublicFacepile(size: 24)
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="card-title text-truncate" title="@Model.Name">@Model.Name</div>
+        </div>
+        @Html.StarToggle(Model)
+    </a>
+}
+

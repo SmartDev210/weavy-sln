@@ -24,16 +24,22 @@ namespace Weavy.Areas.CustomPages.Helpers
             return new MvcHtmlString(sb.ToString());
         }
 
-        public static MvcHtmlString PublicFacepile(this IEnumerable<User> users, int size = 32)
+        public static MvcHtmlString PublicFacepile(this IEnumerable<User> users, int size = 32, bool presence = false)
         {
             StringBuilder sb = new StringBuilder();
             foreach (var user in users)
             {
-                sb.Append($@"<a href=""/people/{user.Id}"" title=""{user.GetTitle()}"">");
-                sb.Append($@"<div class=""img-{size} presence"" data-active=""{user.Id}"">");
-                sb.Append($@"<img alt=""{user.GetTitle()}"" class=""img-{size} avatar"" src=""/people-images/{user.Id}/avatar-{size * 2}"">");
-                sb.Append($@"</div>");
-                sb.Append($@"</a>");
+                if (presence == true)
+                {
+                    sb.Append($@"<a href=""/people/{user.Id}"" title=""{user.GetTitle()}"">");
+                    sb.Append($@"<div class=""img-{size}"" data-active=""{user.Id}"">");
+                    sb.Append($@"<img alt=""{user.GetTitle()}"" class=""img-{size} avatar"" src=""/people-images/{user.Id}/avatar-{size * 2}"">");
+                    sb.Append($@"</div>");
+                    sb.Append($@"</a>");
+                } else
+                {
+                    sb.Append($@"<img alt=""{user.GetTitle()}"" class=""img-{size} avatar"" src=""/people-images/{user.Id}/avatar-{size * 2}"">");
+                }
             }
 
             return new MvcHtmlString(sb.ToString());
