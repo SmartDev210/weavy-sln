@@ -43,16 +43,17 @@
                     foreach (var space in visited)
                     {
                         <a href="@space.Url()" class="dropdown-item@(space.Id == WeavyContext.Space?.Id ? " active" : "")">
-                            @space.AvatarImg(24)<span>@space.Name @if (space.Teamname != null)
-                            {<small class="text-muted">@@@space.Teamname</small>}</span>
+                            @space.AvatarImg(24)<span>
+                                @space.Name @if (space.Teamname != null)
+                            {<small class="text-muted">@@@space.Teamname</small>}
+                            </span>
                         </a>
                     }
                     <div class="dropdown-divider"></div>
                 }
                 @(Html.ActionLink<SpaceController>(c => c.Index(null, null), icon: "view-grid", color: "primary", text: T["Spaces"].ToString(), htmlAttributes: new { @class = "dropdown-item spaces" }, active: LinkActive.Action))
-                
                 @(Html.ActionLink<PeopleController>(c => c.Index(null, null), icon: "account-multiple", color: "primary", text: T["People"].ToString(), htmlAttributes: new { @class = "dropdown-item" }, active: LinkActive.Controller))
-                
+
                 @if (WeavyContext.Browser.Desktop)
                 {
                     <a class="dropdown-item" href="@(Url.Action<Weavy.Areas.Apps.Controllers.MessengerController>(c => c.Index(null)))" target="_blank" title="@T["Open Messenger"]">
@@ -75,6 +76,12 @@
     {
         <div>
             <a class="btn btn-icon" href="/video-call/@(Regex.Replace($"{WeavyContext.Space.Name}-{WeavyContext.Space.Id}", "[^a-zA-Z0-9- ]+", "", RegexOptions.Compiled))" target="_blank" title="Drop-In Video Chat">@Svg.Icon("video")</a>
+        </div>
+    }
+    else
+    {
+        <div>
+            <a class="btn btn-icon" href="/video-call/global-room" target="_blank" title="Drop-In Video Chat">@Svg.Icon("video")</a>
         </div>
     }
 </div>
