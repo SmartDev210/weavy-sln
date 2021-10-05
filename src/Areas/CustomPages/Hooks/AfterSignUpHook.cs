@@ -53,14 +53,18 @@ namespace Weavy.Areas.CustomPages.Hooks
             if (!string.IsNullOrEmpty(ConfigurationService.AppSetting("signup-members")))
                 signupMembers = ConfigurationService.AppSetting("signup-members").Split(',');
 
+           
+            List<int> memberIds = new List<int>();
             foreach (var signupMember in signupMembers)
             {
                 var member = UserService.GetByEmail(signupMember, true);
                 if (member != null)
                 {   
                     SpaceService.AddMember(privateWelcomeSpace.Id, member.Id, Access.Admin, sudo: true);
+                    memberIds.Add(member.Id);
                 }
             }
+            memberIds.Add(e.Inserted.Id);
 
             var bryan = UserService.GetByEmail(ConfigurationService.AppSetting("bryan-email"), sudo: true);
             if (bryan != null)
@@ -71,6 +75,24 @@ namespace Weavy.Areas.CustomPages.Hooks
                     Text = $"Hi ✈️ Professional,{Environment.NewLine}{Environment.NewLine}Feel free to ask us any question(s).{Environment.NewLine}{Environment.NewLine}Use our App to search Jobs, Parts, Planes, Repairs.{Environment.NewLine}{Environment.NewLine}Use our App to Collaborate, Make Money and/or Semi-Subliminally Promote your Aviation Company/Entity.{Environment.NewLine}{Environment.NewLine}Best,{Environment.NewLine}{Environment.NewLine}Bryan, Hana, Rohan & Nas",                    
                 };
                 PostService.Insert(post, postApp, sudo: true);
+                if (memberIds.Contains(bryan.Id))
+                    memberIds.Remove(bryan.Id);
+
+                var conversation = ConversationService.Insert(new Conversation() { Name = "Welcome", CreatedById = bryan.Id }, memberIds);
+
+                var message = $@"<p>Hi ✈️ Professional,<br/><br/>"
+                    + $@"Welcome to buddy.aero - feel free to ask us any question(s).<br/><br/>"
+                    + $@"To become a Paid Ambassador, click here (<a target=""_blank"" href=""https://forms.gle/tmTSpwb2nXnxTcoCA)"">https://forms.gle/tmTSpwb2nXnxTcoCA)</a><br/><br/>"
+                    + $@"or<br/><br/>"
+                    + $@"To order your 1st on-demand mini-podcast, click here (<a target=""_blank"" href=""https://calendly.com/buddyaero/mini-podcast"">https://calendly.com/buddyaero/mini-podcast</a>)<br/><br/>"
+                    + $@"Best,<br/>"
+                    + $@"Bryan, Hana, Rohan & Nas</p>";
+
+                MessageService.Insert(new Message
+                {
+                    CreatedById = bryan.Id,
+                    Html = message
+                }, conversation, sudo: true);
             }
 
             /*
