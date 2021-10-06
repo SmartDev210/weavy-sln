@@ -115,5 +115,32 @@ namespace Weavy.Areas.CustomPages.Controllers
 
             return Redirect($"/spaces/{privateSpace.Id}");
         }
+        [HttpGet]
+        [Route("messengers/contact-us")]
+        public ActionResult ContactUs()
+        {
+            string[] signupMembers = new string[0];
+            if (!string.IsNullOrEmpty(ConfigurationService.AppSetting("signup-members")))
+                signupMembers = ConfigurationService.AppSetting("signup-members").Split(',');
+
+            List<int> memberIds = new List<int>();
+
+            foreach (var signupMember in signupMembers)
+            {
+                var member = UserService.GetByEmail(signupMember, true);
+                if (member != null)
+                {   
+                    memberIds.Add(member.Id);
+                }
+            }
+
+            var conversation = ConversationService.Insert(new Conversation
+            {
+                Name = "Contact us",
+                CreatedById = User.Id,
+            }, memberIds);
+
+            return RedirectToAction<ConversationController>(x => x.Get(conversation.Id));
+        }
     }
 }
