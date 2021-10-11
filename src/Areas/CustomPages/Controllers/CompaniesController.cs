@@ -7,6 +7,7 @@ using Weavy.Areas.Apps.Models;
 using Weavy.Areas.CustomPages.Models;
 using Weavy.Core;
 using Weavy.Core.Models;
+using Weavy.Core.Repos;
 using Weavy.Core.Services;
 using Weavy.Core.Utils;
 using Weavy.Web.Controllers;
@@ -20,6 +21,22 @@ namespace Weavy.Areas.CustomPages.Controllers
     [Authorize]
     public class CompaniesController : WeavyController
     {
+        [HttpGet]
+        [Route("companies")]
+        public ActionResult Index()
+        {
+            var spaces = SpaceService.Search(new SpaceQuery { Sudo = true,  });
+
+            List<Space> companies = new List<Space>();
+            foreach (var space in spaces)
+            {
+                if (!string.IsNullOrEmpty(space.Key) && space.Key.Contains("company_"))
+                {
+                    companies.Add(space);
+                }
+            }
+            return View("~/Areas/CustomPages/Views/Companies/Index.cshtml", companies);
+        }
         /// <summary>
         /// company page
         /// </summary>
