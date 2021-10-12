@@ -8,12 +8,18 @@
 
 <div class="dropdown-menu dropdown-menu-right">
     <div class="scroll-y">
+        @if (companySpace != null)
+        {
+            <a class="dropdown-item" href="/companies/@companySpace.Id">
+                @Svg.Icon("plus-box-outline")<span>@T["View Company Page"]</span>
+            </a>
+        }
         <a class="dropdown-item" href="@(companySpace == null ? "/companies/new" : "/companies/edit")">
             @Svg.Icon("plus-box-outline")<span>@(companySpace == null ? T["Create Company Page"] : T["Edit Company Page"])</span>
         </a>
         @if (companySpace == null)
         {
-            <a class="dropdown-item" href="/spaces?join-company=true">
+            <a class="dropdown-item" href="/companies?join-company=true">
                 @Svg.Icon("account-multiple-plus")<span>Join Company Page</span>
             </a>
         }
