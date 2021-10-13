@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -83,15 +84,35 @@ namespace Weavy.Areas.CustomPages.Controllers
         [AllowAnonymous]
         public ActionResult ClubhouseAviationMarketplace()
         {
-            var joined = SpaceService.Search(new SpaceQuery { Text="tag:collab", Top = 100, Sudo = true, MemberId = User.Id }).ToList();
+            var joined = SpaceService.Search(new SpaceQuery { Text="tag:collab", Top = 100, Sudo = true, MemberId = User.Id });
             var pubs = SpaceService.Search(new SpaceQuery { Top = 100, Text = "tag:master", Sudo = true, MemberId = User.Id });
-            
+
             ClubhouseAviationMarketplaceHomePageViewModel viewModel = new ClubhouseAviationMarketplaceHomePageViewModel
             {
                 Joined = joined.ToList(),
                 PubSpaces = pubs.ToList(),
                 ModeratorSpace = SpaceService.GetByKey(ConfigurationService.AppSetting("moderator-space"), sudo: true)
             };
+
+            var sharedJsonPath = ConfigurationService.AppSetting("SharedJsonPath");
+            if (System.IO.File.Exists($"{sharedJsonPath}stats-0.json"))
+            {
+                var content = System.IO.File.ReadAllText($"{sharedJsonPath}stats-0.json");
+                viewModel.Portal0Stat = JsonConvert.DeserializeObject<VendorListItemStats>(content);
+            }
+            else
+            {
+                viewModel.Portal0Stat = new VendorListItemStats();
+            }
+
+            if (System.IO.File.Exists($"{sharedJsonPath}stats-1.json"))
+            {
+                var content = System.IO.File.ReadAllText($"{sharedJsonPath}stats-1.json");
+                viewModel.Portal1Stat = JsonConvert.DeserializeObject<VendorListItemStats>(content);
+            } else
+            {
+                viewModel.Portal1Stat = new VendorListItemStats();
+            }
 
             return View("~/Areas/CustomPages/Views/MyHome/ClubhouseAviatonMarketplace.cshtml", viewModel);
         }

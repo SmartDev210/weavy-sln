@@ -1,1 +1,29 @@
-﻿
+﻿@using Weavy.Areas.CustomPages.Controllers
+@model List<Space>
+@{
+    Title = T["Companies"].ToString();
+}
+
+@section navbar_middle {
+    @Html.Partial("_NavbarMenu")
+}
+
+
+@if (Model.HasItems())
+{
+    <table class="table table-hover table-name-desc-count">
+        <thead>
+            <tr>
+                <th class="table-icon"></th>
+                <th>@T["Name"]</th>
+                <th>@T["Description"]</th>
+                <th class="text-right">@T["Members"]</th>
+                <th class="table-icon"></th>
+            </tr>
+        </thead>
+        <tbody id="infinite-scroll-target">
+            @{ Html.RenderPartial("_CompanyTable"); }
+        </tbody>
+    </table>    
+
+}

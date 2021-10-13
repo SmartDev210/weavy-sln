@@ -4388,6 +4388,7 @@
     <Content Include="Views\Shared\_AppIcon.cshtml" />
     <Content Include="Views\Account\AdminSignIn.cshtml" />
     <Content Include="Views\Shared\_TopPlusButtonMenu.cshtml" />
+    <Content Include="Views\Shared\_CompanyTable.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
