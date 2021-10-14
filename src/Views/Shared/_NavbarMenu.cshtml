@@ -45,12 +45,14 @@
                         <a href="@space.Url()" class="dropdown-item@(space.Id == WeavyContext.Space?.Id ? " active" : "")">
                             @space.AvatarImg(24)<span>
                                 @space.Name @if (space.Teamname != null)
-                            {<small class="text-muted">@@@space.Teamname</small>}
+                                {<small class="text-muted">@@@space.Teamname</small>}
                             </span>
                         </a>
                     }
                     <div class="dropdown-divider"></div>
                 }
+                @(Html.ActionLink<CompaniesController>(c => c.Index(), icon: "view-grid", color: "primary", text: T["Companies"].ToString(), htmlAttributes: new { @class = "dropdown-item spaces" }, active: LinkActive.Action))
+                <div class="dropdown-divider"></div>
                 @(Html.ActionLink<SpaceController>(c => c.Index(null, null), icon: "view-grid", color: "primary", text: T["Spaces"].ToString(), htmlAttributes: new { @class = "dropdown-item spaces" }, active: LinkActive.Action))
                 @(Html.ActionLink<PeopleController>(c => c.Index(null, null), icon: "account-multiple", color: "primary", text: T["People"].ToString(), htmlAttributes: new { @class = "dropdown-item" }, active: LinkActive.Controller))
 
