@@ -172,5 +172,12 @@ namespace Weavy.Areas.CustomPages.Controllers
 
             return PartialView("~/Areas/CustomPages/Views/MyHome/Partials/_FilteredAviationCompanies.cshtml", viewModel);
         }
+
+        [Route("experts")]
+        [HttpGet]
+        public ActionResult Experts()
+        {
+            return View("~/Areas/CustomPages/Views/MyHome/Experts.cshtml");
+        }
     }
 }

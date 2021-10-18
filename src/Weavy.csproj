@@ -4381,6 +4381,7 @@
     <Content Include="Areas\CustomPages\Views\MyHome\Partials\_FilteredAviationCompanies.cshtml" />
     <Content Include="Areas\CustomPages\Views\MyHome\Partials\_Space.cshtml" />
     <Content Include="Areas\CustomPages\Views\Companies\Index.cshtml" />
+    <Content Include="Areas\CustomPages\Views\MyHome\Experts.cshtml" />
     <None Include="Resources\Resources.txt" />
     <None Include="Resources\Resources.en.txt" />
     <None Include="packages.config" />
