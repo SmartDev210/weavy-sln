@@ -33,9 +33,18 @@
     h3 span.number {
         font-size: 24px;
     }
+    .clubhouse-external-links {
+        gap: 48px;
+        width: 100%;
+    }
+    .clubhouse-external-links img {
+        width: 176px;
+    }
 </style>
+@Html.Partial("~/Views/Shared/_CTA.cshtml")
 <div class="container d-flex flex-column my-4 align-items-center">    
-    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+    <h4 class="mb-4">Search Engine</h4>
+    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist" style="justify-content: center;">
         <li class="nav-item">
             <a class="nav-link active" id="pills-myavdb-tab" data-toggle="pill" href="#pills-myavdb" role="tab" aria-controls="pills-myavdb" aria-selected="true">My Spaces</a>
         </li>
@@ -125,7 +134,10 @@
 </div>
 
 <div class="container d-flex flex-column my-4 ">
-
+    <div class="d-flex flex-column align-items-center justify-content-center">
+        <hr class="cta-separater" />
+        <h4 class="mb-4">Social Network</h4>
+    </div>
     <h5 class="d-flex mt-5">
         <a href="@(Url.Action<SpaceController>(c => c.Index(null, null)))" class="text-hyphens">My spaces</a>
     </h5>
@@ -138,14 +150,18 @@
     <div id="vendor-filtered-result">
         @Html.Partial("~/Areas/CustomPages/Views/MyHome/Partials/_FilteredSpaces.cshtml", Model.PubSpaces)
     </div>
-    <div class="d-flex flex-column align-items-center justify-content-center mt-5">
-        <h2 class="custome-page-title"> ✈️ Expert Two-Sided Marketplace</h2>
-        <p class="mt-2" style="text-align: center; color: #0BB0D5; font-size: 1.25rem;">Aviation Professionals - Make $400-$7000 a month posting on LinkedIn<br/><br/>View Brochure<br/><br/>Click to Become a Paid Moderator</p>        
-    </div>
+
+    @*<div class="d-flex flex-column align-items-center justify-content-center mt-5">
+            <h2 class="custome-page-title"> ✈️ Expert Two-Sided Marketplace</h2>
+            <p class="mt-2" style="text-align: center; color: #0BB0D5; font-size: 1.25rem;">Aviation Professionals - Make $400-$7000 a month posting on LinkedIn<br /><br />View Brochure<br /><br />Click to Become a Paid Moderator</p>
+        </div>*@
+    <h5 class="d-flex mt-5" style="color: #0BB0D5;">
+        Aviation Creator's Space
+    </h5>
     <div class="space-cards">
         @if (Model.ModeratorSpace != null)
         {
-            <a class="card" @if (!Model.ModeratorSpace.IsMember) { <text>href="javascript:void(0);" onclick="OpenRequestJoinConfirmDialog(@Model.ModeratorSpace.Id, '@Model.ModeratorSpace.Name', '@Model.ModeratorSpace.Description');" </text>} else {<text> href="@Model.ModeratorSpace.Url()"</text> }>
+            <a class="card" @if (User.IsAuthenticated() && !Model.ModeratorSpace.IsMember) { <text> href="javascript:void(0);" onclick="OpenRequestJoinConfirmDialog(@Model.ModeratorSpace.Id, '@Model.ModeratorSpace.Name', '@Model.ModeratorSpace.Description');" </text>  } else { <text> href="@Model.ModeratorSpace.Url()" </text> }>
                 <div class="card-cover">
                     @Model.ModeratorSpace.PublicAvatarImg(64)
                     <div class="facepile">
@@ -159,11 +175,39 @@
             </a>
         }
     </div>
-    
-    <div class="d-flex flex-column align-items-center justify-content-center mt-5">
-        <h2 class="custome-page-title">Aviation Vendors & Aviation Entities</h2>
-        <a target="_blank" href="https://calendly.com/buddyaero/mini-podcast" class="btn btn-primary" style="color: white;">Book Your On-Demand Mini Podcast</a>
+
+    @*<div class="d-flex flex-column align-items-center justify-content-center mt-5">
+            <h2 class="custome-page-title">Aviation Vendors & Aviation Entities</h2>
+            <a target="_blank" href="https://calendly.com/buddyaero/mini-podcast" class="btn btn-primary" style="color: white;">Book Your On-Demand Mini Podcast</a>
+        </div>*@
+
+    <div class="d-flex flex-column align-items-center justify-content-center">
+        <hr class="cta-separater" />
+        <h4>Aviation Clubhouse</h4>
+        <p style="color: #0091b2; margin: 16px 0;">Curated Live Talks with Aviation Professionals</p>
+
+        <div class="d-flex flex-wrap align-items-center justify-content-between clubhouse-external-links">
+            <a target="_blank" href="https://www.clubhouse.com/club/aviation-enthusiasts"><img src="~/img/Aviation_Enthusiasts.jpeg.jpg" /></a>
+            <a target="_blank" href="https://www.clubhouse.com/club/aircraft-maintenance"><img src="~/img/Aircraft_Maintenance.jpeg.jpg" /></a>
+            <a target="_blank" href="https://www.clubhouse.com/club/pilot-flight-trainin"><img src="~/img/Pilot_Flight_Training.jpeg.jpg" /></a>
+            <a target="_blank" href="https://www.clubhouse.com/club/european-aviation-talk"><img src="~/img/European_Aviation_Talk.jpeg.jpg" /></a>
+            <a target="_blank" href="https://www.clubhouse.com/club/indian-aviators"><img src="~/img/Indian_Aviators.jpeg.jpg" /></a>
+        </div>
+
     </div>
+    <div class="d-flex flex-column align-items-center justify-content-center mt-5">
+        <hr class="cta-separater" />
+
+        <img style="max-width: 240px; margin: 16px 0;" src="~/img/buddy-logo.png" />
+
+
+        <div style="display: flex; gap: 48px; align-items: center; justify-content: center; margin-top: 16px;">
+            <a href="https://apps.apple.com/us/app/aviation-back-channel/id1568332316"><img style="height: 40px;" src="~/img/download-on-appstore.svg" /></a>
+            <a href="#"><img style="height: 60px;" src="~/img/google-play-badge.png" /></a>
+        </div>
+    </div>
+
+
     @*
         <h2 class="custome-page-title mt-5">Assets for Sale</h2>
         <div class="custome-page-categories mb-5">

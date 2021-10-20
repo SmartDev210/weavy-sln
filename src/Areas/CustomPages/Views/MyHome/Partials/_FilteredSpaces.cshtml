@@ -7,6 +7,9 @@
 else
 {
     <p class="text-muted">
-        @T["There are no filtered spaces"]
+        @T["There are no filtered spaces"] @if (!User.IsAuthenticated())
+                {
+                <a href="/sign-in">Log in to use Spaces</a>
+                }
     </p>
 }

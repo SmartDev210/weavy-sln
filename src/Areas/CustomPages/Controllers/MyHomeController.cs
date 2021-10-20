@@ -85,7 +85,7 @@ namespace Weavy.Areas.CustomPages.Controllers
         public ActionResult ClubhouseAviationMarketplace()
         {
             var joined = SpaceService.Search(new SpaceQuery { Text="tag:collab", Top = 100, Sudo = true, MemberId = User.Id });
-            var pubs = SpaceService.Search(new SpaceQuery { Top = 100, Text = "tag:master", Sudo = true, MemberId = User.Id });
+            var pubs = SpaceService.Search(new SpaceQuery { Text = "tag:master", Top = 100, Sudo = true, MemberId = User.Id });
 
             ClubhouseAviationMarketplaceHomePageViewModel viewModel = new ClubhouseAviationMarketplaceHomePageViewModel
             {

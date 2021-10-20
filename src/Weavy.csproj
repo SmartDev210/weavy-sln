@@ -433,8 +433,13 @@
     <Content Include="Areas\Docs\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Docs\Views\Web.config" />
     <Content Include="Global.asax" />
+    <Content Include="img\Aircraft_Maintenance.jpeg.jpg" />
+    <Content Include="img\Aviation_Enthusiasts.jpeg.jpg" />
     <Content Include="img\backchannel-icon.png" />
+    <Content Include="img\black-logo.png" />
     <Content Include="img\bot.svg" />
+    <Content Include="img\buddy-logo.png" />
+    <Content Include="img\download-on-appstore.svg" />
     <Content Include="img\eo\0023-20e3.svg" />
     <Content Include="img\eo\0023.svg" />
     <Content Include="img\eo\002a-20e3.svg" />
@@ -3262,7 +3267,9 @@
     <Content Include="img\eo\303d.svg" />
     <Content Include="img\eo\3297.svg" />
     <Content Include="img\eo\3299.svg" />
+    <Content Include="img\European_Aviation_Talk.jpeg.jpg" />
     <Content Include="img\favicon.ico" />
+    <Content Include="img\google-play-badge.png" />
     <Content Include="img\horizontal blue-logo.png" />
     <Content Include="img\horizontal dotcom blue-logo.png" />
     <Content Include="img\icon.svg" />
@@ -3440,8 +3447,10 @@
     <Content Include="img\icons\wrench.svg" />
     <Content Include="img\icons\zip-box.svg" />
     <Content Include="img\icons\zoom.svg" />
+    <Content Include="img\Indian_Aviators.jpeg.jpg" />
     <Content Include="img\jitsi-placeholder-image.png" />
     <Content Include="img\linkedin.png" />
+    <Content Include="img\Pilot_Flight_Training.jpeg.jpg" />
     <Content Include="img\pixel.png" />
     <Content Include="img\role.svg" />
     <Content Include="img\shield-logo.png" />
@@ -4390,6 +4399,7 @@
     <Content Include="Views\Account\AdminSignIn.cshtml" />
     <Content Include="Views\Shared\_TopPlusButtonMenu.cshtml" />
     <Content Include="Views\Shared\_CompanyTable.cshtml" />
+    <Content Include="Views\Shared\_CTA.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

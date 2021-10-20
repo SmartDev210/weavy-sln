@@ -17,7 +17,7 @@
 }
 else
 {
-    <a class="card" href="javascript:void(0);">
+    <a class="card" href="@Model.Url()">
         <div class="card-cover">
             @Model.PublicAvatarImg(64)
             <div class="facepile">
@@ -27,7 +27,6 @@ else
         <div class="card-body">
             <div class="card-title text-truncate" title="@Model.Name">@Model.Name</div>
         </div>
-        @Html.StarToggle(Model)
     </a>
 }
 
