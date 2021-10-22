@@ -28,6 +28,7 @@
         margin: 24px 0 32px 0;
         color: #0091b2;
         font-size: 20px;
+        text-align: center;
     }
 
     h3 span.number {
@@ -102,31 +103,28 @@
         </div>
         <div class="tab-pane fade" id="pills-planes" role="tabpanel" aria-labelledby="pills-planes-tab">
             <h3 class="sub-title">Search 54 'Aircraft for Sale' Sites in One Click</h3>
-            <div class="d-flex mt-3 mb-3 flex-wrap">
+            <div class="d-flex mt-3 mb-3 flex-wrap align-items-center">
                 <span class="google-cse-title">Aircraft for Sale</span>
                 <div class="google-cse-search-group">
-                    <script async src="https://cse.google.com/cse.js?cx=004286895403006624284:8dyrm0inbkf"></script>
-                    <div class="gcse-search"></div>
+                    
                 </div>
             </div>
         </div>
         <div class="tab-pane fade" id="pills-pilot-supplies" role="tabpanel" aria-labelledby="pills-pilot-supplies-tab">
             <h3 class="sub-title">Search 19 Sites for Pilot Suplies in One Click</h3>
-            <div class="d-flex mt-3 mb-3 flex-wrap">
+            <div class="d-flex mt-3 mb-3 flex-wrap align-items-center"">
                 <span class="google-cse-title">Pilot Supplies</span>
                 <div class="google-cse-search-group">
-                    <script async src="https://cse.google.com/cse.js?cx=004286895403006624284:ojacjdzpco3"></script>
-                    <div class="gcse-search"></div>
+                    
                 </div>
             </div>
         </div>
         <div class="tab-pane fade" id="pills-jobs" role="tabpanel" aria-labelledby="pills-jobs-tab">
             <h3 class="sub-title">Search 21 Aviation Jobs Sites in One Click</h3>
-            <div class="d-flex mt-3 mb-3 flex-wrap">
+            <div class="d-flex mt-3 mb-3 flex-wrap align-items-center"">
                 <span class="google-cse-title">Aviation Jobs</span>
                 <div class="google-cse-search-group">
-                    <script async src="https://cse.google.com/cse.js?cx=004286895403006624284:uqhunc1oxii"></script>
-                    <div class="gcse-search"></div>
+                    
                 </div>
             </div>
         </div>
@@ -321,6 +319,28 @@
             $('#vendor-tag-filter').on('itemRemoved', function (e) {
                 LoadFilteredCompanies($("#vendor-tag-filter").val());
             })
+
+            $('a[data-toggle="pill"]').on('show.bs.tab', function (e) {
+
+                var hash = e.target.hash;
+                var scriptSrc = '';
+                
+                if (hash == '#pills-planes') {
+                    scriptSrc = 'https://cse.google.com/cse.js?cx=004286895403006624284:8dyrm0inbkf';
+                } else if (hash == '#pills-pilot-supplies') {
+                    scriptSrc = 'https://cse.google.com/cse.js?cx=004286895403006624284:ojacjdzpco3';
+                }
+                else if (hash == '#pills-jobs') {
+                    scriptSrc = 'https://cse.google.com/cse.js?cx=004286895403006624284:uqhunc1oxii';
+                }
+
+                if (scriptSrc != '') {
+                    var scriptTag = document.createElement('script');
+                    scriptTag.src = scriptSrc;
+                    $(hash + ' .google-cse-search-group').html('<div class="gcse-search"></div>');
+                    $(hash + ' .google-cse-search-group').prepend(scriptTag);
+                }
+            });
         })
     </script>
 }
