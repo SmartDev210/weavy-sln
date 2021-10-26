@@ -19,8 +19,10 @@
 }
 
 <div class="container-fluid mt-3">
+    @(Html.FilterForm<SpaceController>(c => c.Members(WeavyContext.Space.Id, null), Model.Query))
 
-    @if (Model.Members.HasItems()) {
+    @if (Model.Members.HasItems())
+    {
         <table class="table table-hover table-name-desc">
             <thead>
                 <tr>
@@ -39,24 +41,31 @@
                 </tr>
             </thead>
             <tbody id="infinite-members-scroll-target">
-                @foreach (var member in Model.Members.OrderByDescending(x => x.Access)) {
+                @foreach (var member in Model.Members.OrderByDescending(x => x.Access))
+                {
                     <tr data-href="@member.Url()" class="@(member.IsSuspended ? "table-muted": "")" data-modal>
                         <td class="table-icon">@(member.AvatarImg(32, presence: true))</td>
                         <td>
-                            @if (member.Username == member.GetTitle()) {
+                            @if (member.Username == member.GetTitle())
+                            {
                                 <a href="@member.Url()"><small>@@@member.Username</small></a>
-                            } else {
+                            }
+                            else
+                            {
                                 <a href="@member.Url()">@member.GetTitle()</a> <small>@@@member.Username</small>
                             }
                             @Html.Badge(member)
                             @Html.Shield(member)
                         </td>
-                        @if (User.IsAdmin) { 
+                        @if (User.IsAdmin)
+                        {
                             <td>@member.Email</td>
-                        } else { 
+                        }
+                        else
+                        {
                             <td>@member.Profile["Bio"]</td>
                         }
-                        
+
                         <td class="table-icon">
                             <div class="d-flex justify-content-end">
                                 @{ Html.RenderPartial("_MemberMenu", member);}
@@ -65,7 +74,7 @@
                     </tr>
                 }
             </tbody>
-        </table>        
+        </table>
     }
 </div>
 
