@@ -72,7 +72,7 @@ namespace Weavy.Areas.CustomPages.Hooks
                 var post = new Post
                 {
                     CreatedById = bryan.Id,
-                    Text = $"Hi ✈️ Professional,{Environment.NewLine}{Environment.NewLine}Feel free to ask us any question(s).{Environment.NewLine}{Environment.NewLine}Use our App to search Jobs, Parts, Planes, Repairs.{Environment.NewLine}{Environment.NewLine}Use our App to Collaborate, Make Money and/or Semi-Subliminally Promote your Aviation Company/Entity.{Environment.NewLine}{Environment.NewLine}Best,{Environment.NewLine}{Environment.NewLine}Bryan, Hana, Rohan & Nas",                    
+                    Text = $"Hi ✈️ Professional,{Environment.NewLine}{Environment.NewLine}Feel free to ask us any question(s).{Environment.NewLine}{Environment.NewLine}Use our App to search Jobs, Parts, Planes, Repairs.{Environment.NewLine}{Environment.NewLine}Use our App to Collaborate, Make Money and/or Promote your Aviation Company/Entity.{Environment.NewLine}{Environment.NewLine}Best,{Environment.NewLine}{Environment.NewLine}Bryan, Hana, Rohan & Nas",                    
                 };
                 PostService.Insert(post, postApp, sudo: true);
                 if (memberIds.Contains(bryan.Id))
