@@ -1,4 +1,4 @@
-{0} ant={0} ant
+﻿{0} ant={0} ant
 {0} ant.n={0} ants
 {0} elephant={0} elephant
 {0} elephant.n={0} elephants
@@ -30,7 +30,7 @@ You and {0} person will be notified when someone updates or comments this.=You a
 You and {0} person will be notified when someone updates or comments this..n=You and {0} people will be notified when someone updates or comments this.
 You have {0} new notifications=You have {0} new notification
 You have {0} new notifications.n=You have {0} new notifications
-Meta Description=Aviation Social Network
+Meta Description=buddy.aero is a Social Network, Marketplace & Gig Economy for Aviation Professionals to collab with ✈ Brands
 Start=Home
 All your spaces will show up here.=All your spaces will show up here.
 It was not possible to create the space. You have reached the maximum number of allowed spaces.=It was not possible to create the space. You have reached the maximum number of allowed spaces.
