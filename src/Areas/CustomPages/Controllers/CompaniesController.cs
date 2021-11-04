@@ -168,7 +168,7 @@ namespace Weavy.Areas.CustomPages.Controllers
         }
 
         /// <summary>
-        /// get private channel with company
+        /// get private space with company
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>

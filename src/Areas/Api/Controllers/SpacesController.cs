@@ -54,9 +54,9 @@ namespace Weavy.Areas.Api.Controllers {
         }
 
         /// <summary>
-        /// Creates a new start collab channel space or Find if it's existing.
+        /// Creates a new start collab space or Find if it's existing.
         /// </summary>
-        /// <param name="request">The collab channel space to insert.</param>
+        /// <param name="request">The collab space to insert.</param>
         /// <example>
         /// POST /api/collab-spaces
         ///
@@ -108,7 +108,7 @@ namespace Weavy.Areas.Api.Controllers {
             
         }
         /// <summary>
-        /// Creates a new service request channel space or Find if it's existing.
+        /// Creates a new service request space or Find if it's existing.
         /// </summary>
         /// <param name="request">The service request space to insert.</param>
         /// <example>
