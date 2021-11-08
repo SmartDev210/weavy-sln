@@ -193,3 +193,14 @@ a.custom-nav-link {
         width: 100%;
     }
 }
+.cta-brands-box {
+    display: flex;
+    justify-content: center;
+    gap: 128px;
+
+    @media(max-width: 767px) {
+        flex-direction: column;
+        gap: 32px;
+    }
+}
+

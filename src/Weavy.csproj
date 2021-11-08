@@ -434,8 +434,9 @@
     <Content Include="Areas\Docs\Views\Web.config" />
     <Content Include="Global.asax" />
     <Content Include="img\Aircraft_Maintenance.jpeg.jpg" />
+    <Content Include="img\aviation-brands-icon-256.png" />
+    <Content Include="img\aviation-creators-icon-256.png" />
     <Content Include="img\Aviation_Enthusiasts.jpeg.jpg" />
-    <Content Include="img\backchannel-icon.png" />
     <Content Include="img\black-logo.png" />
     <Content Include="img\bot.svg" />
     <Content Include="img\buddy-logo.png" />
