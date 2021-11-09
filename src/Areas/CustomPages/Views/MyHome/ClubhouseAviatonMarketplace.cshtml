@@ -56,13 +56,13 @@
             <a class="nav-link" id="pills-spare-parts-tab" data-toggle="pill" href="#pills-spare-parts" role="tab" aria-controls="pills-spare-parts" aria-selected="false">✈ Spare Parts</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" id="pills-planes-tab" data-toggle="pill" href="#pills-planes" role="tab" aria-controls="pills-planes" aria-selected="false">Planes</a>
+            <a class="nav-link" id="pills-planes-tab" data-toggle="pill" href="#pills-planes" role="tab" aria-controls="pills-planes" aria-selected="false" onclick="initGoogleSearch(this)">Planes</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" id="pills-pilot-supplies-tab" data-toggle="pill" href="#pills-pilot-supplies" role="tab" aria-controls="pills-pilot-supplies" aria-selected="false">Pilot Supplies</a>
+            <a class="nav-link" id="pills-pilot-supplies-tab" data-toggle="pill" href="#pills-pilot-supplies" role="tab" aria-controls="pills-pilot-supplies" aria-selected="false" onclick="initGoogleSearch(this)">Pilot Supplies</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" id="pills-jobs-tab" data-toggle="pill" href="#pills-jobs" role="tab" aria-controls="pills-jobs" aria-selected="false">Jobs</a>
+            <a class="nav-link" id="pills-jobs-tab" data-toggle="pill" href="#pills-jobs" role="tab" aria-controls="pills-jobs" aria-selected="false" onclick="initGoogleSearch(this)">Jobs</a>
         </li>
     </ul>
     <div class="tab-content" id="pills-tabContent">
@@ -319,28 +319,27 @@
             $('#vendor-tag-filter').on('itemRemoved', function (e) {
                 LoadFilteredCompanies($("#vendor-tag-filter").val());
             })
-
-            $('a[data-toggle="pill"]').on('show.bs.tab', function (e) {
-
-                var hash = e.target.hash;
-                var scriptSrc = '';
-                
-                if (hash == '#pills-planes') {
-                    scriptSrc = 'https://cse.google.com/cse.js?cx=004286895403006624284:8dyrm0inbkf';
-                } else if (hash == '#pills-pilot-supplies') {
-                    scriptSrc = 'https://cse.google.com/cse.js?cx=004286895403006624284:ojacjdzpco3';
-                }
-                else if (hash == '#pills-jobs') {
-                    scriptSrc = 'https://cse.google.com/cse.js?cx=004286895403006624284:uqhunc1oxii';
-                }
-
-                if (scriptSrc != '') {
-                    var scriptTag = document.createElement('script');
-                    scriptTag.src = scriptSrc;
-                    $(hash + ' .google-cse-search-group').html('<div class="gcse-search"></div>');
-                    $(hash + ' .google-cse-search-group').prepend(scriptTag);
-                }
-            });
+           
         })
+        function initGoogleSearch(e) {
+            var hash = e.hash;
+            var scriptSrc = '';
+
+            if (hash == '#pills-planes') {
+                scriptSrc = 'https://cse.google.com/cse.js?cx=004286895403006624284:8dyrm0inbkf';
+            } else if (hash == '#pills-pilot-supplies') {
+                scriptSrc = 'https://cse.google.com/cse.js?cx=004286895403006624284:ojacjdzpco3';
+            }
+            else if (hash == '#pills-jobs') {
+                scriptSrc = 'https://cse.google.com/cse.js?cx=004286895403006624284:uqhunc1oxii';
+            }
+
+            if (scriptSrc != '') {
+                var scriptTag = document.createElement('script');
+                scriptTag.src = scriptSrc;
+                $(hash + ' .google-cse-search-group').html('<div class="gcse-search"></div>');
+                $(hash + ' .google-cse-search-group').prepend(scriptTag);
+            }
+        }
     </script>
 }
