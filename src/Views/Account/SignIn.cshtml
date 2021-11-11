@@ -37,8 +37,8 @@
     </div>
 </div>
 
-<script type="text/javascript" src="https://appleid.cdn-apple.com/appleauth/static/jsapi/appleid/1/en_US/appleid.auth.js"></script>
 <script type="text/javascript">
+    let appleConnectLoaded = (AppleID) => {
         AppleID.auth.init({
             clientId: '@ConfigurationService.AppSetting("AppleAppId")',
             scope: 'name email',
@@ -46,7 +46,16 @@
             state: 'backchannel',
             nonce: 'nonce',
             usePopup: false //or false defaults to false
-        });       
+        });
+    };
+
+    (function (d, s, cb) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        js = d.createElement(s);
+        js.src = "//appleid.cdn-apple.com/appleauth/static/jsapi/appleid/1/en_US/appleid.auth.js";
+        fjs.parentNode.insertBefore(js, fjs);
+        js.addEventListener("load", () => cb(AppleID));
+    }(document, 'script', appleConnectLoaded));
 </script>
 
 @if (ViewData.ModelState.Values.SelectMany(x => x.Errors).Any())
