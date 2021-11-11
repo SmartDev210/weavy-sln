@@ -782,8 +782,11 @@
 
                 var initData = {
                     spaces: weavy.spaces.map(function (space) {
-                        return space.options;
-                    }),
+                        if (!space.isLoading) {
+                            space.isLoading = true;
+                            return space.options;
+                        }
+                    }).filter((s) => s), // Remove empty
                     plugins: weavy.options.plugins,
                     version: Weavy.version
                 }

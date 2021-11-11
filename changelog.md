@@ -1,9 +1,55 @@
 # Changelog for Weavy
 
+## 8.7.0 (2021-11-02)
+
+*  Added Conversations API with functionality for getting, creating and updating Weavy conversations. For more information, check out the api documentation at https://[weavy_url]/api.
+
+## 8.6.8 (2021-09-21)
+
+* Fix for server error when fetching spaces.
+
+## 8.6.7 (2021-09-17)
+
+* Fix for server error when creating space in client using delayed init.
+* Fix for regression introduced in v8.6.6.
+
+## 8.6.6 (2021-09-16)
+
+* Fix for server error when creating space in client using delayed init. 
+
+## 8.6.5 (2021-09-13)
+
+* Changed the allowed transfer protocol of the integrated OAuth2 server so that it honours the `weavy.https` configuration setting.
+
+## 8.6.4 (2021-09-08)
+
+* Fixed an issue with alerts in Messenger.
+* Changes to license creation. Developers are now referred to weavy.com in order to get a new license key.
+* Changed the schedule for the license update daemon.
+
+## 8.6.3 (2021-08-24)
+
+* Exposed method UserService.GetBySub() for getting User from JWT claims (`iss` and `sub`).
+
+## 8.6.2 (2021-08-20)
+
+* Fixed an issue with browser history in posts app. 
+
+## 8.6.1 (2021-08-13)
+
+* Fixed issue with time zone setting (tz) in messenger app. 
+
+## 8.6.0 (2021-08-09)
+
+* Added support for previewing macro enabled Microsoft Office files (.docm and .xlsm).
+* Added support for previewing emails (.eml and .msg).
+* Added support for previewing .eps files.
+* Increased maximum length of iss and sub claims to 256 chars.
+
 ## 8.5.1 (2021-07-20)
 
 * Fixed issue with resetting panels from error pages.
-* Fixed issue with client scope minification when using weavy.min.js
+* Fixed issue with client scope minification when using weavy.min.js.
 
 ## 8.5.0 (2021-07-13)
 
