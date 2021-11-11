@@ -5,6 +5,7 @@ using System.Net;
 using System.Web.Http;
 using System.Web.Http.Description;
 using Weavy.Areas.Api.Models;
+using Weavy.Core;
 using Weavy.Core.Models;
 using Weavy.Core.Services;
 using Weavy.Core.Utils;
@@ -206,6 +207,16 @@ namespace Weavy.Areas.Api.Controllers {
                     res.Add(dbUser);
             }
             return Ok(res);
+        }
+
+        /// <summary>
+        /// Retrieves the current user.
+        /// </summary>
+        /// <returns>Returns a user.</returns>        
+        [HttpGet]
+        [Route("users/me")]
+        public User GetMe() {
+            return UserService.Get(WeavyContext.Current.User.Id);
         }
     }
 }

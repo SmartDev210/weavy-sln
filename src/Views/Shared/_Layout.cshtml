@@ -101,14 +101,7 @@
                     {
                         <button type="button" class="btn btn-icon" data-toggle="drawer" data-target="#drawer-user">
                             @User.AvatarImg(24)
-                            @if (WeavyContext.Browser.Desktop)
-                            {
-                                @Html.TotalBadge()
-                            }
-                            else
-                            {
-                                @Html.NotificationsBadge()
-                            }
+                            @Html.NotificationsBadge()
                         </button>
                     } 
                     else
