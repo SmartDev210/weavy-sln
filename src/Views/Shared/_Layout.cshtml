@@ -77,7 +77,10 @@
             else
             {
                 <div class="navbar-icons">
-                    <a class="btn btn-icon" href="/messenger" target="_blank" title="Messenger">@Svg.Icon("message-text")</a>
+                    @if (!WeavyContext.Browser.Framed)
+                    {
+                        <a class="btn btn-icon" href="/messenger" target="_blank" title="Messenger">@Svg.Icon("message-text")</a>
+                    }
                     <div class="dropdown">
                         <button type="button" class="btn btn-icon dropdown-toggle" data-toggle="dropdown">
                             @Svg.Icon("plus-circle-outline")
