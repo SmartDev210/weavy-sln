@@ -71,8 +71,8 @@ namespace Weavy.Areas.CustomPages.Hooks
             {
                 var post = new Post
                 {
-                    CreatedById = bryan.Id,
-                    Text = $"Hi ✈️ Professional,{Environment.NewLine}{Environment.NewLine}Feel free to ask us any question(s).{Environment.NewLine}{Environment.NewLine}Use our App to search Jobs, Parts, Planes, Repairs.{Environment.NewLine}{Environment.NewLine}Use our App to Collaborate, Make Money and/or Promote your Aviation Company/Entity.{Environment.NewLine}{Environment.NewLine}Best,{Environment.NewLine}{Environment.NewLine}Bryan, Hana, Rohan & Nas",                    
+                    CreatedById = bryan.Id,                    
+                    Text = $"Welcome to buddy.aero - feel free to ask us any question(s).{Environment.NewLine}{Environment.NewLine}Best Regards,{Environment.NewLine}{Environment.NewLine}Bryan and Hana",
                 };
                 PostService.Insert(post, postApp, sudo: true);
                 if (memberIds.Contains(bryan.Id))
@@ -80,13 +80,9 @@ namespace Weavy.Areas.CustomPages.Hooks
 
                 var conversation = ConversationService.Insert(new Conversation() { Name = "Welcome", CreatedById = bryan.Id }, memberIds);
 
-                var message = $@"<p>Hi ✈️ Professional,<br/><br/>"
-                    + $@"Welcome to buddy.aero - feel free to ask us any question(s).<br/><br/>"
-                    + $@"To become a Paid Ambassador, click here (<a target=""_blank"" href=""https://forms.gle/tmTSpwb2nXnxTcoCA)"">https://forms.gle/tmTSpwb2nXnxTcoCA)</a><br/><br/>"
-                    + $@"or<br/><br/>"
-                    + $@"To order your 1st on-demand mini-podcast, click here (<a target=""_blank"" href=""https://calendly.com/buddyaero/mini-podcast"">https://calendly.com/buddyaero/mini-podcast</a>)<br/><br/>"
-                    + $@"Best,<br/>"
-                    + $@"Bryan, Hana, Rohan & Nas</p>";
+                var message =  $@"Welcome to buddy.aero - feel free to ask us any question(s).<br/><br/>"
+                    + $@"Best Regards,<br/>"
+                    + $@"Bryan and Hana</p>";
 
                 MessageService.Insert(new Message
                 {
