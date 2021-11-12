@@ -26,7 +26,7 @@ namespace Weavy.Areas.CustomPages.Controllers
         [Route("direct-call/{id:int}")]
         public ActionResult DirectCall(int id)
         {
-            var bot = UserService.GetByEmail("bot@mail.back-channel.com");
+            var bot = UserService.GetByEmail("bot@mail.buddy.aero");
             var target = UserService.Get(id, sudo: true);
 
             if (bot != null && target != null)

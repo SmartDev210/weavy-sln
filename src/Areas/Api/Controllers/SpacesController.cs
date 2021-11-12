@@ -367,7 +367,7 @@ namespace Weavy.Areas.Api.Controllers {
         public IHttpActionResult RequestToJoin(int id)
         {
             List<int> adminList = new List<int>();
-            var bot = UserService.GetByEmail("bot@mail.back-channel.com");
+            var bot = UserService.GetByEmail("bot@mail.buddy.aero");
             adminList = SpaceService.GetMembers(id, new MemberQuery() { Admin = true, Sudo = true }).Select(x => x.Id).ToList();            
             var space = SpaceService.Get(id, true);
             if (space == null || bot == null) return NotFound();

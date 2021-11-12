@@ -81,7 +81,7 @@
             <h3 class="sub-title"><span class="number">@Model.Portal0Stat.VendorCount.ToString("N0")</span> Vendors Uploaded <span class="number">@Model.Portal0Stat.PartCount.ToString("N0")</span> Aircraft Spare Parts for sale</h3>
             <div class="d-flex mt-3 mb-3 flex-wrap">
                 <span class="parts-search-title">Repair Capabilities</span>
-                <form action="https://mrofinder.back-channel.com/parts" method="get" class="main-search navbar-search-box" data-turboform style="display: block !important;">
+                <form action="@ConfigurationService.AppSetting("mrofinder-url")/parts" method="get" class="main-search navbar-search-box" data-turboform style="display: block !important;">
                     <div class="form-group" role="search">
                         <input id="weavy-main-search" class="form-control" type="search" name="Search" value="" placeholder="@T["Search"]" />
                         <button type="submit" class="btn btn-icon">@Svg.Icon("magnify")</button>
@@ -93,7 +93,7 @@
             <h3 class="sub-title"><span class="number">@Model.Portal1Stat.VendorCount.ToString("N0")</span> Vendors Uploaded <span class="number">@Model.Portal1Stat.PartCount.ToString("N0")</span> Aircraft Spare Parts for sale</h3>
             <div class="d-flex mt-3 mb-3 flex-wrap">
                 <span class="parts-search-title">Aircraft Spare Parts</span>
-                <form action="https://findparts.back-channel.com/parts" method="get" class="main-search navbar-search-box" data-turboform style="display: block !important;">
+                <form action="@ConfigurationService.AppSetting("findparts-url")/parts" method="get" class="main-search navbar-search-box" data-turboform style="display: block !important;">
                     <div class="form-group" role="search">
                         <input id="weavy-main-search" class="form-control" type="search" name="Search" value="" placeholder="@T["Search"]" />
                         <button type="submit" class="btn btn-icon">@Svg.Icon("magnify")</button>
