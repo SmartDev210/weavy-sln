@@ -4413,6 +4413,7 @@
     <Content Include="Views\Shared\_TopPlusButtonMenu.cshtml" />
     <Content Include="Views\Shared\_CompanyTable.cshtml" />
     <Content Include="Views\Shared\_CTA.cshtml" />
+    <Content Include="Views\Shared\_Footer.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

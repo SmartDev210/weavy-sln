@@ -1,0 +1,21 @@
+﻿
+<footer>
+    <div class="d-flex flex-column align-items-center justify-content-center">
+        <img style="max-width: 240px; margin: 16px 0;" src="~/img/buddy-logo.png" />
+
+        <div style="display: flex; gap: 32px; align-items: center; justify-content: center;">
+            <a href="https://apps.apple.com/us/app/aviation-back-channel/id1568332316"><img style="height: 40px;" src="~/img/download-on-appstore.svg" /></a>
+            <a href="#"><img style="height: 60px;" src="~/img/google-play-badge.png" /></a>
+        </div>
+    </div>
+    
+    <div class="d-flex justify-content-center align-items-center flex-wrap footer-links" style="gap: 32px;">
+        <a href="/">Home</a>
+        <a href="/spaces">Spaces</a>
+        <a href="/people">People</a>
+        <a href="@ConfigurationService.AppSetting("findparts-url")">FindParts</a>
+        <a href="@ConfigurationService.AppSetting("mrofinder-url")">MROfinder</a>
+        <a href="/messenger">Messenger</a>
+        <a href="/spaces/@ConfigurationService.AppSetting("feedback-space-id")">Feedback</a>
+    </div>
+</footer>

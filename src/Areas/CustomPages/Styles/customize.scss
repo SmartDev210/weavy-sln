@@ -203,4 +203,22 @@ a.custom-nav-link {
         gap: 32px;
     }
 }
-
+body {
+    position: relative;
+    padding-bottom: 190px;
+    @media(max-width: 767px) {
+        padding-bottom: 240px;
+    }
+}
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    margin-top: 16px;
+}
+.footer-links {
+    background-color: #DBDBDB;
+    font-size: 16px;
+    text-align: center;
+    padding: 16px 0;
+}
