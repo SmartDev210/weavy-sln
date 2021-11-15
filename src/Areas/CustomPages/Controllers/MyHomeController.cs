@@ -79,7 +79,7 @@ namespace Weavy.Areas.CustomPages.Controllers
         /// Marketplace homepage with categories
         /// </summary>
         /// <returns></returns>
-        [Route("clubhouse-aviation-marketplace")]
+        [Route("aviation-influencer-marketplace")]
         [HttpGet]
         [AllowAnonymous]
         public ActionResult ClubhouseAviationMarketplace()
