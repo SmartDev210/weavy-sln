@@ -85,7 +85,7 @@
             else
             {
                 <div class="navbar-icons">
-                    @if (!WeavyContext.Browser.Mobile)
+                    @if (!WeavyContext.Browser.WebView)
                     {
                         <a class="btn btn-icon" href="/messenger" target="_blank" title="Messenger">@Svg.Icon("message-text")</a>
                     }
@@ -130,8 +130,10 @@
     <audio id="notification-sound" src="~/media/notification.mp3" preload="none"></audio>
     <iframe id="filebrowser" src="about:blank" style="display:none;width:100%;height:100%;z-index:99999999;position:fixed;top:0;left:0;border:0;"></iframe>
     @Html.Scripts()
-
-    @Html.Partial("~/Views/Shared/_Footer.cshtml")
+    @if (!WeavyContext.Browser.WebView)
+    {
+        @Html.Partial("~/Views/Shared/_Footer.cshtml")
+    }
 </body>
 
 </html>
