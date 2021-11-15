@@ -3,10 +3,9 @@
 @model Weavy.Areas.CustomPages.Models.ClubhouseAviationMarketplaceHomePageViewModel
 
 @{
-    Title = T["Start"].ToString();
+    Title = "mini podcasts feat. aviation experts + brands ✈️";
     var companySpace = SpaceService.GetByKey($"company_{User.Id}", sudo: true);
     List<string> tags = new List<string>();
-    ViewBag.MetaDescription = "mini podcasts feat. aviation experts + brands ✈️";
 }
 
 
