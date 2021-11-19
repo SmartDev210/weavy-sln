@@ -26,6 +26,9 @@ namespace Weavy.Areas.CustomPages.Controllers
         [Route("aviation-marketplace")]        
         public ActionResult AviationMarketplace()
         {
+
+            return RedirectToActionPermanent("ClubhouseAviationMarketplace");
+
             var joined = SpaceService.GetVisited(10);
 
             var pods = SpaceService.Search(new SpaceQuery { Text = "tag:pods", Top = 10, Sudo = true, MemberId = User.Id });
@@ -62,7 +65,10 @@ namespace Weavy.Areas.CustomPages.Controllers
         // GET: aviation-clubhouse
         [Route("aviation-clubhouse")]
         public ActionResult AviationClubhouse()
-        {            
+        {
+
+            return RedirectToActionPermanent("ClubhouseAviationMarketplace");
+
             var joined = SpaceService.Search(new SpaceQuery { Text= "tag:aviation", Top = 100, Sudo = true, MemberId = User.Id }).ToList();
 
             // var aviationClubs = SpaceService.Search(new SpaceQuery { Top = 100, Sudo = true }).Where(x => !x.IsMember).ToList();
@@ -177,6 +183,8 @@ namespace Weavy.Areas.CustomPages.Controllers
         [HttpGet]
         public ActionResult Experts()
         {
+            return RedirectToActionPermanent("ClubhouseAviationMarketplace");
+
             return View("~/Areas/CustomPages/Views/MyHome/Experts.cshtml");
         }
     }

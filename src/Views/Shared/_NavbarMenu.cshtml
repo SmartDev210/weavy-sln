@@ -10,7 +10,7 @@
 
 <div class="navbar-middle d-framed">
     @Html.StarToggle(WeavyContext.Space)
-    <a href="@(WeavyContext.Space?.Url() ?? Url.Action<MyHomeController>(c => c.AviationClubhouse()))" class="navbar-text">
+    <a href="@(WeavyContext.Space?.Url() ?? Url.Action<MyHomeController>(c => c.ClubhouseAviationMarketplace()))" class="navbar-text">
         @navtitle
         @if (WeavyContext.Space?.Teamname != null) {
             <small class="d-none d-sm-inline">@@@WeavyContext.Space.Teamname</small>

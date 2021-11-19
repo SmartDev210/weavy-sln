@@ -4,12 +4,12 @@
 
     Title = "Process Join Request";
 }
-@section navbar_left {
+@*@section navbar_left {
 
-    <div class="navbar-icons">
-        <a href="@(Url.Action<MyHomeController>(c => c.AviationClubhouse()))">@Html.Partial("_AppIcon", 34)</a>       
-    </div>
-}
+        <div class="navbar-icons">
+            <a href="@(Url.Action<MyHomeController>(c => c.ClubhouseAviationMarketplace()))">@Html.Partial("_AppIcon", 34)</a>
+        </div>
+    }*@
 @if (Model.Join)
 {
     if (Model.Success)
