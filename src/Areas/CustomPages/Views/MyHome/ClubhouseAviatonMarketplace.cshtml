@@ -78,7 +78,7 @@
             </div>
         </div>
         <div class="tab-pane fade" id="pills-repairs" role="tabpanel" aria-labelledby="pills-repairs-tab">
-            <h3 class="sub-title"><span class="number">@Model.Portal0Stat.VendorCount.ToString("N0")</span> Vendors Uploaded <span class="number">@Model.Portal0Stat.PartCount.ToString("N0")</span> Aircraft Spare Parts for sale</h3>
+            <h3 class="sub-title"><span class="number">@Model.Portal0Stat.VendorCount.ToString("N0")</span> MROs Uploaded <span class="number">@Model.Portal0Stat.PartCount.ToString("N0")</span> Repair Capabilities</h3>
             <div class="d-flex mt-3 mb-3 flex-wrap">
                 <span class="parts-search-title">Repair Capabilities</span>
                 <form action="@ConfigurationService.AppSetting("mrofinder-url")/parts" method="get" class="main-search navbar-search-box" data-turboform style="display: block !important;">
