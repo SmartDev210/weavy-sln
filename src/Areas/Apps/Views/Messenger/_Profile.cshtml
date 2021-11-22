@@ -7,8 +7,8 @@
     @if (User.Id != Model.Id)
     {
         <div class="d-flex flex-wrap justify-content-center mb-3">
-            <a class="btn btn-outline-primary ml-2 mr-2" href="/direct-call/@Model.Id" @if (!WeavyContext.Browser.WebView) {<text> target="_blank"</text>}>@Svg.Icon("video") Video</a>            
-            <a class="btn btn-outline-primary ml-2 mr-2" href="/direct-space/@Model.Id" @if (!WeavyContext.Browser.WebView) {<text> target="_blank"</text>}>@Svg.Icon("account-network") Space</a>
+            <a class="btn btn-outline-primary ml-2 mr-2" href="/direct-call/@Model.Id" target="_blank">@Svg.Icon("video") Video</a>            
+            <a class="btn btn-outline-primary ml-2 mr-2" href="/direct-space/@Model.Id" target="_blank">@Svg.Icon("account-network") Space</a>
         </div>
     }
     @if (!profiledata.IsNullOrWhiteSpace())
