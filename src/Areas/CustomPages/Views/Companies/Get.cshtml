@@ -29,9 +29,9 @@
         <p class="lead text-center text-muted mb-2">@Model.Description</p>
     }
     <div class="justify-content-center mt-4 mb-4" style="gap: 32px; display: flex; flex-wrap: wrap;">
-        <a href="/video-call/@Model.Id-@Model.Name" target="_blank" role="button" class="btn btn-light">Video Call</a>
-        <a href="/companies/@Model.Id/message" target="_blank"  role="button" class="btn btn-light">Send Message</a>
-        <a href="/companies/@Model.Id/private-channel" target="_blank" role="button" class="btn btn-light">Start Private Space</a>
+        <a href="/video-call/@Model.Id-@Model.Name" @if (!WeavyContext.Browser.WebView) {<text> target="_blank"</text>} role="button" class="btn btn-light">Video Call</a>
+        <a href="/companies/@Model.Id/message"@if (!WeavyContext.Browser.WebView) {<text> target="_blank"</text>}  role="button" class="btn btn-light">Send Message</a>
+        <a href="/companies/@Model.Id/private-channel" @if (!WeavyContext.Browser.WebView) {<text> target="_blank"</text>} role="button" class="btn btn-light">Start Private Space</a>
     </div>
     @if (!Model.Teamname.IsNullOrEmpty())
     {
