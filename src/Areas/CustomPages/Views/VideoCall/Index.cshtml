@@ -19,14 +19,16 @@
 <script src='https://8x8.vc/libs/external_api.min.js'></script>
 
 <script>
-    const domain = '8x8.vc';
-    const options = {
-        roomName: '@Model.RoomName',
-        configOverwrite: {
-            disableInviteFunctions: true,
-        },
-        jwt: '@Model.Token',
-        parentNode: document.querySelector('#meet-container')
-    };
-    const api = new JitsiMeetExternalAPI(domain, options);
+    window.onload = function () {
+        const domain = '8x8.vc';
+        const options = {
+            roomName: '@Model.RoomName',
+            configOverwrite: {
+                disableInviteFunctions: true,
+            },
+            jwt: '@Model.Token',
+            parentNode: document.querySelector('#meet-container')
+        };
+        const api = new JitsiMeetExternalAPI(domain, options);
+    }
 </script>
