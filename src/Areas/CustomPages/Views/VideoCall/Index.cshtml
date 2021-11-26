@@ -19,7 +19,7 @@
 <script src='https://8x8.vc/libs/external_api.min.js'></script>
 
 <script>
-    window.onload = function () {
+    let jitsiLoaded = () => {
         const domain = '8x8.vc';
         const options = {
             roomName: '@Model.RoomName',
@@ -30,5 +30,13 @@
             parentNode: document.querySelector('#meet-container')
         };
         const api = new JitsiMeetExternalAPI(domain, options);
-    }
+    };
+
+    (function (d, s, cb) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        js = d.createElement(s);
+        js.src = "https://8x8.vc/libs/external_api.min.js";
+        fjs.parentNode.insertBefore(js, fjs);
+        js.addEventListener("load", () => cb());
+    }(document, 'script', jitsiLoaded));
 </script>
