@@ -47,6 +47,15 @@
 
         gtag('config', 'G-7Q2D05EV2Y');
     </script>
+
+    @if (WeavyContext.Browser.WebView)
+    {
+        <style>
+            body {
+                padding-bottom: unset;
+            }
+        </style>
+    }
 </head>
 <body @RenderBodyAttributes()>
     <script>@Html.ContextInfo()@Html.UserSettings()</script>
