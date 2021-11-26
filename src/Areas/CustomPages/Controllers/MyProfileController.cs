@@ -37,9 +37,9 @@ namespace Weavy.Areas.CustomPages.Controllers
                 }, new int[] { target.Id });
 
                 var callLink = "";
-                callLink = $@"<a target=""_blank"" href=""/video-call/direct-call-{User.Id}-{target.Id}""><small class=""text-muted"">Please click here to have a video call with @{target.Username}</small></a>";
+                callLink = $@"<a target=""_blank"" href=""/video-call/direct-call-{User.Id}-{target.Id}""><small class=""text-muted"">Please click here to have a video call with @{User.Username}</small></a>";
 
-                var message = $@"<p>{target.GetTitle()} wants to have a video call with you."
+                var message = $@"<p>{User.GetTitle()} wants to have a video call with you."
                     + $@"<p>{callLink}</p>";
 
                 MessageService.Insert(new Message
